@@ -41,14 +41,11 @@ public class TileObjects {
 
     }
 
-
     public void setCategoryFilter(short filterBit) {
         Filter filter = new Filter();
         filter.categoryBits = filterBit;
         fixture.setFilterData(filter);
     }
-
-
 
     public TiledMapTileLayer.Cell getCell(TiledMap tiledMap) {
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(1);

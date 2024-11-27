@@ -40,20 +40,19 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         orthographicGameCamera = new OrthographicCamera();
-        gameViewport = new FitViewport(VIRTUAL_WIDTH/ PPM, VIRTUAL_HEIGHT/PPM, orthographicGameCamera);
+        gameViewport = new FitViewport(VIRTUAL_WIDTH/PPM, VIRTUAL_HEIGHT/PPM, orthographicGameCamera);
         gameViewport.apply();
-        orthographicGameCamera.position.set(gameViewport.getWorldWidth() / 2f, gameViewport.getWorldHeight() / 2f, 0);
+        orthographicGameCamera.position.set(gameViewport.getWorldWidth()/2f,gameViewport.getWorldHeight()/2f,0);
         orthographicGameCamera.update();
-
-        world= new World(new Vector2(0, 0), true);
+        world= new World(new Vector2(0,0),true);
         box2DDebugRenderer= new Box2DDebugRenderer();
-        box2DDebugRenderer.SHAPE_STATIC.set(0, 0, 0, 1);
+        box2DDebugRenderer.SHAPE_STATIC.set(0,0,0,1);
         box2DDebugRenderer.setDrawBodies(true);
 
         tiledMap= new TmxMapLoader().load("map/tiledMap.tmx");
-        orthogonalTiledMapRenderer= new OrthogonalTiledMapRenderer(tiledMap, 1/PPM);
+        orthogonalTiledMapRenderer= new OrthogonalTiledMapRenderer(tiledMap,1/PPM);
 
-        levelManager = new LevelManager(world, tiledMap, levelToLoad);
+        levelManager = new LevelManager(levelToLoad, world,tiledMap);
     }
 
     private void update(float delta){
@@ -94,6 +93,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
+
     }
 
     @Override
@@ -107,5 +107,7 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void dispose() {}
+    public void dispose() {
+
+    }
 }

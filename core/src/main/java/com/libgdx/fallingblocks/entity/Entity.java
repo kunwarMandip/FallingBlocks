@@ -3,11 +3,11 @@ package com.libgdx.fallingblocks.entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.libgdx.fallingblocks.entity.interfaces.DeathAction;
-import com.libgdx.fallingblocks.entity.interfaces.HitAction;
+import com.libgdx.fallingblocks.entity.behaviour.DeathBehaviour;
+import com.libgdx.fallingblocks.entity.behaviour.OnHitBehaviour;
 
 
-public abstract class Entity implements DeathAction, HitAction {
+public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
 
     protected Body body;
     protected Fixture fixture;
@@ -61,5 +61,8 @@ public abstract class Entity implements DeathAction, HitAction {
     public void destroyBody(World world){
         world.destroyBody(body);
     }
+
+
+
 
 }

@@ -11,4 +11,8 @@ public class TiledMapController {
     public TiledMapController(World world, TiledMap tiledMap){
         tiledObjectLoader= new TiledObjectLoader(world, tiledMap);
     }
+
+    public void update(){
+
+    }
 }

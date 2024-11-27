@@ -1,7 +1,5 @@
 package com.libgdx.fallingblocks.dto;
 
-import com.libgdx.fallingblocks.entity.enemy.Enemy;
-
 import java.util.Stack;
 
 public class EnemyWaveDto {
@@ -9,7 +7,7 @@ public class EnemyWaveDto {
     private final double waveDuration, waveStartDelay;
     private final String spawnPattern;
     private final Stack<EnemyDto> enemies;
-    private float deltaTime = 0f;
+    private final float enemySpawnInterval;
 
     private EnemyWaveDto(EnemyWaveDtoBuilder builder) {
         this.enemies = builder.enemies;
@@ -17,7 +15,7 @@ public class EnemyWaveDto {
         this.waveDuration = builder.waveDuration;
         this.spawnPattern = builder.spawnPattern;
         this.waveStartDelay = builder.waveStartDelay;
-        this.deltaTime = builder.deltaTime;
+        this.enemySpawnInterval = 0;
     }
 
 
@@ -41,8 +39,18 @@ public class EnemyWaveDto {
         return enemies;
     }
 
-    public float getDeltaTime() {
-        return deltaTime;
+    /**
+     * Get top enemy and remove it from the stack
+     * @return Info about the enemy
+     */
+    public EnemyDto getEnemy(){
+        return enemies.pop();
+    }
+
+
+
+    public float getEnemySpawnInterval(){
+        return enemySpawnInterval;
     }
 
     // Builder Class
@@ -52,7 +60,6 @@ public class EnemyWaveDto {
         private double waveStartDelay;
         private String spawnPattern;
         private Stack<EnemyDto> enemies;
-        private float deltaTime = 0f;
 
         public EnemyWaveDtoBuilder setEnemyWave(Stack<EnemyDto> enemies) {
             this.enemies = enemies;
@@ -76,11 +83,6 @@ public class EnemyWaveDto {
 
         public EnemyWaveDtoBuilder setSpawnPattern(String spawnPattern) {
             this.spawnPattern = spawnPattern;
-            return this;
-        }
-
-        public EnemyWaveDtoBuilder setDeltaTime(float deltaTime) {
-            this.deltaTime = deltaTime;
             return this;
         }
 

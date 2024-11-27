@@ -3,37 +3,43 @@ package com.libgdx.fallingblocks.controller;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.World;
-import com.libgdx.fallingblocks.entity.enemy.Enemy;
-
-import java.util.ArrayList;
+import com.libgdx.fallingblocks.dto.EnemyWaveDto;
+import com.libgdx.fallingblocks.dto.GameLevelDto;
+import com.libgdx.fallingblocks.jsonExtractor.JsonDataExtractor;
 
 public class LevelManager {
 
-    private final ArrayList<Enemy> enemyArrayList= new ArrayList<>();
+    private final GameLevelDto gameLevelDto;
 
-    private EnemyWavesController enemyWavesController;
     private TiledMapController tiledMapController;
+    private EnemyWavesController enemyWavesController;
 
+    private boolean isWaveDurationElapsed =false;
 
-    public LevelManager(World world, TiledMap tiledMap, int levelToLoad) {
+    public LevelManager(int levelToLoad, World world, TiledMap tiledMap) {
         JsonDataExtractor jsonDataExtractor= new JsonDataExtractor();
-        tiledMapController= new TiledMapController(world, tiledMap);
+        this.gameLevelDto =jsonDataExtractor.getGameLevelDto(levelToLoad);
+
+        EnemyWaveDto enemyWaveDto= gameLevelDto.getWaveDtoArray().pop();
+        this.enemyWavesController= new EnemyWavesController(this, enemyWaveDto);
+        this.tiledMapController= new TiledMapController(world, tiledMap);
     }
 
 
-    public void update(float delta){
-        for(Enemy enemy: enemyArrayList){
-            enemy.update(delta);
-        }
+    public void update(float delta) {
+        enemyWavesController.update(delta);
+        tiledMapController.update();
     }
 
     public void draw(SpriteBatch spriteBatch){
-        for(Enemy enemy: enemyArrayList){
-            enemy.draw(spriteBatch);
-        }
+        enemyWavesController.draw(spriteBatch);
     }
 
-    public void addEnemy(Enemy enemy){
-        enemyArrayList.add(enemy);
+
+
+    public void setWaveDurationComplete(){
+        this.isWaveDurationElapsed=true;
     }
+
+
 }

@@ -1,7 +1,6 @@
 package com.libgdx.fallingblocks.dto;
 
 import com.badlogic.gdx.math.Vector2;
-import com.libgdx.fallingblocks.entity.enemy.Enemy;
 
 public class EnemyDto {
 

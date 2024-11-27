@@ -1,0 +1,33 @@
+{
+  "waves": [
+    {
+      "waveNumber": 1,
+      "startTime": 0,
+      "duration": 30,
+      "spawnSettings": {
+        "spawnRate": 0.5,
+        "directions": ["north", "east", "south", "west"],
+        "enemyDistribution": {
+          "goblin": 70,
+          "orc": 20,
+          "dragon": 10
+        },
+        "totalEnemies": 100
+      }
+    },
+    {
+      "waveNumber": 2,
+      "startTime": 40,
+      "duration": 60,
+      "spawnSettings": {
+        "spawnRate": 1,
+        "directions": ["random"],
+        "enemyDistribution": {
+          "orc": 60,
+          "dragon": 40
+        },
+        "totalEnemies": 50
+      }
+    }
+  ]
+}

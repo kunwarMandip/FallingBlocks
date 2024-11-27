@@ -1,7 +1,7 @@
-package com.libgdx.fallingblocks.entity.interfaces;
+package com.libgdx.fallingblocks.entity.behaviour;
 
 import com.libgdx.fallingblocks.entity.Entity;
 
-public interface DeathAction {
+public interface DeathBehaviour {
     public void onDeath(Entity entity);
 }
