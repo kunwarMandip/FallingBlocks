@@ -9,7 +9,7 @@
         "enemies":
         [
           {
-            "enemyType": "NORMAL",
+            "enemyType": "Normal",
             "amount": 5,
             "spawnInterval": 1.0,
             "behavior": "AGGRESSIVE",
@@ -20,7 +20,7 @@
           },
           {
             "enemyType": "boss",
-            "amount": 5,
+            "amount": 50,
             "spawnInterval": 1.0,
             "behavior": "AGGRESSIVE",
             "health": 50,

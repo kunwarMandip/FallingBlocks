@@ -14,6 +14,7 @@ import com.libgdx.fallingblocks.entity.enemy.BossEnemy;
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.NormalEnemy;
 
+import java.util.Stack;
 
 
 public class EnemyWavesController {
@@ -28,10 +29,18 @@ public class EnemyWavesController {
     public EnemyWavesController(World world, Array<EnemyWaveDto> enemyWaveDtoArray){
         this.world=world;
         this.enemyWaveDtoArray=enemyWaveDtoArray;
-        this.enemyWaveDto=enemyWaveDtoArray.pop();
-        this.waveDurationCounter=0f;
-        this.waveStartDelayCounter=0f;
-        this.enemySpawnIntervalCounter=0f;
+        this.enemyWaveDto=enemyWaveDtoArray.get(0);
+        resetWaveVariables();
+
+        for (EnemyDto enemyDto : enemyWaveDto.getEnemies()) {
+            System.out.println("Enemy: " + enemyDto.getType());
+        }
+    }
+
+    private void resetWaveVariables(){
+        waveDurationCounter=0f;
+        waveStartDelayCounter=0f;
+        enemySpawnIntervalCounter=0f;
     }
 
 
@@ -118,11 +127,12 @@ public class EnemyWavesController {
         EnemyDto enemyDto = enemyWaveDto.getEnemy();
         Vector2 spawnPosition = new Vector2(0, 0);
         Vector2 speed = new Vector2(0, 0);
-        String type = enemyDto.getType();
+        String type = enemyDto.getType().toLowerCase();
 
+        Enemy enemy;
         switch (type) {
-            case "Normal":
-                new NormalEnemy(world,
+            case "normal":
+                enemy= new NormalEnemy(world,
                     enemyDto.health,
                     spawnPosition,
                     speed,
@@ -131,8 +141,8 @@ public class EnemyWavesController {
                     new DashMovement());
                 break;
 
-            case "BossEnemy":
-                new BossEnemy(world,
+            case "boss":
+                enemy= new BossEnemy(world,
                     enemyDto.health,
                     spawnPosition,
                     speed,
@@ -141,8 +151,8 @@ public class EnemyWavesController {
                     new DashMovement());
                 break;
 
-            case "QuickEnemy":
-                new NormalEnemy(world,
+            case "quick":
+                enemy= new NormalEnemy(world,
                     enemyDto.health,
                     spawnPosition,
                     speed,
@@ -152,8 +162,9 @@ public class EnemyWavesController {
                 break;
 
             default:
-                throw new RuntimeException("Unidentified Enemy Type on EnemyWavesController.build");
+                throw new RuntimeException("Unidentified Enemy Type on EnemyWavesController.build()");
         }
 
+        activeEnemies.add(enemy);
     }
 }

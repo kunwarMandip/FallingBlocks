@@ -1,12 +1,14 @@
 package com.libgdx.fallingblocks.dto;
 
+import com.badlogic.gdx.utils.Array;
+
 import java.util.Stack;
 
 public class EnemyWaveDto {
     private final boolean isWaveTimed;
     private final double waveDuration, waveStartDelay;
     private final String spawnPattern;
-    private final Stack<EnemyDto> enemies;
+    private final Array<EnemyDto> enemies;
     private final float enemySpawnInterval;
 
     private EnemyWaveDto(EnemyWaveDtoBuilder builder) {
@@ -35,7 +37,7 @@ public class EnemyWaveDto {
         return spawnPattern;
     }
 
-    public Stack<EnemyDto> getEnemies() {
+    public Array<EnemyDto> getEnemies() {
         return enemies;
     }
 
@@ -47,8 +49,6 @@ public class EnemyWaveDto {
         return enemies.pop();
     }
 
-
-
     public float getEnemySpawnInterval(){
         return enemySpawnInterval;
     }
@@ -59,9 +59,9 @@ public class EnemyWaveDto {
         private double waveDuration;
         private double waveStartDelay;
         private String spawnPattern;
-        private Stack<EnemyDto> enemies;
+        private Array<EnemyDto> enemies;
 
-        public EnemyWaveDtoBuilder setEnemyWave(Stack<EnemyDto> enemies) {
+        public EnemyWaveDtoBuilder setEnemyWave(Array<EnemyDto> enemies) {
             this.enemies = enemies;
             return this;
         }

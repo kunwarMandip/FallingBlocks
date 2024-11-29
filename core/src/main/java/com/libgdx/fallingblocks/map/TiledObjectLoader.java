@@ -17,25 +17,27 @@ public class TiledObjectLoader {
     public TiledObjectLoader(World world, TiledMap tiledMap){
         this.world=world;
         this.tiledMap=tiledMap;
+
         loadWall();
         loadOuterBound();
+        loadEnemySpawnArea();
     }
 
-    private void loadWall(){
+    public void loadWall(){
         MapLayer targetLayer= tiledMap.getLayers().get("Wall");
         for (RectangleMapObject object : targetLayer.getObjects().getByType(RectangleMapObject.class)) {
             new PlayerWall(world, tiledMap, object);
         }
     }
 
-    private void loadOuterBound(){
+    public void loadOuterBound(){
         MapLayer targetLayer= tiledMap.getLayers().get("OuterBound");
         for (RectangleMapObject object : targetLayer.getObjects().getByType(RectangleMapObject.class)) {
             new OuterBound(world, tiledMap, object);
         }
     }
 
-    private void loadEnemySpawnArea(){
+    public void loadEnemySpawnArea(){
         MapLayer targetLayer = tiledMap.getLayers().get("EnemySpawn");
         for (RectangleMapObject object : targetLayer.getObjects().getByType(RectangleMapObject.class)) {
             new EnemySpawnArea(world, tiledMap, object);

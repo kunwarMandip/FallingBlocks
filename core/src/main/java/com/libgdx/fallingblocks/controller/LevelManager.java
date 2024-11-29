@@ -8,26 +8,23 @@ import com.libgdx.fallingblocks.jsonExtractor.JsonDataExtractor;
 
 public class LevelManager {
 
-    private final TiledMapController tiledMapController;
+    private final MapController mapController;
     private final EnemyWavesController enemyWavesController;
 
     public LevelManager(int levelToLoad, World world, TiledMap tiledMap) {
         JsonDataExtractor jsonDataExtractor= new JsonDataExtractor();
         GameLevelDto gameLevelDto =jsonDataExtractor.getGameLevelDto(levelToLoad);
-        this.enemyWavesController= new EnemyWavesController(world, gameLevelDto.getWaveDtoArray());
-        this.tiledMapController= new TiledMapController(world, tiledMap);
+        this.enemyWavesController= new EnemyWavesController(world,gameLevelDto.getWaveDtoArray());
+        this.mapController = new MapController(world, tiledMap);
     }
-
 
     public void update(float delta) {
         enemyWavesController.update(delta);
-        tiledMapController.update();
+        mapController.update();
     }
 
     public void draw(SpriteBatch spriteBatch){
-//        enemyWavesController.draw(spriteBatch);
+        enemyWavesController.draw(spriteBatch);
     }
-
-
 
 }

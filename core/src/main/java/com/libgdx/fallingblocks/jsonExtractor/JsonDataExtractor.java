@@ -12,8 +12,6 @@ import com.libgdx.fallingblocks.dto.EnemyWaveDto;
 import com.libgdx.fallingblocks.dto.GameLevelDto;
 
 import java.io.FileNotFoundException;
-import java.util.Stack;
-
 
 public class JsonDataExtractor {
 
@@ -84,7 +82,7 @@ public class JsonDataExtractor {
                 return null;
             }
 
-            Stack<EnemyDto> enemyDtoStack = new Stack<>();
+            Array<EnemyDto> enemyDtoArray = new Array<>();
             for (JsonValue enemy : enemiesNode) {
                 int amount = enemy.getInt("amount", 0);
                 int health = enemy.getInt("health", 0);
@@ -95,39 +93,33 @@ public class JsonDataExtractor {
                 String behavior = enemy.getString("behavior", "Unknown");
                 String enemyType = enemy.getString("enemyType", "Unknown");
 
-                System.out.print("Enemy Type: " + enemyType);
-                System.out.print(" | ");
-                System.out.print("Amount: " + amount);
-                System.out.print(" | ");
-                System.out.print("Spawn Interval: " + spawnInterval);
-                System.out.print(" | ");
-                System.out.print("Behavior: " + behavior);
-                System.out.print(" | ");
-                System.out.print("Health: " + health);
-                System.out.print(" | ");
-                System.out.print("Speed: " + speed);
-                System.out.print(" | ");
-                System.out.print("Attack Power: " + attackPower);
-                System.out.print(" | ");
-                System.out.print("Reward Points: " + rewardPoints);
+                System.out.print("Enemy Type: " + enemyType + " | ");
+                System.out.print("Amount: " + amount + " | ");
+                System.out.print("Spawn Interval: " + spawnInterval + " | ");
+                System.out.print("Behavior: " + behavior + " | ");
+                System.out.print("Health: " + health + " | ");
+                System.out.print("Speed: " + speed + " | ");
+                System.out.print("Attack Power: " + attackPower + " | ");
+                System.out.print("Reward Points: " + rewardPoints + " | ");
                 System.out.println();
 
-                enemyDtoStack.add(new EnemyDto.EnemyDtoBuilder()
+                enemyDtoArray.add(new EnemyDto.EnemyDtoBuilder()
                     .setType(enemyType)
                     .setBehavior(behavior)
                     .setSpawnTime(spawnInterval)
                     .setSpeed(new Vector2(0, speed))
                     .build());
-            }
 
+                System.out.println("Adding new Enemy");
+            }
+            System.out.println("New WAVE");
             enemyWaveDtoArray.add(new EnemyWaveDto.EnemyWaveDtoBuilder()
                 .setWaveTimed(false)
                 .setWaveStartDelay(startDelay)
                 .setWaveDuration(duration)
-                .setEnemyWave(enemyDtoStack)
-                .build(
-
-                ));
+                .setEnemyWave(enemyDtoArray)
+                .build()
+            );
 
         }
         return enemyWaveDtoArray;

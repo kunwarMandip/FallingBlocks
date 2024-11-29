@@ -56,9 +56,10 @@ public class GameScreen implements Screen {
     }
 
     private void update(float delta){
-        world.step(1/60f, 6, 2);
         levelManager.update(delta);
+        world.step(1/60f, 6, 2);
     }
+
 
     private void clearScreen(){
         Gdx.gl.glClearColor(0,0, 0, 1);
