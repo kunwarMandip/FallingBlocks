@@ -2,7 +2,7 @@ package com.libgdx.fallingblocks.controller;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.World;
-import com.libgdx.fallingblocks.entity.map.TiledObjectLoader;
+import com.libgdx.fallingblocks.map.TiledObjectLoader;
 
 public class TiledMapController {
 

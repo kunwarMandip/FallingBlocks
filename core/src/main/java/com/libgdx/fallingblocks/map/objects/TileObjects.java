@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.entity.map.objects;
+package com.libgdx.fallingblocks.map.objects;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;

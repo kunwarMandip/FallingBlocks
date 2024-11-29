@@ -8,6 +8,8 @@ public class EnemyDto {
     private final float spawnTime;
     private final String type, behavior, effect;
 
+    public int health;
+    public Vector2 bodyDimension;
     public EnemyDto(EnemyDtoBuilder enemyDtoBuilder){
         this.type = enemyDtoBuilder.type;
         this.speed = enemyDtoBuilder.speed;

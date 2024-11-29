@@ -7,19 +7,21 @@ import com.libgdx.fallingblocks.entity.Entity;
 import com.libgdx.fallingblocks.entity.behaviour.interfaces.AttackBehaviour;
 import com.libgdx.fallingblocks.entity.behaviour.interfaces.MovementBehaviour;
 
-public final class BossEnemy extends Enemy {
+public class NormalEnemy extends Enemy{
 
 
-    public BossEnemy(World world, int health, Vector2 spawnPosition, Vector2 bodyDimension, Vector2 speed, AttackBehaviour attackBehaviour, MovementBehaviour movementBehaviour) {
+    public NormalEnemy(World world, int health, Vector2 spawnPosition, Vector2 bodyDimension, Vector2 speed, AttackBehaviour attackBehaviour, MovementBehaviour movementBehaviour) {
         super(world, health, spawnPosition, bodyDimension, speed, attackBehaviour, movementBehaviour);
     }
 
     @Override
     public void update(float delta) {
+
     }
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
+
     }
 
     @Override
@@ -31,6 +33,4 @@ public final class BossEnemy extends Enemy {
     public void onHit(Entity a, Entity b) {
 
     }
-
-
 }

@@ -3,8 +3,8 @@ package com.libgdx.fallingblocks.entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.libgdx.fallingblocks.entity.behaviour.DeathBehaviour;
-import com.libgdx.fallingblocks.entity.behaviour.OnHitBehaviour;
+import com.libgdx.fallingblocks.entity.behaviour.interfaces.DeathBehaviour;
+import com.libgdx.fallingblocks.entity.behaviour.interfaces.OnHitBehaviour;
 
 
 public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
@@ -12,14 +12,13 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
     protected Body body;
     protected Fixture fixture;
 
+    protected int health;
     protected boolean isDead;
-    protected int health, attackPower;
     protected Vector2 spawnPosition, bodyDimension;
 
-    public Entity(World world, int health, int attackPower, Vector2 spawnPosition, Vector2 bodyDimension){
+    public Entity(World world, int health, Vector2 spawnPosition, Vector2 bodyDimension){
         this.isDead=false;
         this.health=health;
-        this.attackPower=attackPower;
         this.spawnPosition=spawnPosition;
         this.bodyDimension=bodyDimension;
         setBody(world);

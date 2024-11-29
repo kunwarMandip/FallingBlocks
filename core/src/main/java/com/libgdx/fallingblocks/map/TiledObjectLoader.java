@@ -1,12 +1,12 @@
-package com.libgdx.fallingblocks.entity.map;
+package com.libgdx.fallingblocks.map;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.World;
-import com.libgdx.fallingblocks.entity.map.objects.EnemySpawnArea;
-import com.libgdx.fallingblocks.entity.map.objects.OuterBound;
-import com.libgdx.fallingblocks.entity.map.objects.PlayerWall;
+import com.libgdx.fallingblocks.map.objects.EnemySpawnArea;
+import com.libgdx.fallingblocks.map.objects.OuterBound;
+import com.libgdx.fallingblocks.map.objects.PlayerWall;
 
 
 public class TiledObjectLoader {
