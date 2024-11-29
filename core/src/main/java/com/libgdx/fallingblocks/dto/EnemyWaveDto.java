@@ -2,7 +2,6 @@ package com.libgdx.fallingblocks.dto;
 
 import com.badlogic.gdx.utils.Array;
 
-import java.util.Stack;
 
 public class EnemyWaveDto {
     private final boolean isWaveTimed;
@@ -41,10 +40,6 @@ public class EnemyWaveDto {
         return enemies;
     }
 
-    /**
-     * Get top enemy and remove it from the stack
-     * @return Info about the enemy
-     */
     public EnemyDto getEnemy(){
         return enemies.pop();
     }

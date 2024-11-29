@@ -124,8 +124,13 @@ public class EnemyWavesController {
 
 
     private void spawnEnemy() {
+        if(enemyWaveDto.getEnemies().isEmpty()){
+            System.out.println("Empty");
+            return;
+        }
         EnemyDto enemyDto = enemyWaveDto.getEnemy();
-        Vector2 spawnPosition = new Vector2(0, 0);
+        Vector2 spawnPosition = new Vector2(22,45 );
+        Vector2 bodyDimension = new Vector2(22,45 );
         Vector2 speed = new Vector2(0, 0);
         String type = enemyDto.getType().toLowerCase();
 
@@ -135,8 +140,8 @@ public class EnemyWavesController {
                 enemy= new NormalEnemy(world,
                     enemyDto.health,
                     spawnPosition,
-                    speed,
                     enemyDto.bodyDimension,
+                    speed,
                     new MeleeAttack(),
                     new DashMovement());
                 break;
@@ -145,8 +150,8 @@ public class EnemyWavesController {
                 enemy= new BossEnemy(world,
                     enemyDto.health,
                     spawnPosition,
-                    speed,
                     enemyDto.bodyDimension,
+                    speed,
                     new RangeAttack(),
                     new DashMovement());
                 break;
@@ -155,8 +160,8 @@ public class EnemyWavesController {
                 enemy= new NormalEnemy(world,
                     enemyDto.health,
                     spawnPosition,
-                    speed,
                     enemyDto.bodyDimension,
+                    speed,
                     new RangeAttack(),
                     new SlowMovement());
                 break;

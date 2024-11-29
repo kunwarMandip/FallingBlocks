@@ -16,6 +16,7 @@ public class EnemyDto {
         this.spawnTime = enemyDtoBuilder.spawnTime;
         this.behavior = enemyDtoBuilder.behavior;
         this.effect = enemyDtoBuilder.effect;
+        this.bodyDimension= new Vector2(5, 5);
     }
 
     public String getType() {
