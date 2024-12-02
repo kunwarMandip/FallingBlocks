@@ -9,7 +9,7 @@
  <imagelayer id="22" name="foreground" locked="1">
   <image source="images/map2/upper.png" width="720" height="1440"/>
  </imagelayer>
- <objectgroup id="11" name="Wall" locked="1">
+ <objectgroup id="11" name="Wall">
   <object id="61" x="0" y="1280" width="720" height="16"/>
   <object id="62" x="720" y="160" width="16" height="1120"/>
   <object id="63" x="0" y="144" width="720" height="16"/>

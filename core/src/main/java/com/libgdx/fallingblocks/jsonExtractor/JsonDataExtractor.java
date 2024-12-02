@@ -2,7 +2,6 @@ package com.libgdx.fallingblocks.jsonExtractor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
@@ -10,18 +9,25 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.libgdx.fallingblocks.dto.EnemyDto;
 import com.libgdx.fallingblocks.dto.EnemyWaveDto;
 import com.libgdx.fallingblocks.dto.GameLevelDto;
+import com.libgdx.fallingblocks.entity.enemy.EnemyType;
 
 import java.io.FileNotFoundException;
 
 public class JsonDataExtractor {
 
+    private WaveExtractor waveExtractor;
+
     public GameLevelDto getGameLevelDto(int level){
+        waveExtractor= new WaveExtractor();
+        String waveFilePath= "jsons/enemyWaves/" + level +".json";
+        System.out.println(waveFilePath);
+        getEnemyWavesDto(waveFilePath);
 
-        String enemyWavesFilePath="jsons/enemyWaves.json";
+        throw new RuntimeException("Ends");
+//        return new GameLevelDto.GameLevelDtoBuilder()
+//            .setEnemyWaveDtoArray(getEnemyWaveDto(level, enemyWavesFilePath))
+//            .build();
 
-        return new GameLevelDto.GameLevelDtoBuilder()
-            .setEnemyWaveDtoArray(getEnemyWaveDto(level, enemyWavesFilePath))
-            .build();
     }
 
     private void checkFile(String filepath) throws FileNotFoundException {
@@ -32,8 +38,7 @@ public class JsonDataExtractor {
         throw new FileNotFoundException( "File not Found: " + filepath);
     }
 
-
-    private Array<EnemyWaveDto> getEnemyWaveDto(int level, String filepath) {
+    private Array<EnemyWaveDto> getEnemyWavesDto(int level, String filepath) {
         FileHandle fileHandle = Gdx.files.internal(filepath);
 
         //Check if file doesn't exist
@@ -104,10 +109,9 @@ public class JsonDataExtractor {
                 System.out.println();
 
                 enemyDtoArray.add(new EnemyDto.EnemyDtoBuilder()
-                    .setType(enemyType)
-                    .setBehavior(behavior)
-                    .setSpawnTime(spawnInterval)
-                    .setSpeed(new Vector2(0, speed))
+                    .setType(EnemyType.valueOf(enemyType))
+//                    .setSpawnTime(spawnInterval)
+//                    .setSpeed(new Vector2(0, speed))
                     .build());
 
                 System.out.println("Adding new Enemy");
@@ -125,6 +129,44 @@ public class JsonDataExtractor {
         return enemyWaveDtoArray;
     }
 
+    private void isFileExist(FileHandle fileHandle){
+        if(!fileHandle.exists()){
+           throw new RuntimeException(fileHandle.path() + " not Found");
+        }
+    }
+
+    private Array<EnemyWaveDto> getEnemyWavesDto(String filepath) {
+        FileHandle fileHandle = Gdx.files.internal(filepath);
+
+        // Check if file doesn't exist
+        isFileExist(fileHandle);
+
+        JsonReader jsonReader = new JsonReader();
+        JsonValue root = jsonReader.parse(fileHandle);
+        JsonValue wavesNode = root.get("waves");
+        waveExtractor.isWaveNodeExists(root);
+
+        Array<EnemyWaveDto> enemyWaveDtoArray = new Array<>();
+        for (JsonValue wave : wavesNode) {
+            waveExtractor.parseWaveSetting(wave);
+            waveExtractor.isSpawnSettingsExists(wave);
+            JsonValue spawnSettings = wave.get("spawnSettings");
+            waveExtractor.parseWaveSpawnSettings(spawnSettings);
+            waveExtractor.parseWaveDirections(spawnSettings);
+            waveExtractor.parseEnemyDistribution(spawnSettings);
+
+            // Create and add EnemyWaveDto to the array
+            EnemyWaveDto waveDto = new EnemyWaveDto.EnemyWaveDtoBuilder()
+//                .setWaveNumber(waveNumber)
+//                .setStartTime(startTime)
+//                .setDuration(duration)
+                // Set other properties as needed
+                .build();
+
+            enemyWaveDtoArray.add(waveDto);
+        }
+        return enemyWaveDtoArray;
+    }
 
 
 }

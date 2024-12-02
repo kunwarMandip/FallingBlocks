@@ -1,89 +1,111 @@
 package com.libgdx.fallingblocks.dto;
 
-import com.badlogic.gdx.utils.Array;
-
+import java.util.Map;
 
 public class EnemyWaveDto {
-    private final boolean isWaveTimed;
-    private final double waveDuration, waveStartDelay;
-    private final String spawnPattern;
-    private final Array<EnemyDto> enemies;
-    private final float enemySpawnInterval;
 
-    private EnemyWaveDto(EnemyWaveDtoBuilder builder) {
-        this.enemies = builder.enemies;
-        this.isWaveTimed = builder.isWaveTimed;
-        this.waveDuration = builder.waveDuration;
-        this.spawnPattern = builder.spawnPattern;
-        this.waveStartDelay = builder.waveStartDelay;
-        this.enemySpawnInterval = 0;
+    private final float duration;
+    private final float startDelay;
+    private final int totalEnemies;
+    private final float spawnRateStart;
+    private final float spawnRateIncrease;
+    private final float spawnRateIncreaseIncrement;
+    private final Map<String, Integer> spawnDirections;
+    private final Map<String, Integer> enemyDistributions;
+
+    public EnemyWaveDto(EnemyWaveDtoBuilder enemyWaveDtoBuilder){
+        this.totalEnemies=enemyWaveDtoBuilder.totalEnemies;
+        this.startDelay=enemyWaveDtoBuilder.startDelay;
+        this.duration=enemyWaveDtoBuilder.duration;
+        this.spawnRateStart= enemyWaveDtoBuilder.spawnRateStart;
+        this.spawnRateIncrease= enemyWaveDtoBuilder.spawnRateIncrease;
+        this.spawnRateIncreaseIncrement= enemyWaveDtoBuilder.spawnRateIncreaseIncrement;
+        this.spawnDirections= enemyWaveDtoBuilder.spawnDirections;
+        this.enemyDistributions=enemyWaveDtoBuilder.enemyDistributions;
+
     }
 
-
-    public boolean isWaveTimed() {
-        return isWaveTimed;
+    public int getTotalEnemies() {
+        return totalEnemies;
     }
 
-    public double getWaveDuration() {
-        return waveDuration;
+    public float getStartDelay() {
+        return startDelay;
     }
 
-    public double getWaveStartDelay() {
-        return waveStartDelay;
+    public float getDuration() {
+        return duration;
     }
 
-    public String getSpawnPattern() {
-        return spawnPattern;
+    public float getSpawnRateStart() {
+        return spawnRateStart;
     }
 
-    public Array<EnemyDto> getEnemies() {
-        return enemies;
+    public float getSpawnRateIncreaseIncrement() {
+        return spawnRateIncreaseIncrement;
     }
 
-    public EnemyDto getEnemy(){
-        return enemies.pop();
+    public float getSpawnRateIncrease() {
+        return spawnRateIncrease;
     }
 
-    public float getEnemySpawnInterval(){
-        return enemySpawnInterval;
+    public Map<String, Integer> getSpawnDirections() {
+        return spawnDirections;
     }
 
-    // Builder Class
-    public static class EnemyWaveDtoBuilder {
-        private boolean isWaveTimed;
-        private double waveDuration;
-        private double waveStartDelay;
-        private String spawnPattern;
-        private Array<EnemyDto> enemies;
+    public Map<String, Integer> getEnemyDistributions() {
+        return enemyDistributions;
+    }
 
-        public EnemyWaveDtoBuilder setEnemyWave(Array<EnemyDto> enemies) {
-            this.enemies = enemies;
+    public static class EnemyWaveDtoBuilder{
+
+        private float duration;
+        private float startDelay;
+        private int totalEnemies;
+        private float spawnRateStart;
+        private float spawnRateIncrease;
+        private float spawnRateIncreaseIncrement;
+        private Map<String, Integer> spawnDirections;
+        private Map<String, Integer> enemyDistributions;
+
+        public EnemyWaveDtoBuilder setTotalEnemies(int totalEnemies) {
+            this.totalEnemies = totalEnemies;
             return this;
         }
 
-        public EnemyWaveDtoBuilder setWaveTimed(boolean isWaveTimed) {
-            this.isWaveTimed = isWaveTimed;
+        public EnemyWaveDtoBuilder setDuration(float duration) {
+            this.duration = duration;
             return this;
         }
 
-        public EnemyWaveDtoBuilder setWaveDuration(double waveDuration) {
-            this.waveDuration = waveDuration;
+        public EnemyWaveDtoBuilder setStartDelay(float startDelay) {
+            this.startDelay = startDelay;
             return this;
         }
 
-        public EnemyWaveDtoBuilder setWaveStartDelay(double waveStartDelay) {
-            this.waveStartDelay = waveStartDelay;
+        public EnemyWaveDtoBuilder setSpawnRateStart(float spawnRateStart) {
+            this.spawnRateStart = spawnRateStart;
             return this;
         }
 
-        public EnemyWaveDtoBuilder setSpawnPattern(String spawnPattern) {
-            this.spawnPattern = spawnPattern;
+        public EnemyWaveDtoBuilder setSpawnRateIncrease(float spawnRateIncrease) {
+            this.spawnRateIncrease = spawnRateIncrease;
             return this;
         }
 
-        public EnemyWaveDto build() {
-            return new EnemyWaveDto(this);
+        public EnemyWaveDtoBuilder setSpawnRateIncreaseIncrement(float spawnRateIncreaseIncrement) {
+            this.spawnRateIncreaseIncrement = spawnRateIncreaseIncrement;
+            return this;
+        }
+
+        public EnemyWaveDtoBuilder setSpawnDirections(Map<String, Integer> spawnDirections) {
+            this.spawnDirections = spawnDirections;
+            return this;
+        }
+
+        public EnemyWaveDtoBuilder setEnemyDistributions(Map<String, Integer> enemyDistributions) {
+            this.enemyDistributions = enemyDistributions;
+            return this;
         }
     }
 }
-

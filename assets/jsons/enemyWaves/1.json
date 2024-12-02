@@ -4,15 +4,33 @@
       "waveNumber": 1,
       "startTime": 0,
       "duration": 30,
+      "totalEnemies": 100,
       "spawnSettings": {
-        "spawnRate": 0.5,
-        "directions": ["north", "east", "south", "west"],
+        "spawnRate": {
+          "start": 0.5,
+          "increment": 0.1,
+          "interval": 10
+        },
+        "directions": {
+          "north": 40,
+          "east": 30,
+          "south": 20,
+          "west": 10
+        },
         "enemyDistribution": {
           "goblin": 70,
           "orc": 20,
-          "dragon": 10
+          "dragon": 10,
+          "ss": 10
         },
-        "totalEnemies": 100
+        "syncGroups": [
+          {
+            "enemyTypes": ["orc", "goblin"],
+            "quantity": 5,
+            "directions": ["north", "south"],
+            "spawnTime": 15
+          }
+        ]
       }
     },
     {
@@ -20,8 +38,12 @@
       "startTime": 40,
       "duration": 60,
       "spawnSettings": {
-        "spawnRate": 1,
-        "directions": ["random"],
+        "spawnRate": {
+          "start": 1,
+          "increment": 0.2,
+          "interval": 20
+        },
+        "directions": "random",
         "enemyDistribution": {
           "orc": 60,
           "dragon": 40

@@ -9,6 +9,7 @@ import com.libgdx.fallingblocks.entity.behaviour.interfaces.OnHitBehaviour;
 
 public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
 
+    //Box2d setters
     protected Body body;
     protected Fixture fixture;
 
@@ -61,7 +62,11 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
         world.destroyBody(body);
     }
 
+    public Vector2 getBodyDimension(){
+        return bodyDimension;
+    }
 
-
-
+    public void setBodyDimension(Vector2 bodyDimension){
+        this.bodyDimension=bodyDimension;
+    }
 }

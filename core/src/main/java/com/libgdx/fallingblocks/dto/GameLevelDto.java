@@ -2,8 +2,6 @@ package com.libgdx.fallingblocks.dto;
 
 import com.badlogic.gdx.utils.Array;
 
-import java.util.Stack;
-
 public class GameLevelDto {
 
     private final Array<EnemyWaveDto> enemyWaveDtoArray;

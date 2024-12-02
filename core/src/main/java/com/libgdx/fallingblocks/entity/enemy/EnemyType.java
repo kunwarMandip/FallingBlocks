@@ -1,4 +1,5 @@
 package com.libgdx.fallingblocks.entity.enemy;
 
-public class FastEnemy {
+public enum EnemyType {
+    NORMAL, BOSS, QUICK
 }
