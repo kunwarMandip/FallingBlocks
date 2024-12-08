@@ -3,6 +3,7 @@ package com.libgdx.fallingblocks.map.objects;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.World;
+import com.libgdx.fallingblocks.map.TileObjects;
 
 import static com.libgdx.fallingblocks.GlobalVariables.CATEGORY_OUTER_BOUND;
 

@@ -3,12 +3,14 @@ package com.libgdx.fallingblocks.map;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 
 import static com.libgdx.fallingblocks.GlobalVariables.PPM;
 
-public abstract class TiledObject {
+public class TileObjects {
+
     protected World world;
     protected Body body;
     protected Rectangle bounds;
@@ -16,7 +18,7 @@ public abstract class TiledObject {
     protected MapObject mapObject;
     protected Fixture fixture;
 
-    public TiledObject(World world, TiledMap tiledMap, MapObject object) {
+    public TileObjects(World world, TiledMap tiledMap, MapObject object) {
         this.mapObject = object;
         this.world = world;
         this.tiledMap = tiledMap;
@@ -27,13 +29,13 @@ public abstract class TiledObject {
         PolygonShape shape = new PolygonShape();
 
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        float x = (bounds.getX() + bounds.getWidth() / 2) / PPM;
-        float y = (bounds.getY() + bounds.getHeight() / 2) / PPM;
-        bodyDef.position.set(x, y);
+        bodyDef.position.set((bounds.getX() + bounds.getWidth() / 2) / PPM,
+                (bounds.getY() + bounds.getHeight() / 2) / PPM);
 
         body = world.createBody(bodyDef);
 
-        shape.setAsBox(bounds.getWidth() / 2 / PPM, bounds.getHeight() / 2 / PPM);
+        shape.setAsBox(bounds.getWidth() / 2 / PPM,
+                bounds.getHeight() / 2 / PPM);
         fixtureDef.shape = shape;
         fixture = body.createFixture(fixtureDef);
 
@@ -45,4 +47,11 @@ public abstract class TiledObject {
         fixture.setFilterData(filter);
     }
 
+    public TiledMapTileLayer.Cell getCell(TiledMap tiledMap) {
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(1);
+        return layer.getCell((int) (body.getPosition().x * PPM / 16),
+                (int) (body.getPosition().y * PPM / 16));
+    }
+
 }
+

@@ -13,7 +13,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.libgdx.fallingblocks.controller.LevelManager;
+import com.libgdx.fallingblocks.contactlistener.GameContactListener;
+import com.libgdx.fallingblocks.controllers.LevelManager;
 
 import static com.libgdx.fallingblocks.GlobalVariables.*;
 
@@ -53,6 +54,8 @@ public class GameScreen implements Screen {
         orthogonalTiledMapRenderer= new OrthogonalTiledMapRenderer(tiledMap,1/PPM);
 
         levelManager = new LevelManager(levelToLoad, world,tiledMap);
+
+        world.setContactListener(new GameContactListener());
     }
 
     private void update(float delta){

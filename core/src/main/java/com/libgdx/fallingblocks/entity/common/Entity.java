@@ -1,10 +1,10 @@
-package com.libgdx.fallingblocks.entity;
+package com.libgdx.fallingblocks.entity.common;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.libgdx.fallingblocks.entity.behaviour.interfaces.DeathBehaviour;
-import com.libgdx.fallingblocks.entity.behaviour.interfaces.OnHitBehaviour;
+import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.DeathBehaviour;
+import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.OnHitBehaviour;
 
 
 public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
@@ -47,11 +47,23 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
         fixtureDef.friction = 0.0f;
         fixtureDef.restitution = 0.0f;
 
-        body.createFixture(fixtureDef).setUserData(this);
+        fixture= body.createFixture(fixtureDef);
+        fixture.setUserData(this);
         rectangleShape.dispose();
     }
 
+    public void setCategoryFilter(short filterBit) {
+        Filter filter = new Filter();
+        filter.categoryBits = filterBit;
+        fixture.setFilterData(filter);
+    }
+
     public void setMaskBit(short filterBit, short maskBit) {
+
+        if (fixture == null) {
+            throw new IllegalStateException("Fixture is not initialized. Ensure the fixture is created before setting filter data.");
+        }
+
         Filter filter = new Filter();
         filter.categoryBits = filterBit;
         filter.maskBits=maskBit;

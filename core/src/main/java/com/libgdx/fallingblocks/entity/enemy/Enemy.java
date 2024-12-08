@@ -2,9 +2,12 @@ package com.libgdx.fallingblocks.entity.enemy;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.libgdx.fallingblocks.entity.behaviour.interfaces.AttackBehaviour;
-import com.libgdx.fallingblocks.entity.behaviour.interfaces.MovementBehaviour;
-import com.libgdx.fallingblocks.entity.Entity;
+import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.AttackBehaviour;
+import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.MovementBehaviour;
+import com.libgdx.fallingblocks.entity.common.Entity;
+
+import static com.libgdx.fallingblocks.GlobalVariables.CATEGORY_ENEMY;
+import static com.libgdx.fallingblocks.GlobalVariables.CATEGORY_WALL;
 
 public abstract class Enemy extends Entity {
     protected Vector2 speed;
@@ -16,6 +19,7 @@ public abstract class Enemy extends Entity {
         this.speed=speed;
         this.attackBehaviour=attackBehaviour;
         this.movementBehaviour=movementBehaviour;
+        setMaskBit(CATEGORY_ENEMY, (short) ~(CATEGORY_WALL | CATEGORY_ENEMY));
     }
 
     public void performAttack(float delta){
@@ -29,6 +33,8 @@ public abstract class Enemy extends Entity {
     public void setAttackBehaviour(AttackBehaviour attackBehaviour) {
         this.attackBehaviour = attackBehaviour;
     }
+
+    public Vector2 getBodyPosition(){return body.getPosition();}
 
     public void setMovementBehaviour(MovementBehaviour movementBehaviour) {
         this.movementBehaviour = movementBehaviour;

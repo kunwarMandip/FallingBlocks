@@ -2,7 +2,7 @@
   "waves": [
     {
       "waveNumber": 1,
-      "startTime": 0,
+      "startDelay": 0,
       "duration": 30,
       "totalEnemies": 100,
       "spawnSettings": {
@@ -35,8 +35,9 @@
     },
     {
       "waveNumber": 2,
-      "startTime": 40,
+      "startDelay": 40,
       "duration": 60,
+      "totalEnemies": 50,
       "spawnSettings": {
         "spawnRate": {
           "start": 1,
@@ -47,8 +48,7 @@
         "enemyDistribution": {
           "orc": 60,
           "dragon": 40
-        },
-        "totalEnemies": 50
+        }
       }
     }
   ]

@@ -3,9 +3,9 @@ package com.libgdx.fallingblocks.entity.enemy.types;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.libgdx.fallingblocks.entity.Entity;
-import com.libgdx.fallingblocks.entity.behaviour.interfaces.AttackBehaviour;
-import com.libgdx.fallingblocks.entity.behaviour.interfaces.MovementBehaviour;
+import com.libgdx.fallingblocks.entity.common.Entity;
+import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.AttackBehaviour;
+import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.MovementBehaviour;
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
 
 public final class BossEnemy extends Enemy {

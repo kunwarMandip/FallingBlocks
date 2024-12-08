@@ -6,6 +6,7 @@ public class GameContactListener implements ContactListener {
 
     private final BeginContactListenerHandler beginContactListenerHandler;
     private final PreSolveContactListenerHandler preSolveContactListenerHandler;
+
     public GameContactListener(){
         this.beginContactListenerHandler= new BeginContactListenerHandler();
         this.preSolveContactListenerHandler= new PreSolveContactListenerHandler();
@@ -16,6 +17,10 @@ public class GameContactListener implements ContactListener {
         if(isAnyBodiesNull(contact)){
             return;
         }
+
+        if(beginContactListenerHandler.handleEnemyPlayerContact(contact)){return;};
+        if(beginContactListenerHandler.handleEnemyOuterBoundContact(contact)){return;}
+        if(beginContactListenerHandler.handleEnemyPlayerContact(contact)){return;}
     }
 
     @Override
