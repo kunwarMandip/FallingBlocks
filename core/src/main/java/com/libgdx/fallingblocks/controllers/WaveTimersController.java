@@ -1,23 +1,38 @@
 package com.libgdx.fallingblocks.controllers;
 
-import com.badlogic.gdx.Gdx;
+import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.dto.EnemyWaveDto;
 import com.libgdx.fallingblocks.controllers.listeners.EnemySpawnListener;
 
+import static com.libgdx.fallingblocks.Logger.Tags.WAVE_TIMER_CONTROLLER;
 
-public class WaveController {
+/**
+ * Manage all Timers and counters needed to control wave
+ */
+public class WaveTimersController {
 
     private final EnemyWaveDto enemyWaveDto;
     private final EnemySpawnListener enemySpawnListener;
 
-    private int totalEnemiesSpawned;
-    private float waveDurationCounter, waveStartDelayCounter, enemySpawnRateCounter;
+    private float waveDurationCounter, waveStartDelayCounter;
 
-    public WaveController(EnemyWaveDto enemyWaveDto, EnemySpawnListener enemySpawnListener){
+    private int totalEnemiesSpawned;
+    private float spawnRate, spawnRateCounter;
+
+    public WaveTimersController(EnemyWaveDto enemyWaveDto, EnemySpawnListener enemySpawnListener){
         this.enemyWaveDto=enemyWaveDto;
         this.enemySpawnListener=enemySpawnListener;
-
         resetWaveTimers();
+
+    }
+
+    private void resetWaveTimers(){
+        waveDurationCounter= 0f;
+        waveStartDelayCounter= 0f;
+
+        totalEnemiesSpawned=0;
+        spawnRate=enemyWaveDto.getSpawnRateStart();
+        spawnRateCounter=0f;
     }
 
     public void update(float delta){
@@ -30,19 +45,20 @@ public class WaveController {
             return;
         }
 
-        if(isEnemySpawnAble(delta)){
-            enemySpawnListener.spawnEnemy(1);
+
+        if(isMaxEnemySpawned()){
+            Logger.log(WAVE_TIMER_CONTROLLER, "Max Enemy Spawned");
+            return;
         }
 
+        if(!isEnemySpawnRateReached(delta)){
+            return;
+        }
+
+        enemySpawnListener.setNumEnemyToSpawn(1);
+        totalEnemiesSpawned++;
     }
 
-
-
-    private void resetWaveTimers(){
-        waveDurationCounter= 0f;
-        waveStartDelayCounter= 0f;
-        enemySpawnRateCounter = 0f;
-    }
 
 
     /**
@@ -53,11 +69,9 @@ public class WaveController {
      */
     private boolean isWaveStartDelayCompleted(float delta){
         if(waveStartDelayCounter >= enemyWaveDto.getWaveStartDelay()){
-//            Gdx.app.log("Wave Controller", " WaveStartDelayCounter: Finished");
             return true;
         }
 
-//        Gdx.app.log("Wave Controller", " WaveStartDelayCounter: " + (waveStartDelayCounter));
         waveStartDelayCounter+=delta;
         return false;
     }
@@ -71,33 +85,28 @@ public class WaveController {
      */
     private boolean isWaveDurationReached(float delta){
         if(waveDurationCounter >= enemyWaveDto.getDuration()){
-//            Gdx.app.log("Wave Controller", " WaveDurationCounter: Finished");
+            Logger.log(WAVE_TIMER_CONTROLLER, "Duration Reached: " + waveDurationCounter);
             return true;
         }
 
-//        Gdx.app.log("Wave Controller", " WaveDurationCounter: Finished" + + (waveDurationCounter));
         waveDurationCounter+=delta;
         return false;
     }
 
 
-    /**
-     * Checks if it's time to spawnNext Enemy, and then checks if there is a next Enemy
-     *
-     * @param delta Time elapsed since the last frame.
-     */
-    private boolean isEnemySpawnAble(float delta){
-        if(enemySpawnRateCounter < enemyWaveDto.getSpawnRateStart()){
-            enemySpawnRateCounter +=delta;
-            return false;
+    private boolean isEnemySpawnRateReached(float delta){
+        if(spawnRateCounter >= spawnRate){
+            Logger.log(WAVE_TIMER_CONTROLLER, "spawn rate: " + spawnRateCounter + " :  "+ delta);
+            spawnRateCounter=0f;
+            return true;
         }
 
-        if(totalEnemiesSpawned >= enemyWaveDto.getTotalEnemies()){
-            return false;
-        }
+        spawnRateCounter+=delta;
+        return false;
+    }
 
-        enemySpawnRateCounter = 0f;
-        return true;
+    private boolean isMaxEnemySpawned(){
+        return totalEnemiesSpawned >= enemyWaveDto.getTotalEnemies();
     }
 
 }

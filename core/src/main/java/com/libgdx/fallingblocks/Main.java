@@ -8,6 +8,11 @@ public class Main extends Game {
 
     @Override
     public void create() {
+
+//        Logger.disableTag(Logger.Tags.CONTACT_LISTENER);
+//        Logger.disableTag(Logger.Tags.WAVE_PARSER);
+        Logger.disableTag(Logger.Tags.WAVE_TIMER_CONTROLLER);
+
         SpriteBatch spriteBatch = new SpriteBatch();
         setScreen(new GameScreen(1, spriteBatch));
     }

@@ -9,13 +9,13 @@
  <imagelayer id="22" name="foreground" locked="1">
   <image source="images/map2/upper.png" width="720" height="1440"/>
  </imagelayer>
- <objectgroup id="11" name="Wall">
+ <objectgroup id="11" name="Wall" locked="1">
   <object id="61" x="0" y="1280" width="720" height="16"/>
   <object id="62" x="720" y="160" width="16" height="1120"/>
   <object id="63" x="0" y="144" width="720" height="16"/>
   <object id="64" x="-16" y="160" width="16" height="1120"/>
  </objectgroup>
- <objectgroup id="12" name="EnemySpawn" locked="1">
+ <objectgroup id="12" name="EnemySpawn">
   <object id="26" x="48" y="96" width="624" height="16">
    <properties>
     <property name="name" value="top"/>
@@ -23,17 +23,17 @@
   </object>
   <object id="29" x="48" y="1360" width="624" height="16">
    <properties>
-    <property name="name" value="bottom"/>
+    <property name="name" value="top"/>
    </properties>
   </object>
   <object id="47" x="-80" y="208" width="31.0986" height="1104">
    <properties>
-    <property name="name" value="left"/>
+    <property name="name" value="right"/>
    </properties>
   </object>
   <object id="48" x="768" y="192" width="31.1174" height="1104.67">
    <properties>
-    <property name="name" value="right"/>
+    <property name="name" value="bottom"/>
    </properties>
   </object>
  </objectgroup>

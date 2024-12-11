@@ -3,10 +3,10 @@ package com.libgdx.fallingblocks.dto;
 import java.util.Map;
 
 public class EnemyInfoDto {
-    private Map<String, Float> spawnDirections;
+    private Map<String, Integer> spawnDirections;
     private Map<String, Integer> enemyDistributions;
 
-    public Map<String, Float> getSpawnDirections() {
+    public Map<String, Integer> getSpawnDirections() {
         return spawnDirections;
     }
 
@@ -14,7 +14,7 @@ public class EnemyInfoDto {
         return enemyDistributions;
     }
 
-    public void setSpawnDirections(Map<String, Float> spawnDirections) {
+    public void setSpawnDirections(Map<String, Integer> spawnDirections) {
         this.spawnDirections = spawnDirections;
     }
 

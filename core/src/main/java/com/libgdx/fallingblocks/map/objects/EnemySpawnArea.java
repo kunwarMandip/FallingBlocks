@@ -20,11 +20,7 @@ public class EnemySpawnArea extends TileObjects {
         fixture.setUserData(this);
         setCategoryFilter(CATEGORY_ENEMY_SPAWN_AREA);
         this.spawnDirection=mapObject.getProperties().get("name", String.class);
-        float x= bounds.getWidth() / 2 / PPM;
-        float y=bounds.getHeight() / 2 / PPM;
-        rectangleDimension=new Vector2(x, y);
-        System.out.print("Rectangle Created. Direction: " + spawnDirection);
-        System.out.println(" - Position"+  bounds);
+        rectangleDimension=new Vector2(bounds.getWidth() / 2 / PPM, bounds.getHeight() / 2 / PPM);
     }
 
     public Vector2 getPosition(){

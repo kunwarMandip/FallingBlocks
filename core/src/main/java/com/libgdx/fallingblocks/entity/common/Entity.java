@@ -29,6 +29,10 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
 
     public abstract void draw(SpriteBatch spriteBatch);
 
+    public void setToDestroy(){
+        isDead=true;
+    }
+
     protected void setBody(World world){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -59,11 +63,6 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
     }
 
     public void setMaskBit(short filterBit, short maskBit) {
-
-        if (fixture == null) {
-            throw new IllegalStateException("Fixture is not initialized. Ensure the fixture is created before setting filter data.");
-        }
-
         Filter filter = new Filter();
         filter.categoryBits = filterBit;
         filter.maskBits=maskBit;

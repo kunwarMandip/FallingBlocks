@@ -13,4 +13,13 @@ public class GlobalVariables {
     public static final short CATEGORY_ENEMY_SPAWN_AREA = 0x0008;
     public static final short CATEGORY_OUTER_BOUND      = 0x00016;
 
+    /**
+     * Re
+     * @param maxValue
+     * @return
+     */
+    public static int getRandomValue(int maxValue){
+        return (int) (Math.random() * maxValue) + 1;
+    }
+
 }

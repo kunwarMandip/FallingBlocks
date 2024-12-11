@@ -1,4 +1,6 @@
 # FallingBlocks
  
 to do :
-Add animations
+
+Update WaveController
+Update managed spawn

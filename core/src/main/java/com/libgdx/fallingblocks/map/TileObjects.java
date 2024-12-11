@@ -53,5 +53,8 @@ public class TileObjects {
                 (int) (body.getPosition().y * PPM / 16));
     }
 
+    public void destroy(){
+        world.destroyBody(body);
+    }
 }
 

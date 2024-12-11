@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.libgdx.fallingblocks.dto.EnemyWaveDto;
+import com.libgdx.fallingblocks.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +48,6 @@ public class WaveExtractor {
     }
 
     public void parseWaveSetting(JsonValue wave, EnemyWaveDto enemyWaveDto){
-        int waveNumber = wave.getInt("waveNumber", -1);
         int totalEnemies= wave.getInt("totalEnemies", -1);
         float startDelay = wave.getFloat("startDelay", 0.0f);
         float duration = wave.getFloat("duration", 0.0f);
@@ -56,9 +56,9 @@ public class WaveExtractor {
         enemyWaveDto.setWaveStartDelay(startDelay);
         enemyWaveDto.setDuration(duration);
 
-        Gdx.app.log("WaveParser", "Total Enemies: " + (enemyWaveDto.getTotalEnemies()));
-        Gdx.app.log("WaveParser", "Start Delay: " + (enemyWaveDto.getWaveStartDelay()));
-        Gdx.app.log("WaveParser", "Duration: " + (enemyWaveDto.getDuration()));
+        Logger.log(Logger.Tags.WAVE_PARSER, "Total Enemies: " + (enemyWaveDto.getTotalEnemies()));
+        Logger.log(Logger.Tags.WAVE_PARSER, "Start Delay: " + (enemyWaveDto.getWaveStartDelay()));
+        Logger.log(Logger.Tags.WAVE_PARSER, "Duration: " + (enemyWaveDto.getDuration()));
     }
 
     public void isSpawnSettingsExists(JsonValue wave){
@@ -78,9 +78,9 @@ public class WaveExtractor {
         enemyWaveDto.setSpawnRateIncrement(spawnRateIncrement);
         enemyWaveDto.setSpawnRateIncreaseInterval(spawnRateInterval);
 
-        Gdx.app.log("WaveParser", "Spawn Rate Start: " + (enemyWaveDto.getSpawnRateStart()));
-        Gdx.app.log("WaveParser", "Spawn Rate Increment: " + (enemyWaveDto.getSpawnRateIncrement()));
-        Gdx.app.log("WaveParser", "Spawn Rate Increment Interval: " + (enemyWaveDto.getSpawnRateIncreaseInterval()));
+        Logger.log(Logger.Tags.WAVE_PARSER, "Spawn Rate Start: " + (enemyWaveDto.getSpawnRateStart()));
+        Logger.log(Logger.Tags.WAVE_PARSER, "Spawn Rate Increment: " + (enemyWaveDto.getSpawnRateIncrement()));
+        Logger.log(Logger.Tags.WAVE_PARSER, "Spawn Rate Increment Interval: " + (enemyWaveDto.getSpawnRateIncreaseInterval()));
     }
 
 
@@ -90,15 +90,15 @@ public class WaveExtractor {
             throw new RuntimeException("Wave Direction not found");
         }
 
-        Map<String, Float> enemySpawnDirections = new HashMap<>();
+        Map<String, Integer> enemySpawnDirections = new HashMap<>();
         for (JsonValue direction : directionsNode) {
             String directionName = direction.name();
-            float weight = direction.asFloat();
+            int weight = direction.asInt();
             enemySpawnDirections.put(directionName, weight);
         }
 
         enemyWaveDto.getEnemyInfoDto().setSpawnDirections(enemySpawnDirections);
-        Gdx.app.log("WaveParser", "Spawn Directions : " + (enemyWaveDto.getEnemyInfoDto().getSpawnDirections()));
+        Logger.log(Logger.Tags.WAVE_PARSER, "Spawn Directions : " + (enemyWaveDto.getEnemyInfoDto().getSpawnDirections()));
     }
 
     public void parseEnemyDistribution(JsonValue spawnSettings, EnemyWaveDto enemyWaveDto){
@@ -114,7 +114,7 @@ public class WaveExtractor {
             enemiesDistribution.put(enemyName, percentage);
         }
         enemyWaveDto.getEnemyInfoDto().setEnemyDistributions(enemiesDistribution);
-        Gdx.app.log("WaveParser", "Enemy Distribution : " + (enemyWaveDto.getEnemyInfoDto().getEnemyDistributions()));
+        Logger.log(Logger.Tags.WAVE_PARSER, "Enemy Distribution : " + (enemyWaveDto.getEnemyInfoDto().getEnemyDistributions()));
     }
 
 

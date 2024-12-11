@@ -7,7 +7,7 @@
       "totalEnemies": 100,
       "spawnSettings": {
         "spawnRate": {
-          "start": 0.5,
+          "start": 1,
           "increment": 0.1,
           "interval": 10
         },
