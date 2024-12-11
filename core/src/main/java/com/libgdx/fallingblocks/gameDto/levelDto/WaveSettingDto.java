@@ -1,10 +1,9 @@
-package com.libgdx.fallingblocks.dto;
+package com.libgdx.fallingblocks.gameDto.levelDto;
 
-public class EnemyWaveDto {
+public class WaveSettingDto {
 
     private int totalEnemies;
     private float duration, waveStartDelay, spawnRateStart, spawnRateIncrement,spawnRateIncreaseInterval;
-    private EnemyInfoDto enemyInfoDto= new EnemyInfoDto();
 
     public int getTotalEnemies() {
         return totalEnemies;
@@ -52,13 +51,5 @@ public class EnemyWaveDto {
 
     public void setSpawnRateIncreaseInterval(float spawnRateIncreaseInterval) {
         this.spawnRateIncreaseInterval = spawnRateIncreaseInterval;
-    }
-
-    public EnemyInfoDto getEnemyInfoDto() {
-        return enemyInfoDto;
-    }
-
-    public void setEnemyInfoDto(EnemyInfoDto enemyInfoDto) {
-        this.enemyInfoDto = enemyInfoDto;
     }
 }

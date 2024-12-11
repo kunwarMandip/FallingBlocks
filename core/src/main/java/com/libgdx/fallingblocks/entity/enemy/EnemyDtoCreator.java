@@ -1,15 +1,14 @@
-package com.libgdx.fallingblocks.controllers;
+package com.libgdx.fallingblocks.entity.enemy;
 
-import com.libgdx.fallingblocks.controllers.listeners.EnemyDtoGenerator;
-import com.libgdx.fallingblocks.dto.EnemyDto;
-import com.libgdx.fallingblocks.dto.EnemyInfoDto;
-import com.libgdx.fallingblocks.entity.enemy.EnemyType;
+import com.badlogic.gdx.math.Vector2;
+import com.libgdx.fallingblocks.gameDto.levelDto.EnemyDto;
+import com.libgdx.fallingblocks.gameDto.levelDto.EnemyInfoDto;
 
 import java.util.Map;
 
 import static com.libgdx.fallingblocks.GlobalVariables.getRandomValue;
 
-public class EnemyDtoCreator implements EnemyDtoGenerator {
+public final class EnemyDtoCreator{
 
     private final Map<String, Integer> spawnDirections;
     private final Map<String, Integer> enemyDistributions;
@@ -24,8 +23,12 @@ public class EnemyDtoCreator implements EnemyDtoGenerator {
         return EnemyType.valueOf(enemy.toUpperCase());
     }
 
-    private String getSpawnPosition(){
+    private String getSpawnDirection(){
         return getString(spawnDirections);
+    }
+
+    private Vector2 getSpawnPosition(String spawnDirection){
+        return null;
     }
 
     private String getString(Map<String, Integer> map) {
@@ -41,8 +44,10 @@ public class EnemyDtoCreator implements EnemyDtoGenerator {
         throw new IllegalStateException("EnemyDtoGenerator: Error on getString(): \n"+ map);
     }
 
-    @Override
     public EnemyDto getEnemyDto() {
-        return new EnemyDto(getEnemyType(), getSpawnPosition());
+        EnemyType enemyType= getEnemyType();
+        String spawnDirection= getSpawnDirection();
+        Vector2 spawnPosition= getSpawnPosition(spawnDirection);
+        return new EnemyDto(enemyType, spawnDirection, spawnPosition);
     }
 }

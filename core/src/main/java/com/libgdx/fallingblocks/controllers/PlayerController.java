@@ -1,43 +1,28 @@
 package com.libgdx.fallingblocks.controllers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.entity.player.Player;
+import com.libgdx.fallingblocks.entity.player.PlayerFactory;
 import com.libgdx.fallingblocks.entity.player.PlayerTypes;
+import com.libgdx.fallingblocks.gameDto.levelDto.PlayerDto;
 
 public class PlayerController {
 
-    private final World world;
-    private Player currentPlayer;
+    private Player player;
+    private final PlayerFactory playerFactory;
 
-    public PlayerController(World world, PlayerTypes playerTypes){
-        this.world=world;
-        changeCurrentPlayer(playerTypes);
+    public PlayerController(World world, PlayerDto playerDto){
+        this.playerFactory= new PlayerFactory(world, playerDto);
+        this.player= playerFactory.getPlayer(playerDto);
     }
 
-    public void changeCurrentPlayer(PlayerTypes playerTypes){
-        switch (playerTypes){
-            case NORMAL:
-                currentPlayer= new Player(world, 50, new Vector2(50, 50 ), new Vector2(5, 5));
-                break;
-            case BOSS:
-                currentPlayer= new Player(world, 100, new Vector2(50, 50), new Vector2(5, 5));
-                break;
-        }
+    public void draw(SpriteBatch spriteBatch){
+        player.draw(spriteBatch);
     }
 
-    public void update(float delta){
-        currentPlayer.update(delta);
+    public void setPlayer(PlayerTypes playerType){
+        player= playerFactory.getPlayer(playerType);
     }
-
-    public void draw(SpriteBatch spriteBatch) {
-        currentPlayer.draw(spriteBatch);
-    }
-
-    public Player getCurrentPlayer(){
-        return currentPlayer;
-    }
-
 
 }

@@ -1,65 +1,68 @@
 package com.libgdx.fallingblocks.controllers;
 
-import com.libgdx.fallingblocks.dto.EnemyWaveDto;
-import com.libgdx.fallingblocks.dto.GameLevelDto;
-import com.libgdx.fallingblocks.jsonExtractor.JsonDataExtractor;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.libgdx.fallingblocks.entity.enemy.EnemyDtoCreator;
+import com.libgdx.fallingblocks.gameDto.GameDto;
+import com.libgdx.fallingblocks.gameDto.WaveDto;
+import com.libgdx.fallingblocks.gameDto.levelDto.WaveSettingDto;
 
 public class LevelManager {
 
-    private EnemyWaveDto currentEnemyWaveDto;
+    private WaveSettingDto currentWaveSettingDto;
 
 
-    private WaveTimersController waveTimersController;
+    private TimerController timerController;
     private  SpawnController spawnController;
 
     private EnemyDtoCreator enemyDtoCreator;
 
 //    public LevelManager(int levelToLoad, World world, TiledMap tiledMap) {
-//        gameLevelDto= new JsonDataExtractor().getGameLevelDto(levelToLoad);
-//        currentEnemyWaveDto= gameLevelDto.getWaveDtoArray().get(0);
+//        gameDto= new DtoParserController().getGameLevelDto(levelToLoad);
+//        currentWaveSettingDto= gameDto.getWaveDtoArray().get(0);
 //
 //        tiledMapController= new TiledMapController(world, tiledMap);
 //        playerController= new PlayerController(world, PlayerTypes.NORMAL);
-//        spawnController = new SpawnController( world, currentEnemyWaveDto.getEnemyInfoDto(), tiledMapController.getSpawnAreas());
-//        waveTimersController = new WaveTimersController(currentEnemyWaveDto, spawnController);
+//        spawnController = new SpawnController( world, currentWaveSettingDto.getEnemyInfoDto(), tiledMapController.getSpawnAreas());
+//        timerController = new TimerController(currentWaveSettingDto, spawnController);
 //
-//        this.enemyController= new EnemyController();
-//        this.enemyDtoCreator= new EnemyDtoCreator(currentEnemyWaveDto.getEnemyInfoDto());
+//        this.enemiesController= new EnemiesController();
+//        this.enemyDtoCreator= new EnemyDtoCreator(currentWaveSettingDto.getEnemyInfoDto());
 //    }
 
-    private final GameLevelDto gameLevelDto;
+    private final GameDto gameDto;
+    private WaveDto waveDto;
+
     private final WorldController worldController;
     private final TiledMapController tiledMapController;
 
-    private final EnemyController enemyController;
     private final PlayerController playerController;
+    private final EnemiesController enemiesController;
 
     public LevelManager(int level){
-        this.gameLevelDto= new JsonDataExtractor().getGameLevelDto(level);
-        this.worldController = new WorldController(gameLevelDto.getWorldDto());
-        this.tiledMapController = new TiledMapController(worldController.getWorld(), gameLevelDto.getTiledMapDto());
+        this.gameDto= new DtoParserController().getGameDto(level);
+        this.waveDto = gameDto.getWave();
 
-        this.enemyController= new EnemyController();
-        this.playerController= new PlayerController();
+        this.worldController = new WorldController(waveDto.getWorldDto());
+        this.tiledMapController = new TiledMapController(worldController.getWorld(), waveDto.getTiledMapDto());
+
+        this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto());
+        this.enemiesController = new EnemiesController(worldController.getWorld(), waveDto.getEnemyInfoDto());
 
     }
 
-//    public void update(float delta) {
-//
-//        enemyController.update(delta);
-//        enemyDtoCreator.getEnemyDto();
-//
-//        waveTimersController.update(delta);
-//        tiledMapController.update(delta);
-//        spawnController.spawnEnemy(new Vector2(0, 0));
-//        playerController.update(delta);
-//    }
-//
-//    public void draw(SpriteBatch spriteBatch){
-//
-//        enemyController.draw(spriteBatch);
-//        playerController.draw(spriteBatch);
-//    }
 
+    public void update(float delta){
+        timerController.update(delta);
+    }
+
+    public void draw(SpriteBatch spriteBatch){
+        playerController.draw(spriteBatch);
+        enemiesController.draw(spriteBatch);
+    }
+
+
+    public void changeWave(){
+        waveDto= gameDto.getWave();
+    }
 
 }

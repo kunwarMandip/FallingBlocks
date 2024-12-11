@@ -1,7 +1,7 @@
 package com.libgdx.fallingblocks.controllers;
 
 import com.badlogic.gdx.physics.box2d.World;
-import com.libgdx.fallingblocks.dto.WorldDto;
+import com.libgdx.fallingblocks.gameDto.levelDto.WorldDto;
 
 
 public class WorldController {

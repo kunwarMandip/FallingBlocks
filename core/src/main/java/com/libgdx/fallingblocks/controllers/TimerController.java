@@ -1,7 +1,7 @@
 package com.libgdx.fallingblocks.controllers;
 
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.dto.EnemyWaveDto;
+import com.libgdx.fallingblocks.gameDto.levelDto.WaveSettingDto;
 import com.libgdx.fallingblocks.controllers.listeners.EnemySpawnListener;
 
 import static com.libgdx.fallingblocks.Logger.Tags.WAVE_TIMER_CONTROLLER;
@@ -9,9 +9,9 @@ import static com.libgdx.fallingblocks.Logger.Tags.WAVE_TIMER_CONTROLLER;
 /**
  * Manage all Timers and counters needed to control wave
  */
-public class WaveTimersController {
+public class TimerController {
 
-    private final EnemyWaveDto enemyWaveDto;
+    private final WaveSettingDto waveSettingDto;
     private final EnemySpawnListener enemySpawnListener;
 
     private float waveDurationCounter, waveStartDelayCounter;
@@ -19,8 +19,8 @@ public class WaveTimersController {
     private int totalEnemiesSpawned;
     private float spawnRate, spawnRateCounter;
 
-    public WaveTimersController(EnemyWaveDto enemyWaveDto, EnemySpawnListener enemySpawnListener){
-        this.enemyWaveDto=enemyWaveDto;
+    public TimerController(WaveSettingDto waveSettingDto, EnemySpawnListener enemySpawnListener){
+        this.waveSettingDto = waveSettingDto;
         this.enemySpawnListener=enemySpawnListener;
         resetWaveTimers();
 
@@ -31,7 +31,7 @@ public class WaveTimersController {
         waveStartDelayCounter= 0f;
 
         totalEnemiesSpawned=0;
-        spawnRate=enemyWaveDto.getSpawnRateStart();
+        spawnRate= waveSettingDto.getSpawnRateStart();
         spawnRateCounter=0f;
     }
 
@@ -68,7 +68,7 @@ public class WaveTimersController {
      * @return true if delay has been completed, else false
      */
     private boolean isWaveStartDelayCompleted(float delta){
-        if(waveStartDelayCounter >= enemyWaveDto.getWaveStartDelay()){
+        if(waveStartDelayCounter >= waveSettingDto.getWaveStartDelay()){
             return true;
         }
 
@@ -84,7 +84,7 @@ public class WaveTimersController {
      * @return true if the wave duration has been reached
      */
     private boolean isWaveDurationReached(float delta){
-        if(waveDurationCounter >= enemyWaveDto.getDuration()){
+        if(waveDurationCounter >= waveSettingDto.getDuration()){
             Logger.log(WAVE_TIMER_CONTROLLER, "Duration Reached: " + waveDurationCounter);
             return true;
         }
@@ -106,7 +106,7 @@ public class WaveTimersController {
     }
 
     private boolean isMaxEnemySpawned(){
-        return totalEnemiesSpawned >= enemyWaveDto.getTotalEnemies();
+        return totalEnemiesSpawned >= waveSettingDto.getTotalEnemies();
     }
 
 }

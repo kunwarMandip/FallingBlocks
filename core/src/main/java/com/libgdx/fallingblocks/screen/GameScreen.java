@@ -53,7 +53,7 @@ public class GameScreen implements Screen {
         tiledMap= new TmxMapLoader().load("map/tiledMap.tmx");
         orthogonalTiledMapRenderer= new OrthogonalTiledMapRenderer(tiledMap,1/PPM);
 
-        levelManager = new LevelManager(levelToLoad, world,tiledMap);
+        levelManager = new LevelManager(levelToLoad);
 
         world.setContactListener(new GameContactListener());
     }

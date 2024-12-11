@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.dto;
+package com.libgdx.fallingblocks.gameDto.levelDto;
 
 import com.badlogic.gdx.math.Vector2;
 

@@ -9,6 +9,7 @@ import java.util.Set;
 public class Logger {
 
     public enum Tags {
+        ENEMY_INFO_PARSER,
         WAVE_PARSER,
         CONTACT_LISTENER,
         WAVE_TIMER_CONTROLLER,
