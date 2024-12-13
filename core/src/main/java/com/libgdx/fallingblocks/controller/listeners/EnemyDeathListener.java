@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.controllers.listeners;
+package com.libgdx.fallingblocks.controller.listeners;
 
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
 

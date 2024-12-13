@@ -3,16 +3,17 @@ package com.libgdx.fallingblocks.gameDto.levelDto;
 
 import com.badlogic.gdx.math.Vector2;
 import com.libgdx.fallingblocks.entity.enemy.EnemyType;
+import com.libgdx.fallingblocks.map.objects.spawnArea.MovementDirection;
 
 public class EnemyDto {
 
     private final EnemyType enemyType;
-    private final String spawnDirection;
     private final Vector2 spawnPosition;
+    private final MovementDirection movementDirection;
 
-    public EnemyDto(EnemyType enemyType, String spawnDirection, Vector2 spawnPosition) {
+    public EnemyDto(EnemyType enemyType, MovementDirection movementDirection, Vector2 spawnPosition) {
         this.enemyType = enemyType;
-        this.spawnDirection = spawnDirection;
+        this.movementDirection = movementDirection;
         this.spawnPosition = spawnPosition;
     }
 
@@ -24,7 +25,7 @@ public class EnemyDto {
         return spawnPosition;
     }
 
-    public String getSpawnDirection() {
-        return spawnDirection;
+    public MovementDirection getMovementDirection() {
+        return movementDirection;
     }
 }

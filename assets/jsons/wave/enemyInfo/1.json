@@ -13,6 +13,13 @@
         "orc": 20,
         "dragon": 10,
         "ss": 10
+      },
+      "spawnSettings": {
+        "spawnRate": {
+          "start": 1,
+          "increment": 0.1,
+          "interval": 10
+        }
       }
     }
   ]

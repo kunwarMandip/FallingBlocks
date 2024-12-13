@@ -1,8 +1,8 @@
-package com.libgdx.fallingblocks.controllers;
+package com.libgdx.fallingblocks.controller.controllers;
 
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.gameDto.levelDto.WaveSettingDto;
-import com.libgdx.fallingblocks.controllers.listeners.EnemySpawnListener;
+import com.libgdx.fallingblocks.controller.listeners.EnemySpawnListener;
 
 import static com.libgdx.fallingblocks.Logger.Tags.WAVE_TIMER_CONTROLLER;
 

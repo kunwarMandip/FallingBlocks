@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.map;
+package com.libgdx.fallingblocks.map.objects;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import static com.libgdx.fallingblocks.GlobalVariables.PPM;
 
-public class TileObjects {
+public abstract class TileObjects {
 
     protected World world;
     protected Body body;

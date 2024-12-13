@@ -7,7 +7,7 @@ import com.libgdx.fallingblocks.entity.common.Entity;
 
 public class Player extends Entity {
     public Player(World world, int health, Vector2 spawnPosition, Vector2 bodyDimension) {
-        super(world, health, spawnPosition, bodyDimension);
+        super(health, spawnPosition, bodyDimension);
     }
 
     @Override

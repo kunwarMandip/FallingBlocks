@@ -2,6 +2,7 @@ package com.libgdx.fallingblocks;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.JsonValue;
 
 public class GlobalVariables {
     public static final float PPM                   = 16;
@@ -36,6 +37,12 @@ public class GlobalVariables {
             if (obj == null) {
                 throw new IllegalStateException("Null Objects: " + String.valueOf(objects));
             }
+        }
+    }
+
+    public static void isNodeExists(JsonValue node){
+        if(node== null){
+            throw new RuntimeException("Json Parser: Node not found");
         }
     }
 

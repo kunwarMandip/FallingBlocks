@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.libgdx.fallingblocks.contactlistener.GameContactListener;
-import com.libgdx.fallingblocks.controllers.LevelManager;
+import com.libgdx.fallingblocks.controller.LevelManager;
 
 import static com.libgdx.fallingblocks.GlobalVariables.*;
 

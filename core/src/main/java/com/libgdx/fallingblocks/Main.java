@@ -11,7 +11,7 @@ public class Main extends Game {
 
 //        Logger.disableTag(Logger.Tags.CONTACT_LISTENER);
 //        Logger.disableTag(Logger.Tags.WAVE_PARSER);
-        Logger.disableTag(Logger.Tags.WAVE_TIMER_CONTROLLER);
+//        Logger.disableTag(Logger.Tags.WAVE_TIMER_CONTROLLER);
 
         SpriteBatch spriteBatch = new SpriteBatch();
         setScreen(new GameScreen(1, spriteBatch));

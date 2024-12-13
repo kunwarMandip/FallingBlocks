@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.controllers;
+package com.libgdx.fallingblocks.controller.controllers;
 
 import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.gameDto.levelDto.WorldDto;

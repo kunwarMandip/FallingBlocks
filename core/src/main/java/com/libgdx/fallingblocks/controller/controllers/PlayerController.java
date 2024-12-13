@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.controllers;
+package com.libgdx.fallingblocks.controller.controllers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
@@ -14,7 +14,7 @@ public class PlayerController {
 
     public PlayerController(World world, PlayerDto playerDto){
         this.playerFactory= new PlayerFactory(world, playerDto);
-        this.player= playerFactory.getPlayer(playerDto);
+        this.player= playerFactory.getPlayer(playerDto.playerTypes);
     }
 
     public void draw(SpriteBatch spriteBatch){

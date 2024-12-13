@@ -10,29 +10,33 @@ import com.libgdx.fallingblocks.gameDto.levelDto.WaveSettingDto;
 
 public class GameDto {
 
-    private final Array<WorldDto> worldDto;
-    private final Array<TiledMapDto> tiledMapDto;
-    private final Array<WaveSettingDto> waveSettingDto;
+    private final WaveManager waveManager;
 
-    private final Array<PlayerDto> playerDto;
-    private final Array<EnemyInfoDto> enemyInfoDto;
+    private final Array<WorldDto> worldDtoArray;
+    private final Array<TiledMapDto> tiledMapDtoArray;
+    private final Array<WaveSettingDto> waveSettingDtoArray;
+
+    private final Array<PlayerDto> playerDtoArray;
+    private final Array<EnemyInfoDto> enemyInfoDtoArray;
 
     public GameDto(GameDtoBuilder gameDtoBuilder) {
-        this.worldDto = gameDtoBuilder.worldDto;
-        this.tiledMapDto = gameDtoBuilder.tiledMapDto;
-        this.waveSettingDto = gameDtoBuilder.waveSettingDto;
-        this.playerDto = gameDtoBuilder.playerDto;
-        this.enemyInfoDto = gameDtoBuilder.enemyInfoDto;
+        this.waveManager= new WaveManager();
+        this.worldDtoArray = gameDtoBuilder.worldDto;
+        this.tiledMapDtoArray = gameDtoBuilder.tiledMapDto;
+        this.waveSettingDtoArray = gameDtoBuilder.waveSettingDto;
+        this.playerDtoArray = gameDtoBuilder.playerDto;
+        this.enemyInfoDtoArray = gameDtoBuilder.enemyInfoDto;
+
     }
 
+    public WaveDto getNextWave(){
 
-    public WaveDto getWave(){
         WaveDto.WaveDtoBuilder waveDtoBuilder= new WaveDto.WaveDtoBuilder()
-            .setWaveSettingDto(null)
-            .setWorldDto(null)
-            .setTiledMapDto(null)
-            .setPlayerDto(null)
-            .setEnemyInfoDto(null);
+            .setWorldDto(waveManager.getWorldDto(worldDtoArray))
+            .setTiledMapDto(waveManager.getTiledMapDto(tiledMapDtoArray))
+            .setWaveSettingDto(waveManager.getWaveSettingDto(waveSettingDtoArray))
+            .setPlayerDto(waveManager.getPlayerDto(playerDtoArray))
+            .setEnemyInfoDto(waveManager.getEnemyInfoDto(enemyInfoDtoArray));
 
         return waveDtoBuilder.build();
     }

@@ -14,26 +14,17 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
     protected Fixture fixture;
 
     protected int health;
-    protected boolean isDead;
+    protected boolean isBodySpawned, isDead;
     protected Vector2 spawnPosition, bodyDimension;
 
-    public Entity(World world, int health, Vector2 spawnPosition, Vector2 bodyDimension){
+    public Entity(int health, Vector2 spawnPosition, Vector2 bodyDimension){
         this.isDead=false;
         this.health=health;
         this.spawnPosition=spawnPosition;
         this.bodyDimension=bodyDimension;
-        setBody(world);
     }
 
-    public abstract void update(float delta);
-
-    public abstract void draw(SpriteBatch spriteBatch);
-
-    public void setToDestroy(){
-        isDead=true;
-    }
-
-    protected void setBody(World world){
+    protected void spawnBody(World world){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(spawnPosition.x, spawnPosition.y);
@@ -56,6 +47,10 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
         rectangleShape.dispose();
     }
 
+    public abstract void update(float delta);
+
+    public abstract void draw(SpriteBatch spriteBatch);
+
     public void setCategoryFilter(short filterBit) {
         Filter filter = new Filter();
         filter.categoryBits = filterBit;
@@ -67,6 +62,10 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
         filter.categoryBits = filterBit;
         filter.maskBits=maskBit;
         fixture.setFilterData(filter);
+    }
+
+    public void setToDestroy(){
+        isDead=true;
     }
 
     public void destroyBody(World world){
