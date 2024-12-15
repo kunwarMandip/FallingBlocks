@@ -14,7 +14,7 @@ import java.util.Map;
 import static com.libgdx.fallingblocks.GlobalVariables.isFileExist;
 import static com.libgdx.fallingblocks.GlobalVariables.isNodeExists;
 
-public class EnemyInfoParser {
+public class EnemyInfoDtoParser {
 
     public Array<EnemyInfoDto> getEnemyInfoDto(String filePath){
         FileHandle fileHandle = Gdx.files.internal(filePath);

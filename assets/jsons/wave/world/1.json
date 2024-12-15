@@ -1,0 +1,9 @@
+{
+  "waves":[
+    {
+      "waveNumber": 1,
+      "sleep": "false",
+      "gravity": [0, 0]
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import com.libgdx.fallingblocks.gameDto.levelDto.TiledMapDto;
 import com.libgdx.fallingblocks.gameDto.levelDto.WaveSettingDto;
 
 
+
 public class GameDto {
 
     private final WaveManager waveManager;
@@ -26,7 +27,6 @@ public class GameDto {
         this.waveSettingDtoArray = gameDtoBuilder.waveSettingDto;
         this.playerDtoArray = gameDtoBuilder.playerDto;
         this.enemyInfoDtoArray = gameDtoBuilder.enemyInfoDto;
-
     }
 
     public WaveDto getNextWave(){
@@ -54,7 +54,7 @@ public class GameDto {
             return this;
         }
 
-        public GameDtoBuilder setTiledMapDto(Array<TiledMapDto> tiledMapDto) {
+        public GameDtoBuilder setTiledMapDto(Array<TiledMapDto > tiledMapDto) {
             this.tiledMapDto = tiledMapDto;
             return this;
         }
@@ -75,17 +75,13 @@ public class GameDto {
         }
 
         public boolean areAllVariablesInitialized() {
-            return worldDto != null &&
-                tiledMapDto != null &&
-                playerDto != null &&
-                waveSettingDto != null &&
-                enemyInfoDto != null;
+            return worldDto != null && tiledMapDto != null && playerDto != null && waveSettingDto != null && enemyInfoDto != null;
         }
 
         public GameDto build(){
-            if(!areAllVariablesInitialized()){
-                throw new IllegalStateException("GameDtoBuilder: WaveDtoBuilder variables not initialized!");
-            }
+//            if(!areAllVariablesInitialized()){
+//                throw new IllegalStateException("GameDtoBuilder: WaveDtoBuilder variables not initialized!");
+//            }
 
             return new GameDto(this);
         }

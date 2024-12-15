@@ -8,34 +8,58 @@ import com.libgdx.fallingblocks.jsonParser.GameDtoParser;
 
 public class LevelManager {
 
+    private final SpriteBatch spriteBatch;
+
     private WaveDto waveDto;
     private final GameDto gameDto;
 
     private final WorldController worldController;
-    private final TiledMapController tiledMapController;
+    private final SceneGraphController sceneGraphController;
 
-    private final PlayerController playerController;
+//    private final PlayerController playerController;
     private final EnemiesController enemiesController;
 
-    public LevelManager(int level){
+
+    public LevelManager(int level, SpriteBatch spriteBatch){
         this.gameDto= new GameDtoParser().getGameDto(level);
         this.waveDto = gameDto.getNextWave();
 
-        this.worldController = new WorldController(waveDto.getWorldDto());
-        this.tiledMapController = new TiledMapController(worldController.getWorld(), waveDto.getTiledMapDto());
+        this.spriteBatch= spriteBatch;
 
-        this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto());
-        this.enemiesController = new EnemiesController(waveDto.getEnemyInfoDto(), tiledMapController.getSpawnAreas());
+        this.sceneGraphController= new SceneGraphController(waveDto.getTiledMapDto());
+        this.worldController = new WorldController(true, waveDto.getWorldDto(), sceneGraphController.getTiledMap());
+
+//        this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto());
+        this.enemiesController = new EnemiesController(waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
     }
 
-
     public void update(float delta){
+        worldController.update();
+        sceneGraphController.render();
         enemiesController.updateEnemies(delta);
     }
 
-    public void draw(SpriteBatch spriteBatch){
-        playerController.draw(spriteBatch);
+
+    public void render(){
+        sceneGraphController.render();
+        worldController.render(sceneGraphController.getOrthographicGameCamera());
+    }
+
+
+    public void resize(int width, int height){
+        sceneGraphController.resize(width, height);
+    }
+
+    public void draw(){
+//        playerController.draw(spriteBatch);
         enemiesController.draw(spriteBatch);
     }
+
+//    private void renderSpriteBatch(){
+//        spriteBatch.setProjectionMatrix(orthographicGameCamera.combined);
+//        spriteBatch.begin();
+//        levelManager.draw(spriteBatch);
+//        spriteBatch.end();
+//    }
 
 }

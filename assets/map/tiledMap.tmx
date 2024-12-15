@@ -23,17 +23,17 @@
   </object>
   <object id="29" x="48" y="1360" width="624" height="16">
    <properties>
-    <property name="name" value="top"/>
+    <property name="name" value="bottom"/>
    </properties>
   </object>
   <object id="47" x="-80" y="208" width="31.0986" height="1104">
    <properties>
-    <property name="name" value="right"/>
+    <property name="name" value="left"/>
    </properties>
   </object>
   <object id="48" x="768" y="192" width="31.1174" height="1104.67">
    <properties>
-    <property name="name" value="bottom"/>
+    <property name="name" value="right"/>
    </properties>
   </object>
  </objectgroup>

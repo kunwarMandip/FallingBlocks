@@ -6,11 +6,13 @@ import com.libgdx.fallingblocks.gameDto.levelDto.*;
 public class WaveManager {
 
     public WorldDto getWorldDto(Array<WorldDto> worldDtoArray){
-        return null;
+        return worldDtoArray.pop();
     }
 
     public TiledMapDto getTiledMapDto(Array<TiledMapDto> tiledMapDtoArray){
-        return null;
+
+        return tiledMapDtoArray.pop();
+//        return null;
     }
 
     public WaveSettingDto getWaveSettingDto(Array<WaveSettingDto> waveSettingDtoArray){
@@ -22,7 +24,7 @@ public class WaveManager {
     }
 
     public EnemyInfoDto getEnemyInfoDto( Array<EnemyInfoDto> enemyInfoDtoArray){
-        return null;
+        return enemyInfoDtoArray.pop();
     }
 
 }

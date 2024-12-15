@@ -1,0 +1,8 @@
+{
+  "waves":[
+    {
+      "waveNumber": 1,
+      "mapPath": "map/tiledMap.tmx"
+    }
+  ]
+}

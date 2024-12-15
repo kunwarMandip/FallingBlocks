@@ -23,7 +23,7 @@ public class EnemySpawnArea extends TileObjects {
 
     public MovementDirection getTraversalDirection(){
         String spawnDirection=mapObject.getProperties().get("name", String.class);
-        return MovementDirection.valueOf(spawnDirection);
+        return MovementDirection.valueOf(spawnDirection.toUpperCase());
     }
 
 }

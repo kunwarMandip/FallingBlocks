@@ -12,7 +12,7 @@ import static com.libgdx.fallingblocks.GlobalVariables.isFileExist;
 import static com.libgdx.fallingblocks.GlobalVariables.isNodeExists;
 
 
-public class WaveSettingsParser {
+public class WaveSettingsDtoParser {
 
     public Array<WaveSettingDto> getWaveSettingDtoArray(String filePath){
         FileHandle fileHandle = Gdx.files.internal(filePath);
@@ -34,7 +34,7 @@ public class WaveSettingsParser {
 
 
 
-    public void parseWaveSetting(JsonValue wave, WaveSettingDto waveSettingDto){
+    private void parseWaveSetting(JsonValue wave, WaveSettingDto waveSettingDto){
         int totalEnemies= wave.getInt("totalEnemies", -1);
         float startDelay = wave.getFloat("startDelay", 0.0f);
         float duration = wave.getFloat("duration", 0.0f);
