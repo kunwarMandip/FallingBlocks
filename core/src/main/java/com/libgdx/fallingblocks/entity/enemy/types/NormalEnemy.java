@@ -36,4 +36,9 @@ public class NormalEnemy extends Enemy {
     public void onHit(Entity a, Entity b) {
 
     }
+
+    @Override
+    public void collide(Entity entity) {
+
+    }
 }

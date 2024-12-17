@@ -1,8 +1,7 @@
 package com.libgdx.fallingblocks.controller.controllers;
 
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.gameDto.levelDto.WaveSettingDto;
-import com.libgdx.fallingblocks.controller.listeners.EnemySpawnListener;
+import com.libgdx.fallingblocks.jsonParser.dto.levelDto.WaveSettingDto;
 
 import static com.libgdx.fallingblocks.Logger.Tags.WAVE_TIMER_CONTROLLER;
 
@@ -12,18 +11,16 @@ import static com.libgdx.fallingblocks.Logger.Tags.WAVE_TIMER_CONTROLLER;
 public class TimerController {
 
     private final WaveSettingDto waveSettingDto;
-    private final EnemySpawnListener enemySpawnListener;
+
 
     private float waveDurationCounter, waveStartDelayCounter;
 
     private int totalEnemiesSpawned;
     private float spawnRate, spawnRateCounter;
 
-    public TimerController(WaveSettingDto waveSettingDto, EnemySpawnListener enemySpawnListener){
+    public TimerController(WaveSettingDto waveSettingDto){
         this.waveSettingDto = waveSettingDto;
-        this.enemySpawnListener=enemySpawnListener;
         resetWaveTimers();
-
     }
 
     private void resetWaveTimers(){
@@ -55,8 +52,6 @@ public class TimerController {
             return;
         }
 
-        enemySpawnListener.setNumEnemyToSpawn(1);
-        totalEnemiesSpawned++;
     }
 
 

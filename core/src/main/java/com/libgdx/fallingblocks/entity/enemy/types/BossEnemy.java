@@ -32,4 +32,8 @@ public final class BossEnemy extends Enemy {
     }
 
 
+    @Override
+    public void collide(Entity entity) {
+
+    }
 }

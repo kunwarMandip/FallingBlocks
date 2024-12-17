@@ -3,16 +3,15 @@
     {
       "waveNumber": 1,
       "directions": {
-        "north": 40,
-        "east": 30,
-        "south": 20,
-        "west": 10
+        "top": 40,
+        "left": 30,
+        "right": 20,
+        "bottom": 10
       },
       "enemyDistribution": {
-        "goblin": 70,
-        "orc": 20,
-        "dragon": 10,
-        "ss": 10
+        "normal": 70,
+        "boss": 20,
+        "quick": 10
       },
       "spawnSettings": {
         "spawnRate": {

@@ -1,9 +1,10 @@
 package com.libgdx.fallingblocks.entity.enemy.services;
 
 import com.badlogic.gdx.math.Vector2;
+import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.entity.enemy.EnemyType;
-import com.libgdx.fallingblocks.gameDto.levelDto.EnemyDto;
-import com.libgdx.fallingblocks.gameDto.levelDto.EnemyInfoDto;
+import com.libgdx.fallingblocks.jsonParser.dto.levelDto.EnemyDto;
+import com.libgdx.fallingblocks.jsonParser.dto.levelDto.EnemiesDto;
 import com.libgdx.fallingblocks.map.objects.spawnArea.MovementDirection;
 
 import java.util.Map;
@@ -16,19 +17,21 @@ public final class EnemyDtoCreator{
     private final Map<String, Integer> enemyDistributions;
     private final Map<MovementDirection, Vector2> spawnAreas;
 
-    public EnemyDtoCreator(EnemyInfoDto enemyInfoDto, Map<MovementDirection, Vector2> spawnAreas){
+    public EnemyDtoCreator(EnemiesDto enemiesDto, Map<MovementDirection, Vector2> spawnAreas){
         this.spawnAreas= spawnAreas;
-        this.spawnDirections=enemyInfoDto.getSpawnDirections();
-        this.enemyDistributions=enemyInfoDto.getEnemyDistributions();
+        this.spawnDirections= enemiesDto.getSpawnDirections();
+        this.enemyDistributions= enemiesDto.getEnemyDistributions();
+
     }
 
     private EnemyType getEnemyType(){
         String enemy= getString(enemyDistributions);
+//        Logger.log(Logger.Tags.ENEMY_SPAWNER, enemyDistributions.toString());
         return EnemyType.valueOf(enemy.toUpperCase());
     }
 
     private MovementDirection getMovementDirection(){
-        return MovementDirection.valueOf(getString(spawnDirections));
+        return MovementDirection.valueOf(getString(spawnDirections).toUpperCase());
     }
 
     private String getString(Map<String, Integer> map) {

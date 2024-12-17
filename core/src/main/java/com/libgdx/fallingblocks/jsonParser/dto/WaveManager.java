@@ -1,7 +1,7 @@
-package com.libgdx.fallingblocks.gameDto;
+package com.libgdx.fallingblocks.jsonParser.dto;
 
 import com.badlogic.gdx.utils.Array;
-import com.libgdx.fallingblocks.gameDto.levelDto.*;
+import com.libgdx.fallingblocks.jsonParser.dto.levelDto.*;
 
 public class WaveManager {
 
@@ -23,7 +23,7 @@ public class WaveManager {
         return null;
     }
 
-    public EnemyInfoDto getEnemyInfoDto( Array<EnemyInfoDto> enemyInfoDtoArray){
+    public EnemiesDto getEnemyInfoDto(Array<EnemiesDto> enemyInfoDtoArray){
         return enemyInfoDtoArray.pop();
     }
 

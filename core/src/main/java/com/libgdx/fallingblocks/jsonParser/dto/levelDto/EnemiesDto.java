@@ -1,12 +1,12 @@
-package com.libgdx.fallingblocks.gameDto.levelDto;
+package com.libgdx.fallingblocks.jsonParser.dto.levelDto;
 
 import java.util.Map;
 
-public class EnemyInfoDto {
+public class EnemiesDto {
     private final Map<String, Integer> spawnDirections;
     private final Map<String, Integer> enemyDistributions;
 
-    public EnemyInfoDto(Map<String, Integer> spawnDirections, Map<String, Integer> enemyDistributions) {
+    public EnemiesDto(Map<String, Integer> spawnDirections, Map<String, Integer> enemyDistributions) {
         this.spawnDirections = spawnDirections;
         this.enemyDistributions = enemyDistributions;
     }

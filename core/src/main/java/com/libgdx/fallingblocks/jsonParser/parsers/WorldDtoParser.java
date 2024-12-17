@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
-import com.libgdx.fallingblocks.gameDto.levelDto.WorldDto;
+import com.libgdx.fallingblocks.jsonParser.dto.levelDto.WorldDto;
 
 import static com.libgdx.fallingblocks.GlobalVariables.isFileExist;
 

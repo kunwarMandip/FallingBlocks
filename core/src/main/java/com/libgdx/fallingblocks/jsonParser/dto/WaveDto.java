@@ -1,6 +1,6 @@
-package com.libgdx.fallingblocks.gameDto;
+package com.libgdx.fallingblocks.jsonParser.dto;
 
-import com.libgdx.fallingblocks.gameDto.levelDto.*;
+import com.libgdx.fallingblocks.jsonParser.dto.levelDto.*;
 
 public class WaveDto {
 
@@ -9,14 +9,14 @@ public class WaveDto {
 
     private final PlayerDto playerDto;
     private final WaveSettingDto waveSettingDto;
-    private final EnemyInfoDto enemyInfoDto;
+    private final EnemiesDto enemiesDto;
 
     public WaveDto(WaveDtoBuilder waveDtoBuilder) {
         this.worldDto = waveDtoBuilder.worldDto;
         this.tiledMapDto = waveDtoBuilder.tiledMapDto;
         this.playerDto = waveDtoBuilder.playerDto;
         this.waveSettingDto = waveDtoBuilder.waveSettingDto;
-        this.enemyInfoDto = waveDtoBuilder.enemyInfoDto;
+        this.enemiesDto = waveDtoBuilder.enemiesDto;
     }
 
     public WorldDto getWorldDto() {
@@ -35,8 +35,8 @@ public class WaveDto {
         return waveSettingDto;
     }
 
-    public EnemyInfoDto getEnemyInfoDto() {
-        return enemyInfoDto;
+    public EnemiesDto getEnemyInfoDto() {
+        return enemiesDto;
     }
 
     public static class WaveDtoBuilder {
@@ -44,7 +44,7 @@ public class WaveDto {
         private TiledMapDto tiledMapDto;
         private WaveSettingDto waveSettingDto;
         private PlayerDto playerDto;
-        private EnemyInfoDto enemyInfoDto;
+        private EnemiesDto enemiesDto;
 
         public WaveDtoBuilder setWorldDto(WorldDto worldDto) {
             this.worldDto = worldDto;
@@ -66,8 +66,8 @@ public class WaveDto {
             return this;
         }
 
-        public WaveDtoBuilder setEnemyInfoDto(EnemyInfoDto enemyInfoDto) {
-            this.enemyInfoDto = enemyInfoDto;
+        public WaveDtoBuilder setEnemyInfoDto(EnemiesDto enemiesDto) {
+            this.enemiesDto = enemiesDto;
             return this;
         }
 

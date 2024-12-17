@@ -2,8 +2,8 @@ package com.libgdx.fallingblocks.controller;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libgdx.fallingblocks.controller.controllers.*;
-import com.libgdx.fallingblocks.gameDto.GameDto;
-import com.libgdx.fallingblocks.gameDto.WaveDto;
+import com.libgdx.fallingblocks.jsonParser.dto.GameDto;
+import com.libgdx.fallingblocks.jsonParser.dto.WaveDto;
 import com.libgdx.fallingblocks.jsonParser.GameDtoParser;
 
 public class LevelManager {
@@ -16,7 +16,7 @@ public class LevelManager {
     private final WorldController worldController;
     private final SceneGraphController sceneGraphController;
 
-//    private final PlayerController playerController;
+    private final PlayerController playerController;
     private final EnemiesController enemiesController;
 
 
@@ -29,37 +29,36 @@ public class LevelManager {
         this.sceneGraphController= new SceneGraphController(waveDto.getTiledMapDto());
         this.worldController = new WorldController(true, waveDto.getWorldDto(), sceneGraphController.getTiledMap());
 
-//        this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto());
+        this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto());
         this.enemiesController = new EnemiesController(waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
     }
 
     public void update(float delta){
         worldController.update();
         sceneGraphController.render();
+        playerController.update(delta);
         enemiesController.updateEnemies(delta);
+        enemiesController.isEnemySpawnAble(playerController.getPlayerPosition());
     }
 
 
     public void render(){
         sceneGraphController.render();
         worldController.render(sceneGraphController.getOrthographicGameCamera());
+        spriteBatch.setProjectionMatrix(sceneGraphController.getOrthographicGameCamera().combined);
+
+        spriteBatch.begin();
+        playerController.draw(spriteBatch);
+        enemiesController.draw(spriteBatch);
+        spriteBatch.end();
     }
+
 
 
     public void resize(int width, int height){
         sceneGraphController.resize(width, height);
     }
 
-    public void draw(){
-//        playerController.draw(spriteBatch);
-        enemiesController.draw(spriteBatch);
-    }
 
-//    private void renderSpriteBatch(){
-//        spriteBatch.setProjectionMatrix(orthographicGameCamera.combined);
-//        spriteBatch.begin();
-//        levelManager.draw(spriteBatch);
-//        spriteBatch.end();
-//    }
 
 }

@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.gameDto.levelDto.TiledMapDto;
+import com.libgdx.fallingblocks.jsonParser.dto.levelDto.TiledMapDto;
 
 import static com.libgdx.fallingblocks.GlobalVariables.isFileExist;
 

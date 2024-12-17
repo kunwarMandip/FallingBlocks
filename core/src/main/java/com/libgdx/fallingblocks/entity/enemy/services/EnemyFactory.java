@@ -2,7 +2,7 @@ package com.libgdx.fallingblocks.entity.enemy.services;
 
 import com.badlogic.gdx.math.Vector2;
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
-import com.libgdx.fallingblocks.gameDto.levelDto.EnemyDto;
+import com.libgdx.fallingblocks.jsonParser.dto.levelDto.EnemyDto;
 import com.libgdx.fallingblocks.entity.enemy.types.BossEnemy;
 import com.libgdx.fallingblocks.entity.enemy.types.NormalEnemy;
 import com.libgdx.fallingblocks.entity.enemy.types.QuickEnemy;

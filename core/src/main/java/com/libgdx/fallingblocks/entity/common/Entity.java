@@ -3,11 +3,12 @@ package com.libgdx.fallingblocks.entity.common;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.ActionListener;
 import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.DeathBehaviour;
 import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.OnHitBehaviour;
 
 
-public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
+public abstract class Entity implements DeathBehaviour, OnHitBehaviour, ActionListener {
 
     //Box2d setters
     protected Body body;
@@ -24,7 +25,7 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
         this.bodyDimension=bodyDimension;
     }
 
-    protected void spawnBody(World world){
+    public void spawnBody(World world){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(spawnPosition.x, spawnPosition.y);
@@ -64,6 +65,8 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
         fixture.setFilterData(filter);
     }
 
+    public Vector2 getBodyPosition(){return body.getPosition();}
+
     public void setToDestroy(){
         isDead=true;
     }
@@ -79,4 +82,5 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour {
     public void setBodyDimension(Vector2 bodyDimension){
         this.bodyDimension=bodyDimension;
     }
+
 }

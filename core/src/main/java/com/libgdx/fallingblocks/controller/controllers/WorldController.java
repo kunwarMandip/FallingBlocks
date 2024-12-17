@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.contactlistener.GameContactListener;
-import com.libgdx.fallingblocks.gameDto.levelDto.WorldDto;
+import com.libgdx.fallingblocks.jsonParser.dto.levelDto.WorldDto;
 import com.libgdx.fallingblocks.map.TiledObjectLoader;
 import com.libgdx.fallingblocks.map.objects.spawnArea.MovementDirection;
 
@@ -31,10 +31,9 @@ public class WorldController {
 
     private void setBox2DDebugRenderer(){
         box2DDebugRenderer= new Box2DDebugRenderer();
-        box2DDebugRenderer.SHAPE_STATIC.set(0,0,0,1);
+        box2DDebugRenderer.SHAPE_STATIC.set(0,0, 0,0);
         box2DDebugRenderer.setDrawBodies(true);
     }
-
 
 
     public void update(){
@@ -43,7 +42,6 @@ public class WorldController {
 
     public void render(OrthographicCamera orthographicGameCamera){
         box2DDebugRenderer.render(world, orthographicGameCamera.combined);
-
     }
 
     public Map<MovementDirection, Vector2> getSpawnAreas() {

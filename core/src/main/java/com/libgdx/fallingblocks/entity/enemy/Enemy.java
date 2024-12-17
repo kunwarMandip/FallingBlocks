@@ -19,7 +19,7 @@ public abstract class Enemy extends Entity {
         this.speed=speed;
         this.attackBehaviour=attackBehaviour;
         this.movementBehaviour=movementBehaviour;
-        setMaskBit(CATEGORY_ENEMY, (short) ~(CATEGORY_WALL | CATEGORY_ENEMY));
+//        setMaskBit(CATEGORY_ENEMY, (short) ~(CATEGORY_WALL | CATEGORY_ENEMY));
     }
 
     public void performAttack(float delta){
@@ -34,7 +34,6 @@ public abstract class Enemy extends Entity {
         this.attackBehaviour = attackBehaviour;
     }
 
-    public Vector2 getBodyPosition(){return body.getPosition();}
 
     public void setMovementBehaviour(MovementBehaviour movementBehaviour) {
         this.movementBehaviour = movementBehaviour;
