@@ -2,6 +2,7 @@ package com.libgdx.fallingblocks.controller.controllers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyDtoCreator;
@@ -17,13 +18,15 @@ import java.util.Map;
 
 public class EnemiesController {
 
+    private World world;
     private final EnemyFactory enemyFactory;
     private final EnemyDtoCreator enemyDtoCreator;
     private final EnemySpawnManager enemySpawnManager;
 
     private final Array<Enemy> allEnemies = new Array<>();
 
-    public EnemiesController(EnemiesDto enemiesDto, Map<MovementDirection, Vector2> spawnAreas){
+    public EnemiesController(World world ,EnemiesDto enemiesDto, Map<MovementDirection, Vector2> spawnAreas){
+        this.world=world;
         this.enemyFactory= new EnemyFactory();
         this.enemySpawnManager= new EnemySpawnManager();
         this.enemyDtoCreator= new EnemyDtoCreator(enemiesDto, spawnAreas);
@@ -52,7 +55,7 @@ public class EnemiesController {
         for(int i =0; i< numEnemyToSpawn; i++){
             Logger.log(Logger.Tags.ENEMY_SPAWNER, "Spawning");
             EnemyDto enemyDto= enemyDtoCreator.getEnemyDto(playerPosition);
-            allEnemies.add(enemyFactory.getEnemy(enemyDto));
+            allEnemies.add(enemyFactory.getEnemy(enemyDto, world));
         }
 
         enemySpawnManager.resetNumEnemyToSpawn();

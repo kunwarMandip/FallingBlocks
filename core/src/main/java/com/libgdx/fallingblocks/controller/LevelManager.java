@@ -30,7 +30,7 @@ public class LevelManager {
         this.worldController = new WorldController(true, waveDto.getWorldDto(), sceneGraphController.getTiledMap());
 
         this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto());
-        this.enemiesController = new EnemiesController(waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
+        this.enemiesController = new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
     }
 
     public void update(float delta){
