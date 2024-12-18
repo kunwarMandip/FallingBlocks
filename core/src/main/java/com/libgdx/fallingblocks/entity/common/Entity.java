@@ -67,6 +67,10 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour, ActionLi
 
     public Vector2 getBodyPosition(){return body.getPosition();}
 
+
+    public boolean isDestroy(){
+        return isDead;
+    }
     public void setToDestroy(){
         isDead=true;
     }

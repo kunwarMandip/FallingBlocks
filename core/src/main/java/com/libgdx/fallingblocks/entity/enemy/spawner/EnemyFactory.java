@@ -9,7 +9,7 @@ import com.libgdx.fallingblocks.entity.enemy.types.NormalEnemy;
 import com.libgdx.fallingblocks.entity.enemy.types.QuickEnemy;
 
 
-public class EnemyFactory {
+public class EnemyFactory implements ClassProvider<Enemy>{
 
     private final World world;
 
@@ -41,4 +41,8 @@ public class EnemyFactory {
         return enemy;
     }
 
+    @Override
+    public Enemy getInstance() {
+        return null;
+    }
 }

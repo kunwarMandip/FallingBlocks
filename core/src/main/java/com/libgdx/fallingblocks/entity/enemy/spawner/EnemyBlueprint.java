@@ -12,13 +12,13 @@ import java.util.Map;
 
 import static com.libgdx.fallingblocks.GlobalVariables.getRandomValue;
 
-public final class EnemyDtoCreator{
+public final class EnemyBlueprint {
 
     private final MovementCalculator movementCalculator;
     private final Map<String, Integer> spawnDirections;
     private final Map<String, Integer> enemyDistributions;
 
-    public EnemyDtoCreator(EnemiesDto enemiesDto, Map<MovementDirection, Vector2> spawnAreas){
+    public EnemyBlueprint(EnemiesDto enemiesDto, Map<MovementDirection, Vector2> spawnAreas){
         this.spawnDirections= enemiesDto.getSpawnDirections();
         this.enemyDistributions= enemiesDto.getEnemyDistributions();
 

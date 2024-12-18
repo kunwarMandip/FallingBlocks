@@ -9,6 +9,9 @@ import java.util.Set;
 public class Logger {
 
     public enum Tags {
+        BEGIN_CONTACT_LISTENER,
+        INPUT_PROCESSOR,
+        INPUT_LISTENER,
         TILED_OBJECT_LOADER,
         ENEMY_SPAWNER,
         TILED_MAP_PARSER,

@@ -23,6 +23,11 @@ public class BeginContactListenerHandler {
         return true;
     }
 
+    /**
+     * Handles contact between Enemy class and OuterBound class
+     * @param contact
+     * @return
+     */
     public boolean handleEnemyOuterBoundContact(Contact contact){
         Fixture a = contact.getFixtureA();
         Fixture b = contact.getFixtureB();
@@ -32,7 +37,10 @@ public class BeginContactListenerHandler {
             return false;
         }
 
-        Logger.log(Logger.Tags.CONTACT_LISTENER, "Enemy OuterBound Contact Handled");
+        Enemy enemy = ((Enemy) (a.getUserData() instanceof Enemy ? a.getUserData() : b.getUserData()));
+        enemy.setToDestroy();
+
+        Logger.log(Logger.Tags.BEGIN_CONTACT_LISTENER, "Enemy OuterBound Contact Handled");
         return true;
     }
 }

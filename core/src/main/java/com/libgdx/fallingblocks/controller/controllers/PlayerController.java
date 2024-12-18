@@ -17,6 +17,7 @@ public class PlayerController {
         this.playerFactory= new PlayerFactory(world, playerDto);
         this.player= playerFactory.getPlayer(PlayerTypes.NORMAL);
         this.player.spawnBody(world);
+        player.setInput();
     }
 
     public void update(float delta){
