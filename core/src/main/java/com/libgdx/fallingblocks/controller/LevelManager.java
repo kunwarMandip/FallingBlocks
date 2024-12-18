@@ -37,8 +37,7 @@ public class LevelManager {
         worldController.update();
         sceneGraphController.render();
         playerController.update(delta);
-        enemiesController.updateEnemies(delta);
-        enemiesController.isEnemySpawnAble(playerController.getPlayerPosition());
+        enemiesController.updateEnemies(delta, playerController.getPlayerPosition());
     }
 
 

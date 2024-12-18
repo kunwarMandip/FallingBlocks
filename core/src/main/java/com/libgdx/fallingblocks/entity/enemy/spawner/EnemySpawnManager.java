@@ -1,5 +1,4 @@
-package com.libgdx.fallingblocks.entity.enemy.services;
-
+package com.libgdx.fallingblocks.entity.enemy.spawner;
 
 
 //todo: Create a dto or something else to allow automatic change of spawnRate
