@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.map.objects.spawnArea.EnemySpawnArea;
 import com.libgdx.fallingblocks.map.objects.OuterBound;
 import com.libgdx.fallingblocks.map.objects.PlayerWall;
@@ -12,6 +13,8 @@ import com.libgdx.fallingblocks.map.objects.spawnArea.MovementDirection;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.libgdx.fallingblocks.Logger.Tags.TILED_OBJECT_LOADER;
 
 public class TiledObjectLoader {
 
@@ -31,7 +34,9 @@ public class TiledObjectLoader {
         MapLayer targetLayer = tiledMap.getLayers().get("EnemySpawn");
         for (RectangleMapObject object : targetLayer.getObjects().getByType(RectangleMapObject.class)) {
             EnemySpawnArea enemySpawnArea= new EnemySpawnArea(world, tiledMap, object);
-            spawnAreas.put(enemySpawnArea.getTraversalDirection(), enemySpawnArea.getPosition());
+            Vector2 spawnArea= new Vector2(enemySpawnArea.getPosition());
+            spawnAreas.put(enemySpawnArea.getTraversalDirection(), spawnArea);
+            Logger.log(TILED_OBJECT_LOADER, enemySpawnArea.getTraversalDirection() + " | " + enemySpawnArea.getPosition());
             enemySpawnArea.destroy();
         }
     }

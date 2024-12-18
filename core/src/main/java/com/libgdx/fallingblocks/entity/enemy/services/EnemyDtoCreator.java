@@ -22,11 +22,12 @@ public final class EnemyDtoCreator{
         this.spawnDirections= enemiesDto.getSpawnDirections();
         this.enemyDistributions= enemiesDto.getEnemyDistributions();
 
+
+        Logger.log(Logger.Tags.ENEMY_SPAWNER, spawnAreas.toString());
     }
 
     private EnemyType getEnemyType(){
         String enemy= getString(enemyDistributions);
-//        Logger.log(Logger.Tags.ENEMY_SPAWNER, enemyDistributions.toString());
         return EnemyType.valueOf(enemy.toUpperCase());
     }
 
@@ -49,23 +50,61 @@ public final class EnemyDtoCreator{
 
     private Vector2 getSpawnPosition(MovementDirection movementDirection, Vector2 playerLocation){
         Vector2 spawnArea= spawnAreas.get(movementDirection);
+        Vector2 spawnPosition;
+        switch(movementDirection){
+            case TOP :
+            case BOTTOM:
+                spawnPosition= new Vector2(playerLocation.x,spawnArea.y);
+                break;
+            case RIGHT:
+                spawnPosition= new Vector2(spawnArea.y, playerLocation.y);
+                break;
+            case LEFT:
+                spawnPosition= new Vector2(spawnArea.x, playerLocation.y );
+                break;
+            default:
+                throw new IllegalStateException("EnemyDtoCreator: Unknown Cardinal Spawn Direction");
+        }
+        Logger.log(Logger.Tags.ENEMY_SPAWNER,
+            "SpawnDirection" + movementDirection + " | SpawnPosition"+ playerLocation
+                + " | PlayerPosition" + spawnPosition + " | SpawnAreaPosition" + spawnArea);
+        return spawnPosition;
+    }
+
+    private Vector2 getSpeed(MovementDirection movementDirection){
+        float constantSpeed=5f;
+        Vector2 speed;
         switch(movementDirection){
             case TOP:
+                speed= new Vector2(0, -(constantSpeed));
+                break;
             case BOTTOM:
-                return new Vector2(playerLocation.x, spawnArea.y);
+                speed= new Vector2(0, constantSpeed);
+                break;
             case RIGHT:
+                speed= new Vector2(-constantSpeed, 0);
+                break;
             case LEFT:
-                return new Vector2(spawnArea.x, playerLocation.y);
+                speed=  new Vector2(constantSpeed, 0);
+                break;
+            default:
+                throw new IllegalStateException("EnemyDtoCreator: Unknown Cardinal Spawn Direction");
         }
-        throw new IllegalStateException("EnemyDtoCreator: Unknown Cardinal Spawn Direction");
+
+        Logger.log(Logger.Tags.ENEMY_SPAWNER, "Speed" + speed);
+        return speed;
     }
 
 
     public EnemyDto getEnemyDto(Vector2 playerLocation) {
         EnemyType enemyType= getEnemyType();
         MovementDirection spawnCardinalDirection= getMovementDirection();
+
+        Vector2 speed= getSpeed(spawnCardinalDirection);
         Vector2 spawnPosition= getSpawnPosition(spawnCardinalDirection, playerLocation);
 
-        return new EnemyDto(enemyType, spawnCardinalDirection, spawnPosition);
+
+        Logger.log(Logger.Tags.ENEMY_SPAWNER, "Spawn Direction: "+ spawnCardinalDirection + " | " + spawnPosition);
+        return new EnemyDto(enemyType, spawnCardinalDirection,  speed, spawnPosition);
     }
 }

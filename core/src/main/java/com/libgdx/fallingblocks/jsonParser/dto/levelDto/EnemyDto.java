@@ -8,12 +8,15 @@ import com.libgdx.fallingblocks.map.objects.spawnArea.MovementDirection;
 public class EnemyDto {
 
     private final EnemyType enemyType;
-    private final Vector2 spawnPosition;
     private final MovementDirection movementDirection;
 
-    public EnemyDto(EnemyType enemyType, MovementDirection movementDirection, Vector2 spawnPosition) {
+    private final Vector2 speed;
+    private final Vector2 spawnPosition;
+
+    public EnemyDto(EnemyType enemyType, MovementDirection movementDirection, Vector2 speed, Vector2 spawnPosition) {
         this.enemyType = enemyType;
         this.movementDirection = movementDirection;
+        this.speed = speed;
         this.spawnPosition = spawnPosition;
     }
 
@@ -27,5 +30,9 @@ public class EnemyDto {
 
     public MovementDirection getMovementDirection() {
         return movementDirection;
+    }
+
+    public Vector2 getSpeed() {
+        return speed;
     }
 }

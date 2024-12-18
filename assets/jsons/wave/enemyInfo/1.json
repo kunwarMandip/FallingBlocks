@@ -3,15 +3,13 @@
     {
       "waveNumber": 1,
       "directions": {
-        "top": 40,
-        "left": 30,
-        "right": 20,
-        "bottom": 10
+        "top": 20,
+        "left": 20,
+        "right": 30,
+        "bottom": 30
       },
       "enemyDistribution": {
-        "normal": 70,
-        "boss": 20,
-        "quick": 10
+        "normal": 100
       },
       "spawnSettings": {
         "spawnRate": {

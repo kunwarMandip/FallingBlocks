@@ -10,11 +10,11 @@ import com.libgdx.fallingblocks.entity.common.behaviour.strategies.RangeAttack;
 import com.libgdx.fallingblocks.entity.common.behaviour.strategies.SlowMovement;
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
 
-public class NormalEnemy extends Enemy {
+public final class NormalEnemy extends Enemy {
 
     private final Animation animation;
     public NormalEnemy(World world, Vector2 spawnPosition, Vector2 bodyDimension, Vector2 speed) {
-        super(1, world,spawnPosition, bodyDimension, speed, new RangeAttack(), new SlowMovement());
+        super(1, world, spawnPosition, bodyDimension, speed, new RangeAttack(), new SlowMovement());
         this.animation= new Animation(new Vector2(5, 5), new Texture("map/images/arrows/arrow.png"));
     }
 

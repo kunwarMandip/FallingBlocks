@@ -14,14 +14,16 @@ public class EnemyFactory {
 
     public Enemy getEnemy(EnemyDto enemyDto, World world){
 
-        Vector2 speed= new Vector2(1, 1);
+        Vector2 speed= enemyDto.getSpeed();
+        Vector2 spawnPosition= enemyDto.getSpawnPosition();
+
         switch (enemyDto.getEnemyType()){
             case NORMAL:
-                return new NormalEnemy(world, enemyDto.getSpawnPosition(), new Vector2(5, 5),speed);
+                return new NormalEnemy(world, spawnPosition, new Vector2(5, 5), speed);
             case QUICK:
-                return new QuickEnemy(world, enemyDto.getSpawnPosition(), new Vector2(5, 5),speed);
+                return new QuickEnemy(world, spawnPosition, new Vector2(5, 5),speed);
             case BOSS:
-                return new BossEnemy(world, enemyDto.getSpawnPosition(), new Vector2(5, 5),speed);
+                return new BossEnemy(world, spawnPosition, new Vector2(5, 5),speed);
         }
 
         throw new IllegalStateException("EnemyFactory: Unknown EnemyType");
