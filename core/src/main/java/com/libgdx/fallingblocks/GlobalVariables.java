@@ -27,17 +27,6 @@ public class GlobalVariables {
         }
     }
 
-    public static <T> void validateArrayContents(Array<T> objects){
-        if (objects == null || objects.size == 0) {
-            throw new IllegalStateException("Empty Array Objects: " + String.valueOf(objects));
-        }
-
-        for (T obj : objects) {
-            if (obj == null) {
-                throw new IllegalStateException("Null Objects: " + String.valueOf(objects));
-            }
-        }
-    }
 
     public static void isNodeExists(JsonValue node){
         if(node== null){

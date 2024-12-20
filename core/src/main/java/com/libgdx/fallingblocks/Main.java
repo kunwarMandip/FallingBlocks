@@ -2,7 +2,7 @@ package com.libgdx.fallingblocks;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.libgdx.fallingblocks.screen.GameScreen;
+import com.libgdx.fallingblocks.screen.main.GameScreen;
 
 public class Main extends Game {
 
@@ -14,7 +14,8 @@ public class Main extends Game {
 //        Logger.disableTag(Logger.Tags.WAVE_TIMER_CONTROLLER);
 
 //        Logger.enableSingle(Logger.Tags.INPUT_PROCESSOR);
-        Logger.enableSingle(Logger.Tags.BEGIN_CONTACT_LISTENER);
+//        Logger.enableSingle(Logger.Tags.BEGIN_CONTACT_LISTENER);
+        Logger.disableAll();
         SpriteBatch spriteBatch = new SpriteBatch();
         setScreen(new GameScreen(1, spriteBatch));
     }

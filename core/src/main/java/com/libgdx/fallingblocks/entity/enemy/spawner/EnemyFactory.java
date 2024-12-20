@@ -3,7 +3,7 @@ package com.libgdx.fallingblocks.entity.enemy.spawner;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
-import com.libgdx.fallingblocks.jsonParser.dto.levelDto.EnemyDto;
+import com.libgdx.fallingblocks.parser.dto.levelDto.EnemyDto;
 import com.libgdx.fallingblocks.entity.enemy.types.BossEnemy;
 import com.libgdx.fallingblocks.entity.enemy.types.NormalEnemy;
 import com.libgdx.fallingblocks.entity.enemy.types.QuickEnemy;
@@ -35,7 +35,7 @@ public class EnemyFactory implements ClassProvider<Enemy>{
                 enemy= new BossEnemy(world, spawnPosition, new Vector2(5, 5),speed);
                 break;
             default :
-                throw new IllegalStateException("EnemyFactory: Unknown EnemyType");
+                throw new IllegalStateException("EnemyBuilder: Unknown EnemyType");
         }
 
         return enemy;

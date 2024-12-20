@@ -4,11 +4,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.entity.common.Entity;
 import com.libgdx.fallingblocks.entity.common.animation.Animation;
 import com.libgdx.fallingblocks.input.InputListenerManager;
-import com.libgdx.fallingblocks.input.PlayerInputHandler;
+import com.libgdx.fallingblocks.input.BasicPlayerInput;
 
 public class Player extends Entity {
     private final Animation animation;
@@ -26,21 +25,18 @@ public class Player extends Entity {
 
     public void setInput(){
         inputListenerManager= new InputListenerManager();
-
         Vector2 tempSpeed= new Vector2(10, 10);
-        gestureDetector= new GestureDetector(new PlayerInputHandler(body, tempSpeed));
+        gestureDetector= new GestureDetector(new BasicPlayerInput(body, tempSpeed));
         inputListenerManager.addInputProcessor(gestureDetector);
     }
 
     @Override
     public void update(float delta) {
-//        body.setLinearVelocity(new Vector2(5, 5));
     }
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
         animation.draw( getBodyPosition(), spriteBatch);
-
     }
 
     @Override

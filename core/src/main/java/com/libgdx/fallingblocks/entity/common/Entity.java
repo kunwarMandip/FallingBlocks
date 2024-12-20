@@ -65,12 +65,16 @@ public abstract class Entity implements DeathBehaviour, OnHitBehaviour, ActionLi
         fixture.setFilterData(filter);
     }
 
+    public Body getBody(){
+        return body;
+    }
+
     public Vector2 getBodyPosition(){return body.getPosition();}
 
-
-    public boolean isDestroy(){
+    public boolean isSetToDestroy(){
         return isDead;
     }
+
     public void setToDestroy(){
         isDead=true;
     }
