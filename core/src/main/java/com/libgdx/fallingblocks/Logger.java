@@ -9,6 +9,7 @@ import java.util.Set;
 public class Logger {
 
     public enum Tags {
+        ENEMY_OUTER_BOUND_CONTACT,
         ENEMY_DEATH_LISTENER,
         BEGIN_CONTACT_LISTENER,
         INPUT_PROCESSOR,

@@ -1,6 +1,7 @@
 package com.libgdx.fallingblocks.controller;
 
-import com.libgdx.fallingblocks.game.state.listeners.ScoreObserver;
+import com.libgdx.fallingblocks.state.ScoreObserver;
+import com.libgdx.fallingblocks.state.ScoreUpdateAble;
 
 public class GameStateController {
 
@@ -19,6 +20,7 @@ public class GameStateController {
     public GameScoreController getGameScoreController(){
         return gameScoreController;
     }
+
 
 
 

@@ -9,7 +9,7 @@ import com.libgdx.fallingblocks.entity.common.listener.DeathListener;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyRemover;
 import com.libgdx.fallingblocks.entity.enemy.spawner.EnemyDtoBuilder;
 import com.libgdx.fallingblocks.entity.enemy.spawner.EnemySpawnManager;
-import com.libgdx.fallingblocks.game.state.listeners.ScoreUpdateAble;
+import com.libgdx.fallingblocks.state.ScoreUpdateAble;
 import com.libgdx.fallingblocks.parser.dto.wave.EnemiesDto;
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.spawner.EnemyFactory;
@@ -30,12 +30,11 @@ public class EnemiesController {
 
 
     public EnemiesController(World world, EnemiesDto enemiesDto,
-                             ScoreUpdateAble scoreUpdateAble,
                              Map<MovementDirection, Vector2> spawnAreas){
         this.enemyFactory= new EnemyFactory(world);
         this.enemySpawnManager= new EnemySpawnManager();
         this.enemyDtoFactory = new EnemyDtoBuilder(enemiesDto, spawnAreas);
-        this.enemyRemover= new EnemyRemover(world, scoreUpdateAble);
+        this.enemyRemover= new EnemyRemover(world);
     }
 
     public void addDeathListener(DeathListener deathListener) {

@@ -39,9 +39,10 @@ public class GameRunner {
         sceneController = new SceneController(waveDto.getTiledMapDto());
         worldController = new WorldController(true, waveDto.getWorldDto(), sceneController.getTiledMap());
         playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto());
-        enemiesController = new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), gameStateController.getGameScoreController() ,worldController.getSpawnAreas());
+        enemiesController = new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
 
         gameStateController.addScoreObserver(gameRunningHud);
+        enemiesController.addDeathListener(gameStateController.getGameScoreController());
     }
 
 

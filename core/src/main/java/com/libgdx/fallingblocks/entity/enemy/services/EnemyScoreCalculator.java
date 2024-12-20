@@ -1,21 +1,17 @@
 package com.libgdx.fallingblocks.entity.enemy.services;
 
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
-import com.libgdx.fallingblocks.entity.enemy.EnemyType;
-import com.libgdx.fallingblocks.game.state.listeners.ScoreUpdateAble;
+import com.libgdx.fallingblocks.state.ScoreUpdateAble;
 
 public class EnemyScoreCalculator {
 
     private int scoreMultiplier=1;
-    private final ScoreUpdateAble scoreUpdateAble;
 
-    public EnemyScoreCalculator(ScoreUpdateAble scoreUpdateAble){
-        this.scoreUpdateAble=scoreUpdateAble;
+    public EnemyScoreCalculator( ){;
     }
 
-    public void calculateScore(Enemy enemy){
-        int score= getBaseScore(enemy) * scoreMultiplier;
-        scoreUpdateAble.addScore(score);
+    public int calculateScore(Enemy enemy){
+        return getBaseScore(enemy) * scoreMultiplier;
     }
 
     private int getBaseScore(Enemy enemy){

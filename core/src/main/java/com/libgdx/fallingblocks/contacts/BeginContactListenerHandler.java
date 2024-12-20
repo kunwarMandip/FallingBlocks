@@ -43,7 +43,7 @@ public class BeginContactListenerHandler {
         Enemy enemy = ((Enemy) (a.getUserData() instanceof Enemy ? a.getUserData() : b.getUserData()));
         enemy.setToDestroy();
 
-        Logger.log(Logger.Tags.BEGIN_CONTACT_LISTENER, "Enemy OuterBound Contact Handled");
+        Logger.log(Logger.Tags.ENEMY_OUTER_BOUND_CONTACT, "Enemy OuterBound Contact Handled");
         return true;
     }
 }

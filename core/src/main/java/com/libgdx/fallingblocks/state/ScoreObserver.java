@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.game.state.listeners;
+package com.libgdx.fallingblocks.state;
 
 public interface ScoreObserver {
 
