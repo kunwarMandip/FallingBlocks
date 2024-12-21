@@ -18,7 +18,7 @@ public class GameRunner {
 
     private WaveDto waveDto;
     private final GameDto gameDto;
-    private final GameStateController gameStateController;
+    private final GameController gameController;
 
     private final GameRunningHud gameRunningHud;
     private final WorldController worldController;
@@ -32,24 +32,22 @@ public class GameRunner {
         this.spriteBatch= spriteBatch;
         this.inputListenerManager= inputListenerManager;
 
-        gameDto= new GameDtoParser().getGameDto(level);
-        waveDto = gameDto.getNextWave();
+        this.gameDto= new GameDtoParser().getGameDto(level);
+        this.waveDto = gameDto.getNextWave();
+        this.gameController = new GameController();
+        this.gameRunningHud = new GameRunningHud(spriteBatch);
+        this.sceneController = new SceneController(waveDto.getTiledMapDto());
+        this.worldController = new WorldController(true, waveDto.getWorldDto(), sceneController.getTiledMap());
+        this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
+        this.enemiesController = new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
 
-        gameStateController = new GameStateController();
-        gameRunningHud = new GameRunningHud(spriteBatch);
-
-        sceneController = new SceneController(waveDto.getTiledMapDto());
-        worldController = new WorldController(true, waveDto.getWorldDto(), sceneController.getTiledMap());
-        playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
-        enemiesController = new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
-
-        gameStateController.addScoreObserver(gameRunningHud);
-        enemiesController.addDeathListener(gameStateController.getGameScore());
-        playerController.addDeathObserver(gameStateController.getGameState());
+        this.gameController.addScoreObserver(gameRunningHud);
+        this.enemiesController.addDeathListener(gameController.getGameScore());
+        this.playerController.addDeathObserver(gameController.getGameStatistics());
     }
 
     public void update(float delta){
-        if(gameStateController.getGameState().isPlayerDead()){
+        if(gameController.getGameStatistics().isPlayerDead()){
 
             enemiesController.emptyList();
             return;
@@ -59,6 +57,7 @@ public class GameRunner {
         playerController.update(delta);
         enemiesController.update(delta, playerController.getPlayer().getBodyPosition());
     }
+
 
 
     public void render(float delta){

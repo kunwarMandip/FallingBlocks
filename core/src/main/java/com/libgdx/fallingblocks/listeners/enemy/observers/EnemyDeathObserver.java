@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.observers.enemy;
+package com.libgdx.fallingblocks.listeners.enemy.observers;
 
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
 

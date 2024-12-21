@@ -2,7 +2,7 @@ package com.libgdx.fallingblocks.entity.enemy.services;
 
 import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.observers.enemy.EnemyDeathObserver;
+import com.libgdx.fallingblocks.listeners.enemy.observers.EnemyDeathObserver;
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
 
 import java.util.ArrayList;

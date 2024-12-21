@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.libgdx.fallingblocks.observers.state.ScoreChangeObserver;
+import com.libgdx.fallingblocks.listeners.state.ScoreChangeObserver;
 
 import java.util.Locale;
 

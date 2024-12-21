@@ -1,7 +1,5 @@
 package com.libgdx.fallingblocks.controller;
 
-
-
 import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnRateController;
 import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.conditions.TimeBasedSpawnCondition;
 

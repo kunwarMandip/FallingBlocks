@@ -1,23 +1,22 @@
-package com.libgdx.fallingblocks.game.state;
+package com.libgdx.fallingblocks.game;
 
 import com.libgdx.fallingblocks.entity.common.Entity;
 import com.libgdx.fallingblocks.entity.enemy.EnemyType;
-import com.libgdx.fallingblocks.observers.player.PlayerDeathObserver;
+import com.libgdx.fallingblocks.listeners.player.observers.PlayerDeathObserver;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameState implements PlayerDeathObserver {
+public class GameStatistics implements PlayerDeathObserver{
 
     private int totalEnemyKilled;
-    private boolean isPlayerDead, isGameOver, isGamePaused= false;
+    private boolean isPlayerDead= false;
     private final Map<EnemyType, Integer> enemyKillCount= new HashMap<>();
 
 
-    public GameState(){
+    public GameStatistics(){
         this.totalEnemyKilled=0;
     }
-
 
     @Override
     public void onEntityDeath(Entity entity) {

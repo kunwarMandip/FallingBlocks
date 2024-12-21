@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.observers.enemy.EnemyDeathObserver;
+import com.libgdx.fallingblocks.listeners.enemy.observers.EnemyDeathObserver;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyRemover;
 import com.libgdx.fallingblocks.entity.enemy.spawner.EnemyDtoBuilder;
 import com.libgdx.fallingblocks.entity.enemy.spawner.EnemySpawnManager;
