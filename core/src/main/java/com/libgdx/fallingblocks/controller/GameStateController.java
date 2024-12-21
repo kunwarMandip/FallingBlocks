@@ -6,8 +6,9 @@ import com.libgdx.fallingblocks.observers.state.ScoreChangeObserver;
 
 public class GameStateController {
 
-    private final GameState gameState;
+
     private final GameScore gameScore;
+    private final GameState gameState;
     private final DifficultyController difficultyController;
 
     public GameStateController(){
@@ -16,10 +17,11 @@ public class GameStateController {
         this.difficultyController= new DifficultyController();
     }
 
+
+
     public void addScoreObserver(ScoreChangeObserver scoreChangeObserver){
         this.gameScore.addScoreObserver(scoreChangeObserver);
     }
-
 
     public GameScore getGameScore(){
         return gameScore;

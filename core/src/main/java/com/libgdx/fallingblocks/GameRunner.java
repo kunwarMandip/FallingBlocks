@@ -48,13 +48,15 @@ public class GameRunner {
         playerController.addDeathObserver(gameStateController.getGameState());
     }
 
-
     public void update(float delta){
+        if(gameStateController.getGameState().isPlayerDead()){
+
+            enemiesController.emptyList();
+            return;
+        }
         worldController.update();
         sceneController.render();
         playerController.update(delta);
-
-
         enemiesController.update(delta, playerController.getPlayer().getBodyPosition());
     }
 
@@ -76,7 +78,5 @@ public class GameRunner {
         sceneController.resize(width, height);
         gameRunningHud.resize(width, height);
     }
-
-
 
 }

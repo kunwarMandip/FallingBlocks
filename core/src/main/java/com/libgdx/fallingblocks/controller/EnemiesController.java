@@ -21,6 +21,7 @@ import java.util.Map;
 
 public class EnemiesController {
 
+    private final World world;
     private final EnemyRemover enemyRemover;
     private final EnemyFactory enemyFactory;
     private final EnemyDtoBuilder enemyDtoFactory;
@@ -30,6 +31,7 @@ public class EnemiesController {
 
     public EnemiesController(World world, EnemiesDto enemiesDto,
                              Map<MovementDirection, Vector2> spawnAreas){
+        this.world=world;
         this.enemyFactory= new EnemyFactory(world);
         this.enemySpawnManager= new EnemySpawnManager();
         this.enemyDtoFactory = new EnemyDtoBuilder(enemiesDto, spawnAreas);
@@ -58,12 +60,21 @@ public class EnemiesController {
         while(iterator.hasNext()){
             Enemy enemy= iterator.next();
             if(enemyRemover.isDestroy(enemy)){
+                enemy.destroyBody(world);
                 iterator.remove();
             }
             enemy.update(delta);
         }
     }
 
+    public void emptyList(){
+        Iterator<Enemy> iterator= enemies.iterator();
+        while(iterator.hasNext()){
+            Enemy enemy= iterator.next();
+            enemy.destroyBody(world);
+            iterator.remove();
+        }
+    }
 
     private void isEnemySpawnAble(Vector2 playerPosition){
         int numEnemyToSpawn= enemySpawnManager.getNumEnemyToSpawn();

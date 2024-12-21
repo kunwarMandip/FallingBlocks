@@ -23,12 +23,6 @@ public class Player extends Entity {
         return this.gestureDetector;
     }
 
-//    public void setInput(){
-//        inputListenerManager= new InputListenerManager();
-//        Vector2 tempSpeed= new Vector2(10, 10);
-//        gestureDetector= new GestureDetector(new BasicPlayerInput(body, tempSpeed));
-//        inputListenerManager.addInputProcessor(gestureDetector);
-//    }
 
     @Override
     public void update(float delta) {

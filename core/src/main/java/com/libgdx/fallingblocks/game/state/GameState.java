@@ -21,9 +21,11 @@ public class GameState implements PlayerDeathObserver {
 
     @Override
     public void onEntityDeath(Entity entity) {
+        isPlayerDead=true;
+    }
 
-        for(int i=0; i<100; i++){
-            System.out.println("Helllllo");
-        }
+
+    public boolean isPlayerDead(){
+        return isPlayerDead;
     }
 }
