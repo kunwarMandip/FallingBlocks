@@ -5,21 +5,25 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libgdx.fallingblocks.GameRunner;
+import com.libgdx.fallingblocks.input.InputListenerManager;
 
 public class GameScreen implements Screen {
 
     private final int levelToLoad;
     private final SpriteBatch spriteBatch;
+    private InputListenerManager inputListenerManager;
+
     private GameRunner gameRunner;
 
-    public GameScreen(int levelToLoad, SpriteBatch spriteBatch){
+    public GameScreen(int levelToLoad, SpriteBatch spriteBatch, InputListenerManager inputListenerManager){
         this.levelToLoad=levelToLoad;
         this.spriteBatch=spriteBatch;
+        this.inputListenerManager= inputListenerManager;
     }
 
     @Override
     public void show() {
-        gameRunner = new GameRunner(levelToLoad, spriteBatch);
+        gameRunner = new GameRunner(levelToLoad, spriteBatch, inputListenerManager);
     }
 
 

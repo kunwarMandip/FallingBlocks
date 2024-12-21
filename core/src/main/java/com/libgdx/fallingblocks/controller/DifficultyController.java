@@ -9,8 +9,6 @@ public class DifficultyController {
 
     private final SpawnRateController spawnRateController;
 
-
-
     public DifficultyController(){
 
         this.spawnRateController= new SpawnRateController();

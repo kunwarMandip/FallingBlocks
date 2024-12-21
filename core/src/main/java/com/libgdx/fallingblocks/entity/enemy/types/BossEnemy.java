@@ -27,14 +27,15 @@ public final class BossEnemy extends Enemy {
     public void onDeath(Entity entity) {
     }
 
-    @Override
-    public void onHit(Entity a, Entity b) {
-
-    }
 
 
     @Override
     public void collide(Entity entity) {
+
+    }
+
+    @Override
+    public void onHit(Entity entity) {
 
     }
 }

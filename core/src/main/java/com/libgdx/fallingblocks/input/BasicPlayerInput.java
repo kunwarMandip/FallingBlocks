@@ -53,7 +53,6 @@ public class BasicPlayerInput implements GestureDetector.GestureListener {
             } else {
                 body.setLinearVelocity(new Vector2(0f, horizontalSpeed));
             }
-
         }
 
         Logger.log(Logger.Tags.INPUT_PROCESSOR, "Swiped");

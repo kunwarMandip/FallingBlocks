@@ -2,9 +2,8 @@ package com.libgdx.fallingblocks.entity.enemy.services;
 
 import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.entity.common.listener.DeathListener;
+import com.libgdx.fallingblocks.observers.enemy.EnemyDeathObserver;
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
-import com.libgdx.fallingblocks.state.ScoreUpdateAble;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +13,14 @@ import static com.libgdx.fallingblocks.Logger.Tags.BEGIN_CONTACT_LISTENER;
 public class EnemyRemover {
 
     private final World world;
-    private final List<DeathListener> deathListeners= new ArrayList<>();
+    private final List<EnemyDeathObserver> enemyDeathObservers = new ArrayList<>();
 
     public EnemyRemover(World world){
         this.world=world;
     }
 
-    public void addDeathListener(DeathListener deathListener){
-        deathListeners.add(deathListener);
+    public void addDeathListener(EnemyDeathObserver enemyDeathObserver){
+        enemyDeathObservers.add(enemyDeathObserver);
     }
 
 
@@ -38,8 +37,8 @@ public class EnemyRemover {
     }
 
     private void notifyDeathListeners(Enemy enemy){
-        for(DeathListener deathListener: deathListeners){
-            deathListener.onDeath(enemy);
+        for(EnemyDeathObserver enemyDeathObserver : enemyDeathObservers){
+            enemyDeathObserver.onEnemyDeath(enemy);
         }
     }
 }

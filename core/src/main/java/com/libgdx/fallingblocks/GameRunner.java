@@ -3,6 +3,7 @@ package com.libgdx.fallingblocks;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.libgdx.fallingblocks.controller.*;
+import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.GameDto;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
 import com.libgdx.fallingblocks.parser.GameDtoParser;
@@ -13,6 +14,7 @@ public class GameRunner {
 
     private final int level;
     private final SpriteBatch spriteBatch;
+    private final InputListenerManager inputListenerManager;
 
     private WaveDto waveDto;
     private final GameDto gameDto;
@@ -25,24 +27,25 @@ public class GameRunner {
     private final EnemiesController enemiesController;
 
 
-    public GameRunner(int level, SpriteBatch spriteBatch){
+    public GameRunner(int level, SpriteBatch spriteBatch, InputListenerManager inputListenerManager){
         this.level=level;
         this.spriteBatch= spriteBatch;
+        this.inputListenerManager= inputListenerManager;
 
         gameDto= new GameDtoParser().getGameDto(level);
         waveDto = gameDto.getNextWave();
 
         gameStateController = new GameStateController();
-
         gameRunningHud = new GameRunningHud(spriteBatch);
 
         sceneController = new SceneController(waveDto.getTiledMapDto());
         worldController = new WorldController(true, waveDto.getWorldDto(), sceneController.getTiledMap());
-        playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto());
+        playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
         enemiesController = new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
 
         gameStateController.addScoreObserver(gameRunningHud);
-        enemiesController.addDeathListener(gameStateController.getGameScoreController());
+        enemiesController.addDeathListener(gameStateController.getGameScore());
+        playerController.addDeathObserver(gameStateController.getGameState());
     }
 
 
@@ -50,6 +53,8 @@ public class GameRunner {
         worldController.update();
         sceneController.render();
         playerController.update(delta);
+
+
         enemiesController.update(delta, playerController.getPlayer().getBodyPosition());
     }
 
@@ -60,7 +65,7 @@ public class GameRunner {
         spriteBatch.setProjectionMatrix(sceneController.getOrthographicGameCamera().combined);
 
         spriteBatch.begin();
-        playerController.draw(spriteBatch);
+        playerController.getPlayer().draw(spriteBatch);
         enemiesController.draw(spriteBatch);
         spriteBatch.end();
 

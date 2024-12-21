@@ -33,13 +33,14 @@ public final class NormalEnemy extends Enemy {
 
     }
 
+
     @Override
-    public void onHit(Entity a, Entity b) {
+    public void collide(Entity entity) {
 
     }
 
     @Override
-    public void collide(Entity entity) {
+    public void onHit(Entity entity) {
 
     }
 }

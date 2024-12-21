@@ -2,9 +2,9 @@ package com.libgdx.fallingblocks.entity.enemy;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.libgdx.fallingblocks.entity.common.Entity;
 import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.AttackBehaviour;
 import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.Moveable;
-import com.libgdx.fallingblocks.entity.common.Entity;
 
 import static com.libgdx.fallingblocks.GlobalVariables.CATEGORY_ENEMY;
 import static com.libgdx.fallingblocks.GlobalVariables.CATEGORY_WALL;

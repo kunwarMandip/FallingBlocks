@@ -5,11 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.entity.common.listener.DeathListener;
+import com.libgdx.fallingblocks.observers.enemy.EnemyDeathObserver;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyRemover;
 import com.libgdx.fallingblocks.entity.enemy.spawner.EnemyDtoBuilder;
 import com.libgdx.fallingblocks.entity.enemy.spawner.EnemySpawnManager;
-import com.libgdx.fallingblocks.state.ScoreUpdateAble;
 import com.libgdx.fallingblocks.parser.dto.wave.EnemiesDto;
 import com.libgdx.fallingblocks.entity.enemy.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.spawner.EnemyFactory;
@@ -37,8 +36,8 @@ public class EnemiesController {
         this.enemyRemover= new EnemyRemover(world);
     }
 
-    public void addDeathListener(DeathListener deathListener) {
-        enemyRemover.addDeathListener(deathListener);
+    public void addDeathListener(EnemyDeathObserver enemyDeathObserver) {
+        enemyRemover.addDeathListener(enemyDeathObserver);
     }
 
     public void update(float delta, Vector2 playerPosition){

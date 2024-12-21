@@ -1,24 +1,31 @@
 package com.libgdx.fallingblocks.controller;
 
-import com.libgdx.fallingblocks.state.ScoreObserver;
-import com.libgdx.fallingblocks.state.ScoreUpdateAble;
+import com.libgdx.fallingblocks.game.state.GameScore;
+import com.libgdx.fallingblocks.game.state.GameState;
+import com.libgdx.fallingblocks.observers.state.ScoreChangeObserver;
 
 public class GameStateController {
 
-    private final GameScoreController gameScoreController;
+    private final GameState gameState;
+    private final GameScore gameScore;
     private final DifficultyController difficultyController;
 
     public GameStateController(){
-        this.gameScoreController = new GameScoreController();
+        this.gameState= new GameState();
+        this.gameScore = new GameScore();
         this.difficultyController= new DifficultyController();
     }
 
-    public void addScoreObserver(ScoreObserver scoreObserver){
-        this.gameScoreController.addScoreObserver(scoreObserver);
+    public void addScoreObserver(ScoreChangeObserver scoreChangeObserver){
+        this.gameScore.addScoreObserver(scoreChangeObserver);
     }
 
-    public GameScoreController getGameScoreController(){
-        return gameScoreController;
+
+    public GameScore getGameScore(){
+        return gameScore;
+    }
+    public GameState getGameState(){
+        return gameState;
     }
 
 

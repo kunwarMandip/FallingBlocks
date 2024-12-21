@@ -12,7 +12,7 @@
 # CODE IS SHITTY UNREADABLE. NEEDS TO BE REFACTORED
 
 
-# Lets make game reset first upon player touching enemies
+# Lets make game reset first upon entity touching enemies
 # Make enemy increase Score. Make hud Increase Score
 # 
 
