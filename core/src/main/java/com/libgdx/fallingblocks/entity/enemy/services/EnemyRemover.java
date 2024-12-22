@@ -19,12 +19,6 @@ public class EnemyRemover {
         this.world=world;
     }
 
-    public void addDeathListener(EnemyDeathObserver enemyDeathObserver){
-        enemyDeathObservers.add(enemyDeathObserver);
-    }
-
-
-
     public boolean isDestroy(Enemy enemy){
         if(!enemy.isSetToDestroy()){
             return false;
@@ -34,6 +28,14 @@ public class EnemyRemover {
         notifyDeathListeners(enemy);
         Logger.log(BEGIN_CONTACT_LISTENER, "Destroying Enemy");
         return true;
+    }
+
+    public void addDeathListener(EnemyDeathObserver enemyDeathObserver){
+        enemyDeathObservers.add(enemyDeathObserver);
+    }
+
+    public void removeDeathListener(EnemyDeathObserver enemyDeathObserver){
+        enemyDeathObservers.remove(enemyDeathObserver);
     }
 
     private void notifyDeathListeners(Enemy enemy){

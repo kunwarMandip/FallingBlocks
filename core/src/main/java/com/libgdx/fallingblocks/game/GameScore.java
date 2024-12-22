@@ -10,13 +10,11 @@ import java.util.List;
 
 public class GameScore implements EnemyDeathObserver {
 
-    private int score;
+    private int score=0;
+    private final EnemyScoreCalculator enemyScoreCalculator;
     private final List<ScoreChangeObserver> scoreChangeObservers = new ArrayList<>();
 
-    private final EnemyScoreCalculator enemyScoreCalculator;
-
     public GameScore(){
-        this.score=0;
         this.enemyScoreCalculator= new EnemyScoreCalculator();
     }
 
@@ -24,9 +22,17 @@ public class GameScore implements EnemyDeathObserver {
         this.scoreChangeObservers.add(scoreChangeObserver);
     }
 
+    public void removeScoreObserver(ScoreChangeObserver scoreChangeObserver) {
+        this.scoreChangeObservers.remove(scoreChangeObserver);
+    }
+
     public void addScore(int score){
         this.score+=score;
         notifyObservers();
+    }
+
+    public int getScore(){
+        return this.score;
     }
 
     @Override

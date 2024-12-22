@@ -1,7 +1,9 @@
-package com.libgdx.fallingblocks.entity.player;
+package com.libgdx.fallingblocks.entity.player.services;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.libgdx.fallingblocks.entity.player.Player;
+import com.libgdx.fallingblocks.entity.player.PlayerTypes;
 import com.libgdx.fallingblocks.parser.dto.levelDto.PlayerDto;
 
 public class PlayerFactory {

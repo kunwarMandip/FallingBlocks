@@ -6,7 +6,7 @@ import com.libgdx.fallingblocks.listeners.common.EntityDeathObserver;
 public class EnemyDeathHandler implements EntityDeathObserver<Enemy> {
 
     @Override
-    public void handleEntityDeath(Enemy entityDeath) {
+    public void handleEntityDeath(Enemy entity) {
 
     }
 }

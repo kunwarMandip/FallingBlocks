@@ -2,7 +2,7 @@ package com.libgdx.fallingblocks.controller;
 
 import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.entity.player.Player;
-import com.libgdx.fallingblocks.entity.player.PlayerFactory;
+import com.libgdx.fallingblocks.entity.player.services.PlayerFactory;
 import com.libgdx.fallingblocks.entity.player.PlayerTypes;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.listeners.player.observers.PlayerChangeObserver;
@@ -15,23 +15,21 @@ import java.util.List;
 public class PlayerController {
 
     private final World world;
-    private final InputListenerManager inputListenerManager;
-
-    private Player player;
-    private PlayerDto playerDto;
     private final PlayerFactory playerFactory;
-
+    private final InputListenerManager inputListenerManager;
     private final List<PlayerDeathObserver> playerDeathObservers= new ArrayList<>();
     private final List<PlayerChangeObserver> playerChangeObservers= new ArrayList<>();
+
+    private Player player;
 
     public PlayerController(World world, PlayerDto playerDto, InputListenerManager inputListenerManager){
         this.world=world;
         this.inputListenerManager= inputListenerManager;
         this.playerFactory= new PlayerFactory(world, playerDto);
-        setPlayer(PlayerTypes.NORMAL);
+        setNewPlayer(PlayerTypes.NORMAL);
     }
 
-    public void setPlayer(PlayerTypes playerType){
+    public void setNewPlayer(PlayerTypes playerType){
         player= playerFactory.getPlayer(playerType);
         player.spawnBody(world);
         inputListenerManager.addInputProcessor(player.getGestureDetector());
@@ -58,12 +56,18 @@ public class PlayerController {
         inputListenerManager.removeInputProcessor(player.getGestureDetector());
         player.destroyBody(world);
         notifyDeathObservers();
-        setPlayer(PlayerTypes.NORMAL);
+        setNewPlayer(PlayerTypes.NORMAL);
     }
 
     private void notifyDeathObservers(){
         for(PlayerDeathObserver e: playerDeathObservers){
             e.onEntityDeath(player);
+        }
+    }
+
+    private void notifyPlayerChangeObservers(){
+        for(PlayerChangeObserver e: playerChangeObservers){
+            e.newPlayer(player);
         }
     }
 

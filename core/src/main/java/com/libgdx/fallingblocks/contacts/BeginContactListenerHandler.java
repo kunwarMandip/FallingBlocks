@@ -21,7 +21,7 @@ public class BeginContactListenerHandler {
 
         Player player = ((Player) (a.getUserData() instanceof Player ? a.getUserData() : b.getUserData()));
         Enemy enemy = ((Enemy) (a.getUserData() instanceof Enemy ? a.getUserData() : b.getUserData()));
-        player.onHit(enemy);
+//        player.onHit(enemy);
         enemy.setToDestroy();
         Logger.log(Logger.Tags.CONTACT_LISTENER, "Enemy Player Contact Handled");
         return true;

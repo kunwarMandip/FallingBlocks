@@ -25,7 +25,7 @@ public class GameRunner {
     private final SceneController sceneController;
     private final PlayerController playerController;
     private final EnemiesController enemiesController;
-
+    private final DifficultyController difficultyController;
 
     public GameRunner(int level, SpriteBatch spriteBatch, InputListenerManager inputListenerManager){
         this.level=level;
@@ -40,6 +40,7 @@ public class GameRunner {
         this.worldController = new WorldController(true, waveDto.getWorldDto(), sceneController.getTiledMap());
         this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
         this.enemiesController = new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
+        this.difficultyController= new DifficultyController(gameController.getGameScore());
 
         this.gameController.addScoreObserver(gameRunningHud);
         this.enemiesController.addDeathListener(gameController.getGameScore());
@@ -47,11 +48,11 @@ public class GameRunner {
     }
 
     public void update(float delta){
-        if(gameController.getGameStatistics().isPlayerDead()){
-
-            enemiesController.emptyList();
-            return;
-        }
+//        if(gameController.getGameStatistics().isPlayerDead()){
+//
+//            enemiesController.emptyList();
+//            return;
+//        }
         worldController.update();
         sceneController.render();
         playerController.update(delta);

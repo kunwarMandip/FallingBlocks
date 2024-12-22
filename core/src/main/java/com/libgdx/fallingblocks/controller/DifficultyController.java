@@ -1,27 +1,29 @@
 package com.libgdx.fallingblocks.controller;
 
-import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnRateController;
-import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.conditions.TimeBasedSpawnCondition;
+
+import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.ScoreBasedSpawnCondition;
+import com.libgdx.fallingblocks.entity.enemy.services.EnemySpawnRateController;
+import com.libgdx.fallingblocks.game.GameScore;
 
 public class DifficultyController {
 
-    private final SpawnRateController spawnRateController;
+    private final EnemySpawnRateController enemySpawnRateController;
 
-    public DifficultyController(){
+    public DifficultyController(GameScore gameScore){
+        this.enemySpawnRateController = new EnemySpawnRateController();
+        addScoreBasedDifficulty(gameScore);
+    }
 
-        this.spawnRateController= new SpawnRateController();
-
-        setSpawnRateController();
+    private void addScoreBasedDifficulty(GameScore gameScore){
+        ScoreBasedSpawnCondition scoreBasedSpawnCondition= new ScoreBasedSpawnCondition(5);
+        gameScore.addScoreObserver(scoreBasedSpawnCondition);
+        enemySpawnRateController.addListener(scoreBasedSpawnCondition);
     }
 
 
-    private void setSpawnRateController(){
-        spawnRateController.addSpawnCondition(new TimeBasedSpawnCondition(10f));
+    public void update(float delta) {
+        enemySpawnRateController.update(delta);
     }
 
-
-    public void updateSpawnRate(int score, int numEnemyDied, float delta){
-        spawnRateController.update(score, numEnemyDied, delta);
-    }
 
 }

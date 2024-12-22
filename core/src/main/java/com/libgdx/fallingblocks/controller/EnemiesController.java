@@ -60,7 +60,6 @@ public class EnemiesController {
         while(iterator.hasNext()){
             Enemy enemy= iterator.next();
             if(enemyRemover.isDestroy(enemy)){
-                enemy.destroyBody(world);
                 iterator.remove();
             }
             enemy.update(delta);
