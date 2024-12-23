@@ -5,7 +5,7 @@
 
 # No difficulty Settings created yet
 # Game needs to be move to the next wave
-# No way to control Difficulty: EnemySpawnRate, EnemySpeed
+# No way to control Difficulty: EnemySpawnRate, EnemySpeed, EnemyPositionAccuracy
 # Only one class for Enemy is Defined #Normal
 # Only one Movement and Attack Behaviour for Enemy is defined
 

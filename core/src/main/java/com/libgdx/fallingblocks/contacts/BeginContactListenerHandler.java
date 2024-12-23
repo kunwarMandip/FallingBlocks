@@ -2,10 +2,10 @@ package com.libgdx.fallingblocks.contacts;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.libgdx.fallingblocks.entity.enemy.Enemy;
-import com.libgdx.fallingblocks.entity.player.Player;
+import com.libgdx.fallingblocks.box2d.entity.enemy.Enemy;
+import com.libgdx.fallingblocks.box2d.entity.player.Player;
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.map.objects.OuterBound;
+import com.libgdx.fallingblocks.box2d.world.tiled.objects.generic.OuterBound;
 
 public class BeginContactListenerHandler {
 

@@ -6,14 +6,14 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.listeners.enemy.observers.EnemyDeathObserver;
-import com.libgdx.fallingblocks.entity.enemy.services.EnemyRemover;
-import com.libgdx.fallingblocks.entity.enemy.spawner.EnemyDtoBuilder;
-import com.libgdx.fallingblocks.entity.enemy.spawner.EnemySpawnManager;
+import com.libgdx.fallingblocks.box2d.entity.enemy.services.EnemyRemover;
+import com.libgdx.fallingblocks.box2d.entity.enemy.spawner.EnemyDtoBuilder;
+import com.libgdx.fallingblocks.box2d.entity.enemy.spawner.EnemySpawner;
 import com.libgdx.fallingblocks.parser.dto.wave.EnemiesDto;
-import com.libgdx.fallingblocks.entity.enemy.Enemy;
-import com.libgdx.fallingblocks.entity.enemy.spawner.EnemyFactory;
+import com.libgdx.fallingblocks.box2d.entity.enemy.Enemy;
+import com.libgdx.fallingblocks.box2d.entity.enemy.spawner.TempEnemyFactory;
 import com.libgdx.fallingblocks.parser.dto.levelDto.EnemyDto;
-import com.libgdx.fallingblocks.map.objects.spawnArea.MovementDirection;
+import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDirection;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -22,18 +22,19 @@ import java.util.Map;
 public class EnemiesController {
 
     private final World world;
+    private final Array<Enemy> enemies;
     private final EnemyRemover enemyRemover;
-    private final EnemyFactory enemyFactory;
+    private final TempEnemyFactory tempEnemyFactory;
     private final EnemyDtoBuilder enemyDtoFactory;
-    private final EnemySpawnManager enemySpawnManager;
-    private final Array<Enemy> enemies= new Array<>();
+    private final EnemySpawner enemySpawner;
 
 
     public EnemiesController(World world, EnemiesDto enemiesDto,
                              Map<MovementDirection, Vector2> spawnAreas){
         this.world=world;
-        this.enemyFactory= new EnemyFactory(world);
-        this.enemySpawnManager= new EnemySpawnManager();
+        this.enemies= new Array<>();
+        this.tempEnemyFactory = new TempEnemyFactory(world);
+        this.enemySpawner = new EnemySpawner();
         this.enemyDtoFactory = new EnemyDtoBuilder(enemiesDto, spawnAreas);
         this.enemyRemover= new EnemyRemover(world);
     }
@@ -45,7 +46,7 @@ public class EnemiesController {
     public void update(float delta, Vector2 playerPosition){
         updateEnemies(delta);
         isEnemySpawnAble(playerPosition);
-        enemySpawnManager.update(delta);
+        enemySpawner.update(delta);
     }
 
 
@@ -76,16 +77,16 @@ public class EnemiesController {
     }
 
     private void isEnemySpawnAble(Vector2 playerPosition){
-        int numEnemyToSpawn= enemySpawnManager.getNumEnemyToSpawn();
+        int numEnemyToSpawn= enemySpawner.getNumEnemyToSpawn();
 
         Logger.log(Logger.Tags.ENEMY_SPAWNER, "Enemy set to spawn");
 
         for(int i =0; i< numEnemyToSpawn; i++){
             EnemyDto enemyDto= enemyDtoFactory.getEnemyDto(playerPosition);
-            enemies.add(enemyFactory.getEnemy(enemyDto));
+            enemies.add(tempEnemyFactory.getEnemy(enemyDto));
         }
 
-        enemySpawnManager.resetNumEnemyToSpawn();
+        enemySpawner.resetNumEnemyToSpawn();
 
     }
 

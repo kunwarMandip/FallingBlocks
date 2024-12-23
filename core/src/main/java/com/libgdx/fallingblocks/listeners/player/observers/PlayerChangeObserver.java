@@ -1,6 +1,6 @@
 package com.libgdx.fallingblocks.listeners.player.observers;
 
-import com.libgdx.fallingblocks.entity.player.Player;
+import com.libgdx.fallingblocks.box2d.entity.player.Player;
 
 public interface PlayerChangeObserver {
 

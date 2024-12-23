@@ -1,8 +1,7 @@
 package com.libgdx.fallingblocks.controller;
 
 
-import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.ScoreBasedSpawnCondition;
-import com.libgdx.fallingblocks.entity.enemy.services.EnemySpawnRateController;
+import com.libgdx.fallingblocks.box2d.entity.enemy.services.EnemySpawnRateController;
 import com.libgdx.fallingblocks.game.GameScore;
 
 public class DifficultyController {
@@ -11,19 +10,15 @@ public class DifficultyController {
 
     public DifficultyController(GameScore gameScore){
         this.enemySpawnRateController = new EnemySpawnRateController();
-        addScoreBasedDifficulty(gameScore);
+//        addScoreBasedDifficulty(gameScore);
     }
 
-    private void addScoreBasedDifficulty(GameScore gameScore){
-        ScoreBasedSpawnCondition scoreBasedSpawnCondition= new ScoreBasedSpawnCondition(5);
-        gameScore.addScoreObserver(scoreBasedSpawnCondition);
-        enemySpawnRateController.addListener(scoreBasedSpawnCondition);
-    }
+//    private void addScoreBasedDifficulty(GameScore gameScore){
+//        ScoreBasedSpawnCondition scoreBasedSpawnCondition= new ScoreBasedSpawnCondition(5);
+//        gameScore.addScoreObserver(scoreBasedSpawnCondition);
+//        enemySpawnRateController.addListener(scoreBasedSpawnCondition);
+//    }
 
-
-    public void update(float delta) {
-        enemySpawnRateController.update(delta);
-    }
 
 
 }
