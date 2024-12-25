@@ -28,12 +28,12 @@ public class TempEnemyFactory{
             case NORMAL :
                 enemy= new NormalEnemy(world, spawnPosition, new Vector2(5, 5), speed);
                 break;
-            case QUICK :
-                enemy= new QuickEnemy(world, spawnPosition, new Vector2(5, 5),speed);
-                break;
-            case BOSS :
-                enemy= new BossEnemy(world, spawnPosition, new Vector2(5, 5),speed);
-                break;
+//            case QUICK :
+//                enemy= new QuickEnemy(world, spawnPosition, new Vector2(5, 5),speed);
+//                break;
+//            case BOSS :
+//                enemy= new BossEnemy(world, spawnPosition, new Vector2(5, 5),speed);
+//                break;
             default :
                 throw new IllegalStateException("EnemyBuilder: Unknown EnemyType");
         }
