@@ -1,7 +1,7 @@
 package com.libgdx.fallingblocks.controller;
 
 
-import com.libgdx.fallingblocks.box2d.entity.enemy.services.EnemySpawnRateController;
+import com.libgdx.fallingblocks.entity.enemy.spawn.EnemySpawnRateController;
 import com.libgdx.fallingblocks.game.GameScore;
 
 public class DifficultyController {

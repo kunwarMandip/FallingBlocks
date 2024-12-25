@@ -25,6 +25,10 @@ public class TiledObjectLoader {
     public TiledObjectLoader(World world, TiledMap tiledMap){
         this.world=world;
         this.tiledMap=tiledMap;
+
+        loadOuterBound();
+        loadWall();
+        loadSpawnAreas();
     }
 
 

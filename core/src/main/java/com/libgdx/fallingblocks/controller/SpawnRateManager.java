@@ -1,9 +1,9 @@
 package com.libgdx.fallingblocks.controller;
 
-import com.libgdx.fallingblocks.box2d.entity.enemy.difficulty.spawnrate.SpawnRate;
-import com.libgdx.fallingblocks.box2d.entity.enemy.difficulty.spawnrate.TimeBasedSpawnCondition;
-import com.libgdx.fallingblocks.box2d.entity.enemy.difficulty.spawnrate.Timed;
-import com.libgdx.fallingblocks.box2d.entity.enemy.services.EnemySpawnRateController;
+import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnRate;
+import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.TimeBasedSpawnCondition;
+import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.Timed;
+import com.libgdx.fallingblocks.entity.enemy.spawn.EnemySpawnRateController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class SpawnRateManager {
 
     public void addListeners(SpawnRate spawnRate){
         if(spawnRate instanceof TimeBasedSpawnCondition){
-            timeBasedSpawnRate.add( ((TimeBasedSpawnCondition) spawnRate));
+            timeBasedSpawnRate.add(((TimeBasedSpawnCondition) spawnRate));
         }
         enemySpawnRateController.addListeners(spawnRate);
     }

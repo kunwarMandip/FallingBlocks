@@ -1,8 +1,8 @@
 package com.libgdx.fallingblocks.game;
 
 import com.libgdx.fallingblocks.listeners.enemy.observers.EnemyDeathObserver;
-import com.libgdx.fallingblocks.box2d.entity.enemy.Enemy;
-import com.libgdx.fallingblocks.box2d.entity.enemy.services.EnemyScoreCalculator;
+import com.libgdx.fallingblocks.entity.enemy.Enemy;
+import com.libgdx.fallingblocks.entity.enemy.services.EnemyScoreCalculator;
 import com.libgdx.fallingblocks.listeners.state.ScoreChangeObserver;
 
 import java.util.ArrayList;

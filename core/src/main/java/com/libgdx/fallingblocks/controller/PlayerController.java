@@ -1,9 +1,9 @@
 package com.libgdx.fallingblocks.controller;
 
 import com.badlogic.gdx.physics.box2d.World;
-import com.libgdx.fallingblocks.box2d.entity.player.Player;
-import com.libgdx.fallingblocks.box2d.entity.player.services.PlayerFactory;
-import com.libgdx.fallingblocks.box2d.entity.player.PlayerTypes;
+import com.libgdx.fallingblocks.entity.player.Player;
+import com.libgdx.fallingblocks.entity.player.services.PlayerFactory;
+import com.libgdx.fallingblocks.entity.player.PlayerTypes;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.listeners.player.observers.PlayerChangeObserver;
 import com.libgdx.fallingblocks.listeners.player.observers.PlayerDeathObserver;
@@ -54,7 +54,7 @@ public class PlayerController {
         }
 
         inputListenerManager.removeInputProcessor(player.getGestureDetector());
-        player.destroyBody(world);
+        player.destroy(world);
         notifyDeathObservers();
         setNewPlayer(PlayerTypes.NORMAL);
     }

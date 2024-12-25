@@ -2,16 +2,17 @@ package com.libgdx.fallingblocks.parser.dto.levelDto;
 
 
 import com.badlogic.gdx.math.Vector2;
-import com.libgdx.fallingblocks.box2d.entity.enemy.EnemyType;
+import com.libgdx.fallingblocks.entity.enemy.types.EnemyType;
 import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDirection;
 
 public class EnemyDto {
 
-    private final EnemyType enemyType;
-    private final MovementDirection movementDirection;
+    public EnemyType enemyType;
+    public MovementDirection movementDirection;
 
-    private final Vector2 speed;
-    private final Vector2 spawnPosition;
+    public Vector2 speed;
+    public Vector2 spawnPosition;
+    public Vector2 bodyDimension;;
 
     public EnemyDto(EnemyType enemyType, MovementDirection movementDirection, Vector2 speed, Vector2 spawnPosition) {
         this.enemyType = enemyType;

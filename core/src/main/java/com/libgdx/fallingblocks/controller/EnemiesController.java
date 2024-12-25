@@ -5,13 +5,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
+import com.libgdx.fallingblocks.entity.enemy.death.EnemyDeathManager;
+import com.libgdx.fallingblocks.entity.enemy.spawn.EnemySpawnManager;
 import com.libgdx.fallingblocks.listeners.enemy.observers.EnemyDeathObserver;
-import com.libgdx.fallingblocks.box2d.entity.enemy.services.EnemyRemover;
-import com.libgdx.fallingblocks.box2d.entity.enemy.spawner.EnemyDtoBuilder;
-import com.libgdx.fallingblocks.box2d.entity.enemy.spawner.EnemySpawner;
+import com.libgdx.fallingblocks.entity.enemy.services.EnemyRemover;
+import com.libgdx.fallingblocks.entity.enemy.spawner.EnemyDtoBuilder;
+import com.libgdx.fallingblocks.entity.enemy.spawner.EnemySpawner;
 import com.libgdx.fallingblocks.parser.dto.wave.EnemiesDto;
-import com.libgdx.fallingblocks.box2d.entity.enemy.Enemy;
-import com.libgdx.fallingblocks.box2d.entity.enemy.spawner.TempEnemyFactory;
+import com.libgdx.fallingblocks.entity.enemy.Enemy;
+import com.libgdx.fallingblocks.entity.enemy.spawner.TempEnemyFactory;
 import com.libgdx.fallingblocks.parser.dto.levelDto.EnemyDto;
 import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDirection;
 
@@ -21,13 +23,12 @@ import java.util.Map;
 
 public class EnemiesController {
 
-    private final World world;
-    private final Array<Enemy> enemies;
-    private final EnemyRemover enemyRemover;
-    private final TempEnemyFactory tempEnemyFactory;
-    private final EnemyDtoBuilder enemyDtoFactory;
-    private final EnemySpawner enemySpawner;
-
+    private World world;
+    private Array<Enemy> enemies;
+    private EnemyRemover enemyRemover;
+    private TempEnemyFactory tempEnemyFactory;
+    private EnemyDtoBuilder enemyDtoFactory;
+    private EnemySpawner enemySpawner;
 
     public EnemiesController(World world, EnemiesDto enemiesDto,
                              Map<MovementDirection, Vector2> spawnAreas){
@@ -37,6 +38,18 @@ public class EnemiesController {
         this.enemySpawner = new EnemySpawner();
         this.enemyDtoFactory = new EnemyDtoBuilder(enemiesDto, spawnAreas);
         this.enemyRemover= new EnemyRemover(world);
+    }
+
+    private EnemySpawnManager enemySpawnManager;
+    private EnemyDeathManager enemyDeathManager;
+    public EnemiesController(){
+        this.enemySpawnManager= new EnemySpawnManager();
+        this.enemyDeathManager= new EnemyDeathManager();
+    }
+
+    public void update(float delta){
+        enemySpawnManager.update(delta);
+        enemyDeathManager.update(delta);
     }
 
     public void addDeathListener(EnemyDeathObserver enemyDeathObserver) {
@@ -71,7 +84,7 @@ public class EnemiesController {
         Iterator<Enemy> iterator= enemies.iterator();
         while(iterator.hasNext()){
             Enemy enemy= iterator.next();
-            enemy.destroyBody(world);
+            enemy.destroy(world);
             iterator.remove();
         }
     }

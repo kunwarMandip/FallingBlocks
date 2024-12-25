@@ -16,3 +16,9 @@
 # Make enemy increase Score. Make hud Increase Score
 # 
 
+
+
+# Enemies Controller
+# Updates, Spawns and deletes draw
+# To spawn, I need to create EnemyDto, EnemyFactory and returns EnemyType
+# n

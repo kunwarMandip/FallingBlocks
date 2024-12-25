@@ -1,7 +1,7 @@
 package com.libgdx.fallingblocks.game;
 
-import com.libgdx.fallingblocks.box2d.entity.common.Entity;
-import com.libgdx.fallingblocks.box2d.entity.enemy.EnemyType;
+import com.libgdx.fallingblocks.entity.common.Entity;
+import com.libgdx.fallingblocks.entity.enemy.types.EnemyType;
 import com.libgdx.fallingblocks.listeners.player.observers.PlayerDeathObserver;
 
 import java.util.HashMap;

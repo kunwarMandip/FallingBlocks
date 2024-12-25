@@ -9,6 +9,7 @@ import java.util.Set;
 public class Logger {
 
     public enum Tags {
+        ENTITY_DEATH,
         SPAWN_RATE_INCREASE,
         ENEMY_OUTER_BOUND_CONTACT,
         ENEMY_DEATH_LISTENER,
