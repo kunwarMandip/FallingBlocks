@@ -13,7 +13,7 @@ import com.libgdx.fallingblocks.entity.enemy.Enemy;
 public final class NormalEnemy extends Enemy {
 
     private final Animation animation;
-    public NormalEnemy(World world, Vector2 spawnPosition, Vector2 bodyDimension, Vector2 speed) {
+    public NormalEnemy(Vector2 spawnPosition, Vector2 bodyDimension, Vector2 speed) {
         super(1, spawnPosition, bodyDimension, speed, new RangeAttack(), new SlowMovement());
         this.animation= new Animation(new Vector2(5, 5), new Texture("map/images/arrows/arrow.png"));
         spawnBody(world);
@@ -31,13 +31,11 @@ public final class NormalEnemy extends Enemy {
 
     @Override
     public void onDeath(Entity entity) {
-
     }
 
 
     @Override
     public void collide(Entity entity) {
-
     }
 
     @Override

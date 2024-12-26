@@ -20,7 +20,7 @@ public class EntityDeathNotifier <T extends Entity>{
         enemyDeathObservers.remove(observer);
     }
 
-    public void notifyDeathListeners(Array<T> entity){
+    public void notify(Array<T> entity){
         for(EntityDeathObserver<T> entityDeathObserver : enemyDeathObservers){
             Logger.log(Logger.Tags.ENTITY_DEATH, "Notifying death observer");
             entityDeathObserver.notifyEntityDeath(entity);

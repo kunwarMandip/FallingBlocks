@@ -14,11 +14,22 @@ import static com.libgdx.fallingblocks.GlobalVariables.getRandomValue;
 
 public final class EnemyDtoBuilder {
 
-    private final MovementCalculator movementCalculator;
-    private final Map<String, Integer> spawnDirections;
-    private final Map<String, Integer> enemyDistributions;
+    private Vector2 playerPosition;
+    private MovementCalculator movementCalculator;
+    private Map<String, Integer> spawnDirections;
+    private Map<String, Integer> enemyDistributions;
 
     public EnemyDtoBuilder(EnemiesDto enemiesDto, Map<MovementDirection, Vector2> spawnAreas){
+        this.spawnDirections= enemiesDto.getSpawnDirections();
+        this.enemyDistributions= enemiesDto.getEnemyDistributions();
+
+        this.movementCalculator= new MovementCalculator(spawnAreas);
+        Logger.log(Logger.Tags.ENEMY_SPAWNER, spawnAreas.toString());
+    }
+
+    public EnemyDtoBuilder(EnemiesDto enemiesDto, Vector2 playerPosition,){
+
+        this.playerPosition= playerPosition;
         this.spawnDirections= enemiesDto.getSpawnDirections();
         this.enemyDistributions= enemiesDto.getEnemyDistributions();
 
@@ -48,6 +59,10 @@ public final class EnemyDtoBuilder {
         throw new IllegalStateException("EnemyDtoGenerator: Error on getString(): \n"+ map);
     }
 
+
+    public EnemyDto getEnemyDto(){
+        return null;
+    }
 
     public EnemyDto getEnemyDto(Vector2 playerLocation) {
         EnemyType enemyType= getEnemyType();

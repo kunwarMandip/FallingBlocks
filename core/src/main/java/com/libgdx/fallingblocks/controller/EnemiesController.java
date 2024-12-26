@@ -5,8 +5,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.entity.enemy.death.EnemyDeathManager;
-import com.libgdx.fallingblocks.entity.enemy.spawn.EnemySpawnManager;
+import com.libgdx.fallingblocks.entity.enemy.compact.EnemyDeathManager;
+import com.libgdx.fallingblocks.entity.enemy.compact.EnemyNotifier;
+import com.libgdx.fallingblocks.entity.enemy.compact.EnemySpawnManager;
 import com.libgdx.fallingblocks.listeners.enemy.observers.EnemyDeathObserver;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyRemover;
 import com.libgdx.fallingblocks.entity.enemy.spawner.EnemyDtoBuilder;
@@ -40,17 +41,20 @@ public class EnemiesController {
         this.enemyRemover= new EnemyRemover(world);
     }
 
+
+    private EnemyNotifier enemyNotifier;
     private EnemySpawnManager enemySpawnManager;
     private EnemyDeathManager enemyDeathManager;
-    public EnemiesController(){
-        this.enemySpawnManager= new EnemySpawnManager();
+    public EnemiesController(EnemiesDto enemiesDto, Vector2 playerPosition){
+        this.enemySpawnManager= new EnemySpawnManager(enemiesDto, playerPosition);
         this.enemyDeathManager= new EnemyDeathManager();
     }
 
     public void update(float delta){
-        enemySpawnManager.update(delta);
+        enemySpawnManager.spawnEnemies();
         enemyDeathManager.update(delta);
     }
+
 
     public void addDeathListener(EnemyDeathObserver enemyDeathObserver) {
         enemyRemover.addDeathListener(enemyDeathObserver);

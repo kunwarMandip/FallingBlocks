@@ -1,9 +1,8 @@
-package com.libgdx.fallingblocks.controller;
+package com.libgdx.fallingblocks.entity.enemy.spawn;
 
 import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnRate;
 import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.TimeBasedSpawnCondition;
 import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.Timed;
-import com.libgdx.fallingblocks.entity.enemy.spawn.EnemySpawnRateController;
 
 import java.util.ArrayList;
 import java.util.List;
