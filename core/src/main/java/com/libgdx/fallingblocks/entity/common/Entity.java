@@ -10,7 +10,7 @@ import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.OnHitBehaviou
 
 public abstract class Entity implements DeathBehaviour, OnHitBehaviour, ActionListener {
 
-    //Box2d setters
+    //Box2D setters
     protected Body body;
     protected Fixture fixture;
 

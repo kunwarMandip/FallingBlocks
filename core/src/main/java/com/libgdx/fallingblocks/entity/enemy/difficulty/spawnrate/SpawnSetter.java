@@ -1,6 +1,6 @@
 package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
 
-public interface SpawnSetterListener {
+public interface SpawnSetter {
 
     void setNumEnemyToSpawn(int numEnemyToSpawn);
 }

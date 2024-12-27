@@ -1,9 +1,9 @@
-package com.libgdx.fallingblocks.entity.enemy.service;
+package com.libgdx.fallingblocks.entity.enemy.compact;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.libgdx.fallingblocks.entity.enemy.Enemy;
+import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 
 import java.util.Iterator;
 

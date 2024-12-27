@@ -16,7 +16,7 @@ public class ScoreBasedSpawnCondition extends SpawnRate implements ScoreChangeOb
 
 
     @Override
-    public void onScoreUpdated(int score) {
+    public void onScoreChanged(int score) {
         int scoreChange= score - currentScore;
 
         if(scoreChange % scoreThreshold ==0){

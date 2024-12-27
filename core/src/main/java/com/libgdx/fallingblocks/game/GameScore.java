@@ -1,7 +1,7 @@
 package com.libgdx.fallingblocks.game;
 
 import com.libgdx.fallingblocks.listeners.enemy.observers.EnemyDeathObserver;
-import com.libgdx.fallingblocks.entity.enemy.Enemy;
+import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyScoreCalculator;
 import com.libgdx.fallingblocks.listeners.state.ScoreChangeObserver;
 
@@ -42,7 +42,7 @@ public class GameScore implements EnemyDeathObserver {
 
     private void notifyObservers(){
         for(ScoreChangeObserver scoreChangeObserver : scoreChangeObservers){
-            scoreChangeObserver.onScoreUpdated(score);
+            scoreChangeObserver.onScoreChanged(score);
         }
     }
 

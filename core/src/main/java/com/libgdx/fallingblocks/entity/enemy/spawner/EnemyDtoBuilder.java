@@ -19,7 +19,8 @@ public final class EnemyDtoBuilder {
     private Map<String, Integer> spawnDirections;
     private Map<String, Integer> enemyDistributions;
 
-    public EnemyDtoBuilder(EnemiesDto enemiesDto, Map<MovementDirection, Vector2> spawnAreas){
+    public EnemyDtoBuilder(Vector2 playerPosition, EnemiesDto enemiesDto , Map<MovementDirection, Vector2> spawnAreas){
+        this.playerPosition = playerPosition;
         this.spawnDirections= enemiesDto.getSpawnDirections();
         this.enemyDistributions= enemiesDto.getEnemyDistributions();
 
@@ -27,15 +28,6 @@ public final class EnemyDtoBuilder {
         Logger.log(Logger.Tags.ENEMY_SPAWNER, spawnAreas.toString());
     }
 
-    public EnemyDtoBuilder(EnemiesDto enemiesDto, Vector2 playerPosition,){
-
-        this.playerPosition= playerPosition;
-        this.spawnDirections= enemiesDto.getSpawnDirections();
-        this.enemyDistributions= enemiesDto.getEnemyDistributions();
-
-        this.movementCalculator= new MovementCalculator(spawnAreas);
-        Logger.log(Logger.Tags.ENEMY_SPAWNER, spawnAreas.toString());
-    }
 
     private EnemyType getEnemyType(){
         String enemy= getString(enemyDistributions);
@@ -60,15 +52,11 @@ public final class EnemyDtoBuilder {
     }
 
 
-    public EnemyDto getEnemyDto(){
-        return null;
-    }
-
-    public EnemyDto getEnemyDto(Vector2 playerLocation) {
+    public EnemyDto getEnemyDto() {
         EnemyType enemyType= getEnemyType();
         MovementDirection relativeDirection= getMovementDirection();
         Vector2 speed= movementCalculator.calculateSpeed(relativeDirection);
-        Vector2 spawnPosition= movementCalculator.calculateSpawnPosition(relativeDirection, playerLocation);
+        Vector2 spawnPosition= movementCalculator.calculateSpawnPosition(relativeDirection, playerPosition);
 
         Logger.log(Logger.Tags.ENEMY_SPAWNER, "Spawn Direction: "+ relativeDirection + " | " + spawnPosition);
         return new EnemyDto(enemyType, relativeDirection,  speed, spawnPosition);

@@ -2,11 +2,9 @@ package com.libgdx.fallingblocks.entity.enemy.types;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.entity.common.Entity;
 import com.libgdx.fallingblocks.entity.common.abilites.movement.DashMovement;
 import com.libgdx.fallingblocks.entity.common.behaviour.strategies.MeleeAttack;
-import com.libgdx.fallingblocks.entity.enemy.Enemy;
 
 public final class QuickEnemy extends Enemy {
 

@@ -82,7 +82,7 @@ public class GameOverWindow implements ScoreChangeObserver {
 
 
     @Override
-    public void onScoreUpdated(int score) {
+    public void onScoreChanged(int score) {
         this.score=score;
     }
 }

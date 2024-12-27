@@ -1,16 +1,30 @@
 package com.libgdx.fallingblocks.entity.enemy.spawn;
 
-import com.libgdx.fallingblocks.entity.enemy.Enemy;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
+import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.types.BossEnemy;
 import com.libgdx.fallingblocks.entity.enemy.types.NormalEnemy;
 import com.libgdx.fallingblocks.entity.enemy.types.QuickEnemy;
 import com.libgdx.fallingblocks.parser.dto.levelDto.EnemyDto;
 
+import static com.libgdx.fallingblocks.GlobalVariables.CATEGORY_ENEMY;
+import static com.libgdx.fallingblocks.GlobalVariables.CATEGORY_WALL;
+
 
 public class EnemyFactory implements IEnemyFactory {
 
+    private World world;
+    public EnemyFactory(World world){
+        this.world=world;
+    }
+
     private Enemy createNormalEnemy(EnemyDto enemyDto){
-        return new NormalEnemy(enemyDto.spawnPosition, enemyDto.bodyDimension ,enemyDto.speed);
+        Enemy enemy= new NormalEnemy(enemyDto.spawnPosition, new Vector2(2, 2),enemyDto.speed);
+
+        enemy.spawnBody(world);
+        enemy.setMaskBit(CATEGORY_ENEMY, (short) ~(CATEGORY_WALL | CATEGORY_ENEMY));
+        return enemy;
     }
 
     private Enemy createQuickEnemy(EnemyDto enemyDto){
@@ -24,6 +38,7 @@ public class EnemyFactory implements IEnemyFactory {
 
     @Override
     public Enemy createEnemy(EnemyDto enemyDto) {
+
         switch (enemyDto.getEnemyType()){
             case NORMAL:
                 return createNormalEnemy(enemyDto);

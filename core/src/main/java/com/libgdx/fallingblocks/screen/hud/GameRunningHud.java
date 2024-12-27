@@ -71,7 +71,7 @@ public class GameRunningHud implements Disposable, ScoreChangeObserver {
 
 
     @Override
-    public void onScoreUpdated(int score) {
+    public void onScoreChanged(int score) {
         scoreLabel.setText(score);
     }
 

@@ -1,6 +1,6 @@
 package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
 
-public class TimeBasedSpawnCondition extends SpawnRate implements Timed {
+public class TimeBasedSpawnCondition extends SpawnRate {
 
     private final float spawnRate;
     private float spawnRateCounter;
@@ -10,12 +10,13 @@ public class TimeBasedSpawnCondition extends SpawnRate implements Timed {
         this.spawnRateCounter = 0f;
     }
 
-    @Override
     public void update(float delta) {
-        spawnRateCounter += delta;
-        if (spawnRateCounter >= spawnRate) {
-            notifySpawnSetters(1);
-            spawnRateCounter = 0f;
+        if(spawnRateCounter < spawnRate){
+            spawnRateCounter += delta;
+            return;
         }
+
+        notifySpawnSetters(1);
+        spawnRateCounter = 0f;
     }
 }

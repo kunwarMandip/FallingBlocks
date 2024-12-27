@@ -31,8 +31,6 @@ public class WorldController {
         }
     }
 
-
-
     public void update(){
         world.step(1/60f, 6, 2);
     }
@@ -52,6 +50,4 @@ public class WorldController {
     public void setWorld(World world) {
         this.world = world;
     }
-
-
 }

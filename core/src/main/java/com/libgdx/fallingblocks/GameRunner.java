@@ -25,7 +25,6 @@ public class GameRunner {
     private final SceneController sceneController;
     private final PlayerController playerController;
     private final EnemiesController enemiesController;
-    private final DifficultyController difficultyController;
 
     public GameRunner(int level, SpriteBatch spriteBatch, InputListenerManager inputListenerManager){
         this.level=level;
@@ -39,11 +38,14 @@ public class GameRunner {
         this.sceneController = new SceneController(waveDto.getTiledMapDto());
         this.worldController = new WorldController(true, waveDto.getWorldDto(), sceneController.getTiledMap());
         this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
-        this.enemiesController = new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
-        this.difficultyController= new DifficultyController(gameController.getGameScore());
+//        this.enemiesController = new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
+
+//        this.enemiesController = new EnemiesController(playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto());
+
+        this.enemiesController= new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), playerController.getPlayer().getBodyPosition(), worldController.getSpawnAreas());
 
         this.gameController.addScoreObserver(gameRunningHud);
-        this.enemiesController.addDeathListener(gameController.getGameScore());
+//        this.enemiesController.addDeathListener(gameController.getGameScore());
         this.playerController.addDeathObserver(gameController.getGameStatistics());
     }
 
@@ -56,7 +58,7 @@ public class GameRunner {
         worldController.update();
         sceneController.render();
         playerController.update(delta);
-        enemiesController.update(delta, playerController.getPlayer().getBodyPosition());
+        enemiesController.update(delta);
     }
 
 

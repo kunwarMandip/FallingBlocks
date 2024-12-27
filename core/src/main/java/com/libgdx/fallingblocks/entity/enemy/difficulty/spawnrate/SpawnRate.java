@@ -5,20 +5,22 @@ import java.util.List;
 
 public abstract class SpawnRate {
 
-    private final List<SpawnSetterListener> spawnSetterListeners = new ArrayList<>();
+    private final List<SpawnSetter> spawnSetter = new ArrayList<>();
 
-    public void addSpawnSetter(SpawnSetterListener spawnSetterListener){
-        spawnSetterListeners.add(spawnSetterListener);
+
+    public void addSpawnSetter(SpawnSetter spawnSetter){
+        this.spawnSetter.add(spawnSetter);
     }
 
-    public void removeSpawnSetter(SpawnSetterListener spawnSetterListener){
-        spawnSetterListeners.remove(spawnSetterListener);
+    public void removeSpawnSetter(SpawnSetter spawnSetter){
+        this.spawnSetter.remove(spawnSetter);
     }
 
     protected void notifySpawnSetters(int numEnemiesToSpawn){
-        for(SpawnSetterListener spawnSetterListener : spawnSetterListeners){
-            spawnSetterListener.setNumEnemyToSpawn(numEnemiesToSpawn);
+        for(SpawnSetter spawnSetter : this.spawnSetter){
+            spawnSetter.setNumEnemyToSpawn(numEnemiesToSpawn);
         }
     }
+
 
 }

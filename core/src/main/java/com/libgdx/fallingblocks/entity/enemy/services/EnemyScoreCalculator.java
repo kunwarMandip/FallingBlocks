@@ -1,6 +1,6 @@
 package com.libgdx.fallingblocks.entity.enemy.services;
 
-import com.libgdx.fallingblocks.entity.enemy.Enemy;
+import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 
 public class EnemyScoreCalculator {
 

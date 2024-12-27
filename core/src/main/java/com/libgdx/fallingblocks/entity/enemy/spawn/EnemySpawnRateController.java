@@ -1,9 +1,9 @@
 package com.libgdx.fallingblocks.entity.enemy.spawn;
 
 import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnRate;
-import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnSetterListener;
+import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnSetter;
 
-public class EnemySpawnRateController implements SpawnSetterListener {
+public class EnemySpawnRateController implements SpawnSetter {
 
     private int numEnemyToSpawn=0;
 
