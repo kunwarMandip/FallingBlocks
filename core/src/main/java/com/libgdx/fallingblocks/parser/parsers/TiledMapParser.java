@@ -25,8 +25,6 @@ public class TiledMapParser {
             int waveNumber= wave.getInt("waveNumber", 0);
             String tiledMapPath= wave.getString("mapPath");
             tiledMapDtoArray.add(new TiledMapDto(waveNumber, tiledMapPath, null));
-
-            Logger.log(Logger.Tags.TILED_MAP_PARSER, "WavePath: "+ tiledMapPath);
         }
 
         return tiledMapDtoArray;

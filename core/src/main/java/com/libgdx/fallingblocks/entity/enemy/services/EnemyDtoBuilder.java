@@ -1,11 +1,10 @@
-package com.libgdx.fallingblocks.entity.enemy.spawner;
+package com.libgdx.fallingblocks.entity.enemy.services;
 
 import com.badlogic.gdx.math.Vector2;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.entity.enemy.types.EnemyType;
-import com.libgdx.fallingblocks.entity.enemy.services.MovementCalculator;
 import com.libgdx.fallingblocks.parser.dto.levelDto.EnemyDto;
-import com.libgdx.fallingblocks.parser.dto.wave.EnemiesDto;
+import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDirection;
 
 import java.util.Map;
@@ -19,13 +18,12 @@ public final class EnemyDtoBuilder {
     private Map<String, Integer> spawnDirections;
     private Map<String, Integer> enemyDistributions;
 
-    public EnemyDtoBuilder(Vector2 playerPosition, EnemiesDto enemiesDto , Map<MovementDirection, Vector2> spawnAreas){
+    public EnemyDtoBuilder(Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas){
         this.playerPosition = playerPosition;
-        this.spawnDirections= enemiesDto.getSpawnDirections();
-        this.enemyDistributions= enemiesDto.getEnemyDistributions();
+        this.spawnDirections= enemiesSpawnInfoDto.getSpawnDirections();
+        this.enemyDistributions= enemiesSpawnInfoDto.getEnemyDistributions();
 
         this.movementCalculator= new MovementCalculator(spawnAreas);
-        Logger.log(Logger.Tags.ENEMY_SPAWNER, spawnAreas.toString());
     }
 
 
@@ -58,7 +56,6 @@ public final class EnemyDtoBuilder {
         Vector2 speed= movementCalculator.calculateSpeed(relativeDirection);
         Vector2 spawnPosition= movementCalculator.calculateSpawnPosition(relativeDirection, playerPosition);
 
-        Logger.log(Logger.Tags.ENEMY_SPAWNER, "Spawn Direction: "+ relativeDirection + " | " + spawnPosition);
         return new EnemyDto(enemyType, relativeDirection,  speed, spawnPosition);
     }
 }

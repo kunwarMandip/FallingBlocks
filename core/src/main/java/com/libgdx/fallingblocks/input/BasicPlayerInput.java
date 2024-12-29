@@ -55,7 +55,6 @@ public class BasicPlayerInput implements GestureDetector.GestureListener {
             }
         }
 
-        Logger.log(Logger.Tags.INPUT_PROCESSOR, "Swiped");
         return true;
     }
 

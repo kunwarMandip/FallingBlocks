@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.entity.enemy.spawn;
+package com.libgdx.fallingblocks.entity.enemy.services;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;

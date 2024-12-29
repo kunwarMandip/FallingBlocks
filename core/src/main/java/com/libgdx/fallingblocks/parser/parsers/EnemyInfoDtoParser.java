@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.parser.dto.wave.EnemiesDto;
+import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ import static com.libgdx.fallingblocks.GlobalVariables.isNodeExists;
 
 public class EnemyInfoDtoParser {
 
-    public Array<EnemiesDto> getEnemyInfoDto(String filePath){
+    public Array<EnemiesSpawnInfoDto> getEnemyInfoDto(String filePath){
         FileHandle fileHandle = Gdx.files.internal(filePath);
         isFileExist(fileHandle);
 
@@ -24,11 +24,11 @@ public class EnemyInfoDtoParser {
         JsonValue root = jsonReader.parse(fileHandle);
         JsonValue wavesNode = root.get("waves");
 
-        Array<EnemiesDto> enemyInfoDtoArray= new Array<>();
+        Array<EnemiesSpawnInfoDto> enemyInfoDtoArray= new Array<>();
         for (JsonValue wave : wavesNode) {
             Map<String, Integer> spawnDirection= parseNodeToMap(wave.get("directions"));
             Map<String, Integer> enemiesDistribution= parseNodeToMap(wave.get("enemyDistribution"));
-            enemyInfoDtoArray.add(new EnemiesDto(spawnDirection, enemiesDistribution));
+            enemyInfoDtoArray.add(new EnemiesSpawnInfoDto(spawnDirection, enemiesDistribution));
         }
         return enemyInfoDtoArray;
     }
@@ -43,7 +43,6 @@ public class EnemyInfoDtoParser {
             result.put(key, value);
         }
 
-        Logger.log(Logger.Tags.ENEMY_INFO_PARSER, result.toString());
         return result;
     }
 

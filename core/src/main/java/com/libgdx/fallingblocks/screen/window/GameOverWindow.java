@@ -13,12 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.libgdx.fallingblocks.listeners.state.ScoreChangeObserver;
 
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_HEIGHT;
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_WIDTH;
 
-public class GameOverWindow implements ScoreChangeObserver {
+public class GameOverWindow {
 
     private Skin skin;
     private Stage stage;
@@ -81,8 +80,8 @@ public class GameOverWindow implements ScoreChangeObserver {
     }
 
 
-    @Override
-    public void onScoreChanged(int score) {
-        this.score=score;
-    }
+//    @Override
+//    public void onScoreChanged(int score) {
+//        this.score=score;
+//    }
 }

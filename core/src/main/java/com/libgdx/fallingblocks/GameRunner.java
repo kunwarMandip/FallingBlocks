@@ -3,6 +3,10 @@ package com.libgdx.fallingblocks;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.libgdx.fallingblocks.controller.*;
+import com.libgdx.fallingblocks.entity.common.observers.Subject;
+import com.libgdx.fallingblocks.entity.enemy.compact.EnemyDeathManager;
+import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
+import com.libgdx.fallingblocks.game.GameScore;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.GameDto;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
@@ -38,15 +42,25 @@ public class GameRunner {
         this.sceneController = new SceneController(waveDto.getTiledMapDto());
         this.worldController = new WorldController(true, waveDto.getWorldDto(), sceneController.getTiledMap());
         this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
-//        this.enemiesController = new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
+        this.enemiesController= new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
 
-//        this.enemiesController = new EnemiesController(playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto());
+        setScoreListeners();
+        setEnemyDeathListeners();
+    }
 
-        this.enemiesController= new EnemiesController(worldController.getWorld(),waveDto.getEnemyInfoDto(), playerController.getPlayer().getBodyPosition(), worldController.getSpawnAreas());
+    public void setScoreListeners(){
+        GameScore gameScore= gameController.getGameScore();
+        gameScore.getScoreObservers().addObserver(gameRunningHud);
+        gameScore.getScoreObservers().addObserver(enemiesController.getEnemySpawnManager().setSpawnConditions().setScoreBasedSpawnRate(5));
+    }
 
-        this.gameController.addScoreObserver(gameRunningHud);
-//        this.enemiesController.addDeathListener(gameController.getGameScore());
-        this.playerController.addDeathObserver(gameController.getGameStatistics());
+    public void setEnemyDeathListeners(){
+        Subject<Enemy> enemyDeathNotifier= enemiesController.getEnemyDeathManager().getEnemyDeathNotifier();
+        enemyDeathNotifier.addObserver(gameController.getGameScore());
+    }
+
+    private void setDeathListeners(){
+//        this.playerController.addDeathObserver(gameController.getGameStatistics());
     }
 
     public void update(float delta){

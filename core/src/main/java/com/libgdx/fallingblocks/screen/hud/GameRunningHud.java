@@ -11,14 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.libgdx.fallingblocks.listeners.state.ScoreChangeObserver;
+import com.libgdx.fallingblocks.entity.common.observers.Observers;
 
 import java.util.Locale;
 
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_HEIGHT;
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_WIDTH;
 
-public class GameRunningHud implements Disposable, ScoreChangeObserver {
+public class GameRunningHud implements Disposable, Observers<Integer> {
 
     private final SpriteBatch spriteBatch;
 
@@ -70,13 +70,20 @@ public class GameRunningHud implements Disposable, ScoreChangeObserver {
     }
 
 
-    @Override
-    public void onScoreChanged(int score) {
-        scoreLabel.setText(score);
-    }
+//    @Override
+//    public void onScoreChanged(int score) {
+//        scoreLabel.setText(score);
+//    }
 
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+
+
+    @Override
+    public void notify(Integer event) {
+        scoreLabel.setText(event);
     }
 }

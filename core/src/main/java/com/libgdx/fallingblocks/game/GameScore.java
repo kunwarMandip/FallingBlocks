@@ -1,49 +1,45 @@
 package com.libgdx.fallingblocks.game;
 
-import com.libgdx.fallingblocks.listeners.enemy.observers.EnemyDeathObserver;
+import com.libgdx.fallingblocks.Logger;
+import com.libgdx.fallingblocks.entity.common.observers.Observers;
+import com.libgdx.fallingblocks.entity.common.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyScoreCalculator;
-import com.libgdx.fallingblocks.listeners.state.ScoreChangeObserver;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.libgdx.fallingblocks.Logger.Tags.SCORE;
+import static com.libgdx.fallingblocks.Logger.Tags.SCORE_SETTER;
 
-public class GameScore implements EnemyDeathObserver {
+public class GameScore implements Observers<Enemy> {
 
-    private int score=0;
+    private int score;
+    private final Subject<Integer> scoreObservers;
     private final EnemyScoreCalculator enemyScoreCalculator;
-    private final List<ScoreChangeObserver> scoreChangeObservers = new ArrayList<>();
 
     public GameScore(){
+        this.score=0;
+        this.scoreObservers= new Subject<>();
         this.enemyScoreCalculator= new EnemyScoreCalculator();
     }
 
-    public void addScoreObserver(ScoreChangeObserver scoreChangeObserver){
-        this.scoreChangeObservers.add(scoreChangeObserver);
+    public GameScore(int score){
+        this.score=score;
+        this.scoreObservers= new Subject<>();
+        this.enemyScoreCalculator= new EnemyScoreCalculator();
     }
 
-    public void removeScoreObserver(ScoreChangeObserver scoreChangeObserver) {
-        this.scoreChangeObservers.remove(scoreChangeObserver);
-    }
-
-    public void addScore(int score){
+    private void setScore(int score){
         this.score+=score;
-        notifyObservers();
+        scoreObservers.notify(this.score);
     }
 
-    public int getScore(){
-        return this.score;
+    public Subject<Integer> getScoreObservers(){
+        return this.scoreObservers;
     }
 
     @Override
-    public void onEnemyDeath(Enemy enemy) {
-        addScore(enemyScoreCalculator.calculateScore(enemy));
-    }
-
-    private void notifyObservers(){
-        for(ScoreChangeObserver scoreChangeObserver : scoreChangeObservers){
-            scoreChangeObserver.onScoreChanged(score);
-        }
+    public void notify(Enemy event) {
+        Logger.log(SCORE_SETTER, "Setting Score");
+        setScore(enemyScoreCalculator.calculateScore(event));
     }
 
 }

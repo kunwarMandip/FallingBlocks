@@ -3,7 +3,7 @@ package com.libgdx.fallingblocks.parser;
 import com.badlogic.gdx.utils.Array;
 
 import com.libgdx.fallingblocks.parser.dto.GameDto;
-import com.libgdx.fallingblocks.parser.dto.wave.EnemiesDto;
+import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 import com.libgdx.fallingblocks.parser.dto.wave.TiledMapDto;
 import com.libgdx.fallingblocks.parser.dto.levelDto.WaveSettingDto;
 import com.libgdx.fallingblocks.parser.dto.wave.WorldDto;
@@ -22,7 +22,7 @@ public class GameDtoParser {
         String worldDtoParserPath= "jsons/wave/world/" + level +".json";
 
         Array<WaveSettingDto> waveSettingDtoArray= new WaveSettingsDtoParser().getWaveSettingDtoArray(timeParserPath);
-        Array<EnemiesDto> enemyInfoDtoArray= new EnemyInfoDtoParser().getEnemyInfoDto(enemyInfoParserPath);
+        Array<EnemiesSpawnInfoDto> enemyInfoDtoArray= new EnemyInfoDtoParser().getEnemyInfoDto(enemyInfoParserPath);
         Array<TiledMapDto> tiledMapDtoArray= new TiledMapParser().getTiledMapDto(tiledMapDtoParserPath);
         Array<WorldDto> worldDtoArray= new WorldDtoParser().getWorldDto(worldDtoParserPath);
 
