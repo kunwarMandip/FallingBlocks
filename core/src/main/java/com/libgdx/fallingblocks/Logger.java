@@ -10,7 +10,9 @@ public class Logger {
 
     public enum Tags {
         BEGIN_CONTACT_MANAGER,
-        ENEMY_SPAWNER,
+        SCORE_SETTER,
+        SPAWN_ENEMY,
+        DESTROY_ENEMY,
         WAVE_PARSER,
         DISABLE_ALL
     }

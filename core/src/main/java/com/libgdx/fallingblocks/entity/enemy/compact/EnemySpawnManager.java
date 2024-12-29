@@ -15,7 +15,7 @@ import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 
 import java.util.Map;
 
-import static com.libgdx.fallingblocks.Logger.Tags.ENEMY_SPAWNER;
+import static com.libgdx.fallingblocks.Logger.Tags.SPAWN_ENEMY;
 
 public class EnemySpawnManager {
 
@@ -36,7 +36,7 @@ public class EnemySpawnManager {
         int numEnemyToSpawn= spawnRateController.getNumEnemyToSpawn();
 
         for(int i=0; i<numEnemyToSpawn; i++){
-            Logger.log(ENEMY_SPAWNER, "Spawning Enemy");
+            Logger.log(SPAWN_ENEMY, "Spawning Enemy");
             EnemyDto enemyDto= dtoBuilder.getEnemyDto();
             currentEnemies.add(enemyFactory.createEnemy(enemyDto));
         }

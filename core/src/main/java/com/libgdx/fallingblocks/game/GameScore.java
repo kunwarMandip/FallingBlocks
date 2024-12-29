@@ -1,9 +1,13 @@
 package com.libgdx.fallingblocks.game;
 
+import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.entity.common.observers.Observers;
 import com.libgdx.fallingblocks.entity.common.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyScoreCalculator;
+
+import static com.libgdx.fallingblocks.Logger.Tags.SCORE;
+import static com.libgdx.fallingblocks.Logger.Tags.SCORE_SETTER;
 
 public class GameScore implements Observers<Enemy> {
 
@@ -25,7 +29,7 @@ public class GameScore implements Observers<Enemy> {
 
     private void setScore(int score){
         this.score+=score;
-        scoreObservers.notify(score);
+        scoreObservers.notify(this.score);
     }
 
     public Subject<Integer> getScoreObservers(){
@@ -34,6 +38,7 @@ public class GameScore implements Observers<Enemy> {
 
     @Override
     public void notify(Enemy event) {
+        Logger.log(SCORE_SETTER, "Setting Score");
         setScore(enemyScoreCalculator.calculateScore(event));
     }
 

@@ -9,6 +9,8 @@ import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 
 import java.util.Iterator;
 
+import static com.libgdx.fallingblocks.Logger.Tags.DESTROY_ENEMY;
+
 public class EnemyDeathManager {
 
     private final World world;
@@ -21,7 +23,6 @@ public class EnemyDeathManager {
     }
 
     public void update(float delta){
-
         Iterator<Enemy> iterator= currentEnemies.iterator();
         while(iterator.hasNext()){
             Enemy enemy= iterator.next();
@@ -29,6 +30,7 @@ public class EnemyDeathManager {
                 enemy.destroy(world);
                 iterator.remove();
                 enemyDeathNotifier.notify(enemy);
+                Logger.log(DESTROY_ENEMY, "Destroying Enemy");
             }
         }
     }
