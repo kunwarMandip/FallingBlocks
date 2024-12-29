@@ -1,7 +1,7 @@
 package com.libgdx.fallingblocks.parser.dto;
 
 import com.badlogic.gdx.utils.Array;
-import com.libgdx.fallingblocks.parser.dto.wave.EnemiesDto;
+import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 import com.libgdx.fallingblocks.parser.dto.wave.TiledMapDto;
 import com.libgdx.fallingblocks.parser.dto.wave.WorldDto;
 import com.libgdx.fallingblocks.parser.dto.levelDto.PlayerDto;
@@ -17,7 +17,7 @@ public class GameDto {
     private final Array<WaveSettingDto> waveSettingDtoArray;
 
     private final Array<PlayerDto> playerDtoArray;
-    private final Array<EnemiesDto> enemyInfoDtoArray;
+    private final Array<EnemiesSpawnInfoDto> enemyInfoDtoArray;
 
     public GameDto(GameDtoBuilder gameDtoBuilder) {
         this.waveManager= new WaveManager();
@@ -46,7 +46,7 @@ public class GameDto {
         private Array<WaveSettingDto> waveSettingDto;
 
         private Array<PlayerDto> playerDto;
-        private Array<EnemiesDto> enemyInfoDto;
+        private Array<EnemiesSpawnInfoDto> enemyInfoDto;
 
         public GameDtoBuilder setWorldDto(Array<WorldDto> worldDto) {
             this.worldDto = worldDto;
@@ -68,7 +68,7 @@ public class GameDto {
             return this;
         }
 
-        public GameDtoBuilder setEnemyInfoDto(Array<EnemiesDto> enemyInfoDto) {
+        public GameDtoBuilder setEnemyInfoDto(Array<EnemiesSpawnInfoDto> enemyInfoDto) {
             this.enemyInfoDto = enemyInfoDto;
             return this;
         }

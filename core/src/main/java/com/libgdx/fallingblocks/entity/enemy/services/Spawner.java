@@ -1,15 +1,15 @@
-package com.libgdx.fallingblocks.entity.enemy.spawner;
+package com.libgdx.fallingblocks.entity.enemy.services;
 
 
 //todo: Create a dto or something else to allow automatic change of spawnRate
-public class EnemySpawner {
+public class Spawner {
 
     private float spawnRate;
     private float spawnRateCounter;
 
     private int numEnemyToSpawn=0;
 
-    public EnemySpawner(){
+    public Spawner(){
         reset();
     }
 

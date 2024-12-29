@@ -3,7 +3,7 @@ package com.libgdx.fallingblocks.parser.dto;
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.parser.dto.levelDto.PlayerDto;
 import com.libgdx.fallingblocks.parser.dto.levelDto.WaveSettingDto;
-import com.libgdx.fallingblocks.parser.dto.wave.EnemiesDto;
+import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 import com.libgdx.fallingblocks.parser.dto.wave.TiledMapDto;
 import com.libgdx.fallingblocks.parser.dto.wave.WorldDto;
 
@@ -27,7 +27,7 @@ public class WaveManager {
         return null;
     }
 
-    public EnemiesDto getEnemyInfoDto(Array<EnemiesDto> enemyInfoDtoArray){
+    public EnemiesSpawnInfoDto getEnemyInfoDto(Array<EnemiesSpawnInfoDto> enemyInfoDtoArray){
         return enemyInfoDtoArray.pop();
     }
 

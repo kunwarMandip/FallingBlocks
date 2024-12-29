@@ -2,7 +2,7 @@ package com.libgdx.fallingblocks.parser.dto;
 
 import com.libgdx.fallingblocks.parser.dto.levelDto.PlayerDto;
 import com.libgdx.fallingblocks.parser.dto.levelDto.WaveSettingDto;
-import com.libgdx.fallingblocks.parser.dto.wave.EnemiesDto;
+import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 import com.libgdx.fallingblocks.parser.dto.wave.TiledMapDto;
 import com.libgdx.fallingblocks.parser.dto.wave.WorldDto;
 
@@ -13,14 +13,14 @@ public class WaveDto {
 
     private final PlayerDto playerDto;
     private final WaveSettingDto waveSettingDto;
-    private final EnemiesDto enemiesDto;
+    private final EnemiesSpawnInfoDto enemiesSpawnInfoDto;
 
     public WaveDto(WaveDtoBuilder waveDtoBuilder) {
         this.worldDto = waveDtoBuilder.worldDto;
         this.tiledMapDto = waveDtoBuilder.tiledMapDto;
         this.playerDto = waveDtoBuilder.playerDto;
         this.waveSettingDto = waveDtoBuilder.waveSettingDto;
-        this.enemiesDto = waveDtoBuilder.enemiesDto;
+        this.enemiesSpawnInfoDto = waveDtoBuilder.enemiesSpawnInfoDto;
     }
 
     public WorldDto getWorldDto() {
@@ -39,8 +39,8 @@ public class WaveDto {
         return waveSettingDto;
     }
 
-    public EnemiesDto getEnemyInfoDto() {
-        return enemiesDto;
+    public EnemiesSpawnInfoDto getEnemyInfoDto() {
+        return enemiesSpawnInfoDto;
     }
 
     public static class WaveDtoBuilder {
@@ -48,7 +48,7 @@ public class WaveDto {
         private TiledMapDto tiledMapDto;
         private WaveSettingDto waveSettingDto;
         private PlayerDto playerDto;
-        private EnemiesDto enemiesDto;
+        private EnemiesSpawnInfoDto enemiesSpawnInfoDto;
 
         public WaveDtoBuilder setWorldDto(WorldDto worldDto) {
             this.worldDto = worldDto;
@@ -70,8 +70,8 @@ public class WaveDto {
             return this;
         }
 
-        public WaveDtoBuilder setEnemyInfoDto(EnemiesDto enemiesDto) {
-            this.enemiesDto = enemiesDto;
+        public WaveDtoBuilder setEnemyInfoDto(EnemiesSpawnInfoDto enemiesSpawnInfoDto) {
+            this.enemiesSpawnInfoDto = enemiesSpawnInfoDto;
             return this;
         }
 

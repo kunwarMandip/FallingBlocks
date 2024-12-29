@@ -1,24 +1,27 @@
 package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
 
+import com.libgdx.fallingblocks.entity.common.observers.Observers;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
-import com.libgdx.fallingblocks.listeners.common.EntityDeathObserver;
 
-public class DeathBasedSpawnCondition extends SpawnRate implements EntityDeathObserver<Enemy> {
+public class DeathBasedSpawnCondition extends Spawn implements Observers<Enemy> {
 
     private int currentDeaths;
     private final int deathThreshold;
 
-    public DeathBasedSpawnCondition(int deathThreshold) {
-        this.deathThreshold = deathThreshold;
-        this.currentDeaths = 0;
+    public DeathBasedSpawnCondition(int deathThreshold, SpawnSetter spawnSetter){
+        super(spawnSetter);
+        this.deathThreshold=deathThreshold;
+        this.currentDeaths= 0;
     }
 
+
     @Override
-    public void handleEntityDeath(Enemy entity) {
+    public void notify(Enemy event) {
         currentDeaths++;
+
         if(currentDeaths % deathThreshold == 0){
-            notifySpawnSetters(1);
-            currentDeaths=0;
+            spawnSetter.setNumEnemyToSpawn(1);
+            currentDeaths= 0;
         }
     }
 }
