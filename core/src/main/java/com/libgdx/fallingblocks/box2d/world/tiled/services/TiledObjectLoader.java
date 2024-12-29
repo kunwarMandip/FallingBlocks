@@ -14,7 +14,6 @@ import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDire
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.libgdx.fallingblocks.Logger.Tags.TILED_OBJECT_LOADER;
 
 public class TiledObjectLoader {
 
@@ -37,7 +36,6 @@ public class TiledObjectLoader {
             EnemySpawnArea enemySpawnArea= new EnemySpawnArea(world, tiledMap, object);
             Vector2 spawnArea= new Vector2(enemySpawnArea.getPosition());
             spawnAreas.put(enemySpawnArea.getTraversalDirection(), spawnArea);
-            Logger.log(TILED_OBJECT_LOADER, enemySpawnArea.getTraversalDirection() + " | " + enemySpawnArea.getPosition());
             enemySpawnArea.destroy();
         }
     }

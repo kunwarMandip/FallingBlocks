@@ -43,7 +43,6 @@ public class EnemyInfoDtoParser {
             result.put(key, value);
         }
 
-        Logger.log(Logger.Tags.ENEMY_INFO_PARSER, result.toString());
         return result;
     }
 

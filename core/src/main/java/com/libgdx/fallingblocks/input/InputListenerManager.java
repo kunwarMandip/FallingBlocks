@@ -18,19 +18,16 @@ public class InputListenerManager {
 
     public void addInputProcessor(InputProcessor inputProcessor){
         inputMultiplexer.addProcessor(inputProcessor);
-        Logger.log(Logger.Tags.INPUT_PROCESSOR, "Adding Input Listener");
     }
 
     public void addInputListener(Stage stage){
         System.out.println("Adding Stage Listener");
         inputMultiplexer.addProcessor(stage);
-        Logger.log(Logger.Tags.INPUT_PROCESSOR, "Adding Stage Listener");
     }
 
     public void removeInputProcessor(InputProcessor inputProcessor){
         if(inputMultiplexer.getProcessors().contains(inputProcessor, true)){
             inputMultiplexer.removeProcessor(inputProcessor);
-            Logger.log(Logger.Tags.INPUT_PROCESSOR, "Removing Input Listener");
         }
     }
 

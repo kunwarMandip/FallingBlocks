@@ -3,6 +3,7 @@ package com.libgdx.fallingblocks.entity.enemy.compact;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDirection;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyDtoBuilder;
 import com.libgdx.fallingblocks.entity.enemy.services.SpawnRateController;
@@ -13,6 +14,8 @@ import com.libgdx.fallingblocks.parser.dto.levelDto.EnemyDto;
 import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 
 import java.util.Map;
+
+import static com.libgdx.fallingblocks.Logger.Tags.ENEMY_SPAWNER;
 
 public class EnemySpawnManager {
 
@@ -30,9 +33,10 @@ public class EnemySpawnManager {
     }
 
     public void spawnEnemies(){
-
         int numEnemyToSpawn= spawnRateController.getNumEnemyToSpawn();
+
         for(int i=0; i<numEnemyToSpawn; i++){
+            Logger.log(ENEMY_SPAWNER, "Spawning Enemy");
             EnemyDto enemyDto= dtoBuilder.getEnemyDto();
             currentEnemies.add(enemyFactory.createEnemy(enemyDto));
         }

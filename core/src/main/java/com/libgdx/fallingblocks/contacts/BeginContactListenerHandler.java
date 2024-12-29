@@ -2,13 +2,14 @@ package com.libgdx.fallingblocks.contacts;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.player.Player;
-import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.box2d.world.tiled.objects.generic.OuterBound;
 
-public class BeginContactListenerHandler {
+import static com.libgdx.fallingblocks.Logger.Tags.BEGIN_CONTACT_MANAGER;
 
+public class BeginContactListenerHandler {
 
     public boolean handleEnemyPlayerContact(Contact contact) {
         Fixture a = contact.getFixtureA();
@@ -19,11 +20,12 @@ public class BeginContactListenerHandler {
             return false;
         }
 
+
+        Logger.log(BEGIN_CONTACT_MANAGER, "Player Enemy Contact");
         Player player = ((Player) (a.getUserData() instanceof Player ? a.getUserData() : b.getUserData()));
         Enemy enemy = ((Enemy) (a.getUserData() instanceof Enemy ? a.getUserData() : b.getUserData()));
 //        player.onHit(enemy);
         enemy.setToDestroy();
-        Logger.log(Logger.Tags.CONTACT_LISTENER, "Enemy Player Contact Handled");
         return true;
     }
 
@@ -41,10 +43,9 @@ public class BeginContactListenerHandler {
             return false;
         }
 
+        Logger.log(BEGIN_CONTACT_MANAGER, "Enemy OuterBound Contact");
         Enemy enemy = ((Enemy) (a.getUserData() instanceof Enemy ? a.getUserData() : b.getUserData()));
         enemy.setToDestroy();
-
-        Logger.log(Logger.Tags.ENEMY_OUTER_BOUND_CONTACT, "Enemy OuterBound Contact Handled");
         return true;
     }
 }

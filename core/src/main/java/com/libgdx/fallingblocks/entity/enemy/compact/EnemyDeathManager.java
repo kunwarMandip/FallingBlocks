@@ -3,6 +3,7 @@ package com.libgdx.fallingblocks.entity.enemy.compact;
 
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.entity.common.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 
@@ -26,9 +27,9 @@ public class EnemyDeathManager {
             Enemy enemy= iterator.next();
             if(enemy.isSetToDestroy()){
                 enemy.destroy(world);
+                iterator.remove();
+                enemyDeathNotifier.notify(enemy);
             }
-            enemyDeathNotifier.notify(enemy);
-            iterator.remove();
         }
     }
 

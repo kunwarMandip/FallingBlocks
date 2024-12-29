@@ -24,7 +24,6 @@ public final class EnemyDtoBuilder {
         this.enemyDistributions= enemiesSpawnInfoDto.getEnemyDistributions();
 
         this.movementCalculator= new MovementCalculator(spawnAreas);
-        Logger.log(Logger.Tags.ENEMY_SPAWNER, spawnAreas.toString());
     }
 
 
@@ -57,7 +56,6 @@ public final class EnemyDtoBuilder {
         Vector2 speed= movementCalculator.calculateSpeed(relativeDirection);
         Vector2 spawnPosition= movementCalculator.calculateSpawnPosition(relativeDirection, playerPosition);
 
-        Logger.log(Logger.Tags.ENEMY_SPAWNER, "Spawn Direction: "+ relativeDirection + " | " + spawnPosition);
         return new EnemyDto(enemyType, relativeDirection,  speed, spawnPosition);
     }
 }
