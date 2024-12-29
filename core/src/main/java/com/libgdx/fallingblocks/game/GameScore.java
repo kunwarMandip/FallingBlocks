@@ -6,7 +6,6 @@ import com.libgdx.fallingblocks.entity.common.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyScoreCalculator;
 
-import static com.libgdx.fallingblocks.Logger.Tags.SCORE;
 import static com.libgdx.fallingblocks.Logger.Tags.SCORE_SETTER;
 
 public class GameScore implements Observers<Enemy> {
