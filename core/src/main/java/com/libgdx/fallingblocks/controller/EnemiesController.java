@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDirection;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.compact.EnemyDeathManager;
@@ -23,11 +22,11 @@ public class EnemiesController {
     public EnemiesController(World world, Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas){
         this.currentEnemies = new Array<>();
         this.enemyDeathManager= new EnemyDeathManager(world, currentEnemies);
-        this.enemySpawnManager= new EnemySpawnManager(world, playerPosition, enemiesSpawnInfoDto, currentEnemies, spawnAreas);
+        this.enemySpawnManager= new EnemySpawnManager(world, playerPosition, enemiesSpawnInfoDto, spawnAreas, currentEnemies);
     }
 
     public void update(float delta) {
-        enemyDeathManager.update(delta);
+        enemyDeathManager.update();
 
         for(Enemy enemy: currentEnemies){
             enemy.update(delta);

@@ -1,6 +1,5 @@
 package com.libgdx.fallingblocks.entity.enemy.compact;
 
-
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
@@ -22,7 +21,7 @@ public class EnemyDeathManager {
         this.currentEnemies=currentEnemies;
     }
 
-    public void update(float delta){
+    public void update(){
         Iterator<Enemy> iterator= currentEnemies.iterator();
         while(iterator.hasNext()){
             Enemy enemy= iterator.next();

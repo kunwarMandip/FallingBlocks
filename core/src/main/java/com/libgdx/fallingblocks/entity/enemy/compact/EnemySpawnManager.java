@@ -25,7 +25,7 @@ public class EnemySpawnManager {
     private final IEnemyFactory enemyFactory;
     private final SpawnRateController spawnRateController;
 
-    public EnemySpawnManager(World world, Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Array<Enemy> currentEnemies, Map<MovementDirection, Vector2> spawnAreas){
+    public EnemySpawnManager(World world, Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas, Array<Enemy> currentEnemies){
         this.currentEnemies=currentEnemies;
         this.enemyFactory= new EnemyFactory(world);
         this.spawnRateController= new SpawnRateController();
