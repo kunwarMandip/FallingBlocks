@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.listeners.player.observers;
+package com.libgdx.fallingblocks.listeners;
 
 import com.libgdx.fallingblocks.entity.common.Entity;
 

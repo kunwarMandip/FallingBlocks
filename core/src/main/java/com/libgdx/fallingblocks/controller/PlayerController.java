@@ -5,8 +5,8 @@ import com.libgdx.fallingblocks.entity.player.Player;
 import com.libgdx.fallingblocks.entity.player.services.PlayerFactory;
 import com.libgdx.fallingblocks.entity.player.PlayerTypes;
 import com.libgdx.fallingblocks.input.InputListenerManager;
-import com.libgdx.fallingblocks.listeners.player.observers.PlayerChangeObserver;
-import com.libgdx.fallingblocks.listeners.player.observers.PlayerDeathObserver;
+import com.libgdx.fallingblocks.listeners.PlayerChangeObserver;
+import com.libgdx.fallingblocks.listeners.PlayerDeathObserver;
 import com.libgdx.fallingblocks.parser.dto.levelDto.PlayerDto;
 
 import java.util.ArrayList;
