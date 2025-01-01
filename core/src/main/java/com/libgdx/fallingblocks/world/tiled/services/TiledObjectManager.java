@@ -1,12 +1,12 @@
-package com.libgdx.fallingblocks.box2d.world.tiled.services;
+package com.libgdx.fallingblocks.world.tiled.services;
 
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.libgdx.fallingblocks.box2d.world.tiled.factory.OuterBoundFactory;
-import com.libgdx.fallingblocks.box2d.world.tiled.objects.TiledObject;
+import com.libgdx.fallingblocks.world.tiled.factory.OuterBoundFactory;
+import com.libgdx.fallingblocks.world.tiled.objects.TiledObject;
 
 public class TiledObjectManager {
 

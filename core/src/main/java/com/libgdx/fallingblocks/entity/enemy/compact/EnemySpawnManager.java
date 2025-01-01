@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
-import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDirection;
+import com.libgdx.fallingblocks.world.tiled.objects.spawnArea.MovementDirection;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyDtoBuilder;
 import com.libgdx.fallingblocks.entity.enemy.services.SpawnRateController;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
@@ -20,7 +20,6 @@ import static com.libgdx.fallingblocks.Logger.Tags.SPAWN_ENEMY;
 public class EnemySpawnManager {
 
     private final Array<Enemy> currentEnemies;
-
     private final EnemyDtoBuilder dtoBuilder;
     private final IEnemyFactory enemyFactory;
     private final SpawnRateController spawnRateController;
@@ -42,7 +41,6 @@ public class EnemySpawnManager {
         }
         spawnRateController.resetNumEnemyToSpawn();
     }
-
 
     public SpawnRateController setSpawnConditions(){
         return spawnRateController;

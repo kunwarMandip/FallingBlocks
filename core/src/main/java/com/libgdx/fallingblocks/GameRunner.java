@@ -7,12 +7,16 @@ import com.libgdx.fallingblocks.entity.common.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.compact.EnemyDeathManager;
 import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.DeathBasedSpawnCondition;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
+import com.libgdx.fallingblocks.entity.player.PlayerState;
 import com.libgdx.fallingblocks.game.GameScore;
+import com.libgdx.fallingblocks.game.GameState;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.GameDto;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
 import com.libgdx.fallingblocks.parser.GameDtoParser;
 import com.libgdx.fallingblocks.screen.hud.GameRunningHud;
+
+import static com.libgdx.fallingblocks.Logger.Tags.GAME_OVER_STATE;
 
 
 public class GameRunner {
@@ -47,31 +51,60 @@ public class GameRunner {
 
         setScoreListeners();
         setEnemyDeathListeners();
+        setPlayerState();
     }
 
-    public void setScoreListeners(){
+    private void setScoreListeners(){
         GameScore gameScore= gameController.getGameScore();
         gameScore.getScoreObservers().addObserver(gameRunningHud);
         gameScore.getScoreObservers().addObserver(enemiesController.getEnemySpawnManager().setSpawnConditions().setScoreBasedSpawnRate(5));
     }
 
-    public void setEnemyDeathListeners(){
+    private void setEnemyDeathListeners(){
         Subject<Enemy> enemyDeathNotifier= enemiesController.getEnemyDeathManager().getEnemyDeathNotifier();
         enemyDeathNotifier.addObserver(gameController.getGameScore());
     }
 
-    public void update(float delta){
-//        if(gameController.getGameStatistics().isPlayerDead()){
-//
-//            enemiesController.emptyList();
-//            return;
-//        }
+    private void setPlayerState(){
+        Subject<PlayerState> playerStateSubject= playerController.getPlayerStateSubject();
+        playerStateSubject.addObserver(gameController.getGameStateManager());
+    }
+
+
+//    public void update(float delta){
+////        if(gameController.getGameStatistics().isPlayerDead()){
+////
+////            enemiesController.emptyList();
+////            return;
+////        }
+//        worldController.update();
+//        sceneController.render();
+//        playerController.update(delta);
+//        enemiesController.update(delta);
+//    }
+
+
+    private void gameRunning(float delta){
         worldController.update();
         sceneController.render();
         playerController.update(delta);
         enemiesController.update(delta);
     }
 
+    private void gameOver(){
+        Logger.log(GAME_OVER_STATE, "Game Over");
+    }
+
+    public void update(float delta){
+        GameState gameState= gameController.getGameStateManager().getGameState();
+        switch(gameState){
+            case RUNNING:
+                gameRunning(delta);
+                break;
+            case GAME_OVER:
+                gameOver();
+        }
+    }
 
 
     public void render(float delta){

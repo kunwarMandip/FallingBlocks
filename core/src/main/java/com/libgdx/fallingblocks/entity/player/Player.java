@@ -15,7 +15,6 @@ public class Player extends Entity {
     public Player(int health, Vector2 spawnPosition, Vector2 bodyDimension) {
         super(health, spawnPosition, bodyDimension);
         this.animation= new Animation(bodyDimension, new Texture("map/images/arrows/arrow.png"));
-
     }
 
     public GestureDetector getGestureDetector(){

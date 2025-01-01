@@ -7,8 +7,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.contacts.GameContactListener;
 import com.libgdx.fallingblocks.parser.dto.wave.WorldDto;
-import com.libgdx.fallingblocks.box2d.world.tiled.services.TiledObjectLoader;
-import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDirection;
+import com.libgdx.fallingblocks.world.tiled.services.TiledObjectLoader;
+import com.libgdx.fallingblocks.world.tiled.objects.spawnArea.MovementDirection;
 
 import java.util.Map;
 

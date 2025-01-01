@@ -1,11 +1,10 @@
 package com.libgdx.fallingblocks.entity.enemy.services;
 
 import com.badlogic.gdx.math.Vector2;
-import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.entity.enemy.types.EnemyType;
 import com.libgdx.fallingblocks.parser.dto.levelDto.EnemyDto;
 import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
-import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDirection;
+import com.libgdx.fallingblocks.world.tiled.objects.spawnArea.MovementDirection;
 
 import java.util.Map;
 
@@ -13,16 +12,15 @@ import static com.libgdx.fallingblocks.GlobalVariables.getRandomValue;
 
 public final class EnemyDtoBuilder {
 
-    private Vector2 playerPosition;
-    private MovementCalculator movementCalculator;
-    private Map<String, Integer> spawnDirections;
-    private Map<String, Integer> enemyDistributions;
+    private final Vector2 playerPosition;
+    private final MovementCalculator movementCalculator;
+    private final Map<String, Integer> spawnDirections;
+    private final Map<String, Integer> enemyDistributions;
 
     public EnemyDtoBuilder(Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas){
         this.playerPosition = playerPosition;
         this.spawnDirections= enemiesSpawnInfoDto.getSpawnDirections();
         this.enemyDistributions= enemiesSpawnInfoDto.getEnemyDistributions();
-
         this.movementCalculator= new MovementCalculator(spawnAreas);
     }
 

@@ -10,6 +10,7 @@ public class PlayerFactory {
 
     private final World world;
     private final PlayerDto playerDto;
+    private final Vector2 middlePosition= new Vector2(23, 45);
 
     public PlayerFactory(World world, PlayerDto playerDto){
         this.world=world;
@@ -17,14 +18,13 @@ public class PlayerFactory {
     }
 
     public Player getPlayer(PlayerTypes playerTypes){
-
-        Vector2 middlePosition= new Vector2(23, 45);
         switch (playerTypes){
             case NORMAL:
                 return new Player(50, middlePosition, new Vector2(2, 2));
             case BOSS:
                 return new Player(100, middlePosition, new Vector2(5, 5));
+            default:
+                throw new IllegalStateException("PlayerController: Player Not Found");
         }
-        throw new IllegalStateException("PlayerController: Player Not Found");
     }
 }
