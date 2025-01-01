@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.box2d.world.tiled.objects;
+package com.libgdx.fallingblocks.world.tiled.objects;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;

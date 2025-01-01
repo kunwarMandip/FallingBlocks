@@ -6,7 +6,9 @@ public class EnemyScoreCalculator {
 
     private int scoreMultiplier=1;
 
-    public EnemyScoreCalculator(){}
+    public EnemyScoreCalculator(){
+
+    }
 
     public int calculateScore(Enemy enemy){
         return getBaseScore(enemy) * scoreMultiplier;

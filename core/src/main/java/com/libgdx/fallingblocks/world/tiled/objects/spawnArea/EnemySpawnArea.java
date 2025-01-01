@@ -1,10 +1,10 @@
-package com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea;
+package com.libgdx.fallingblocks.world.tiled.objects.spawnArea;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.libgdx.fallingblocks.box2d.world.tiled.objects.TiledObject;
+import com.libgdx.fallingblocks.world.tiled.objects.TiledObject;
 
 import static com.libgdx.fallingblocks.GlobalVariables.CATEGORY_ENEMY_SPAWN_AREA;
 

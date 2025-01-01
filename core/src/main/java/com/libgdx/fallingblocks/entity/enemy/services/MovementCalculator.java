@@ -1,7 +1,7 @@
 package com.libgdx.fallingblocks.entity.enemy.services;
 
 import com.badlogic.gdx.math.Vector2;
-import com.libgdx.fallingblocks.box2d.world.tiled.objects.spawnArea.MovementDirection;
+import com.libgdx.fallingblocks.world.tiled.objects.spawnArea.MovementDirection;
 
 import java.util.Map;
 
