@@ -14,6 +14,7 @@ import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.GameDto;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
 import com.libgdx.fallingblocks.parser.GameDtoParser;
+import com.libgdx.fallingblocks.screen.hud.GameOverHud;
 import com.libgdx.fallingblocks.screen.hud.GameRunningHud;
 
 import static com.libgdx.fallingblocks.Logger.Tags.GAME_OVER_STATE;
@@ -28,6 +29,8 @@ public class GameRunner {
     private WaveDto waveDto;
     private final GameDto gameDto;
     private final GameController gameController;
+
+    private GameOverHud gameOverHud;
 
     private final GameRunningHud gameRunningHud;
     private final WorldController worldController;
@@ -49,6 +52,8 @@ public class GameRunner {
         this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
         this.enemiesController= new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
 
+
+        this.gameOverHud= new GameOverHud(spriteBatch);
         setScoreListeners();
         setEnemyDeathListeners();
         setPlayerState();
@@ -69,20 +74,6 @@ public class GameRunner {
         Subject<PlayerState> playerStateSubject= playerController.getPlayerStateSubject();
         playerStateSubject.addObserver(gameController.getGameStateManager());
     }
-
-
-//    public void update(float delta){
-////        if(gameController.getGameStatistics().isPlayerDead()){
-////
-////            enemiesController.emptyList();
-////            return;
-////        }
-//        worldController.update();
-//        sceneController.render();
-//        playerController.update(delta);
-//        enemiesController.update(delta);
-//    }
-
 
     private void gameRunning(float delta){
         worldController.update();
@@ -107,6 +98,7 @@ public class GameRunner {
     }
 
 
+
     public void render(float delta){
         sceneController.render();
         worldController.render(sceneController.getOrthographicGameCamera());
@@ -118,11 +110,16 @@ public class GameRunner {
         spriteBatch.end();
 
         gameRunningHud.render(delta);
+        GameState gameState= gameController.getGameStateManager().getGameState();
+        if(gameState==GameState.GAME_OVER){
+           gameOverHud.render(delta);
+        }
     }
 
     public void resize(int width, int height){
         sceneController.resize(width, height);
         gameRunningHud.resize(width, height);
+        gameOverHud.resize(width, height);
     }
 
 }
