@@ -11,7 +11,7 @@ public class GameScreen implements Screen {
 
     private final int levelToLoad;
     private final SpriteBatch spriteBatch;
-    private InputListenerManager inputListenerManager;
+    private final InputListenerManager inputListenerManager;
 
     private GameRunner gameRunner;
 
@@ -47,17 +47,14 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override

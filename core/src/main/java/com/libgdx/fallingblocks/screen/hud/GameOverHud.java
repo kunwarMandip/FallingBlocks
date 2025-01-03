@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.libgdx.fallingblocks.GameRunner;
 
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_HEIGHT;
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_WIDTH;
@@ -27,8 +28,10 @@ public class GameOverHud {
     private final SpriteBatch spriteBatch;
     private final OrthographicCamera orthographicCamera;
 
-    public GameOverHud(SpriteBatch spriteBatch){
+    private GameRunner gameRunner;
+    public GameOverHud(SpriteBatch spriteBatch, GameRunner gameRunner){
         this.spriteBatch=spriteBatch;
+        this.gameRunner=gameRunner;
         this.orthographicCamera= new OrthographicCamera();
         this.viewport= new FitViewport(VIRTUAL_WIDTH/2f, VIRTUAL_HEIGHT/2f, orthographicCamera);
         this.stage= new Stage(viewport, spriteBatch);
@@ -61,6 +64,7 @@ public class GameOverHud {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Restart Clicked");
+                gameRunner.reset();
                 window.setVisible(false);
             }
         });
@@ -74,6 +78,10 @@ public class GameOverHud {
         viewport.update(width, height);
     }
 
+
+    public Stage getStage(){
+        return stage;
+    }
     public void render(float delta){
         window.setVisible(true);
         spriteBatch.setProjectionMatrix(orthographicCamera.combined);

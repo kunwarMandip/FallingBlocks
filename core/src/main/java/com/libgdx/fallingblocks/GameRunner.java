@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.libgdx.fallingblocks.controller.*;
 import com.libgdx.fallingblocks.entity.common.observers.Subject;
-import com.libgdx.fallingblocks.entity.enemy.compact.EnemyDeathManager;
-import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.DeathBasedSpawnCondition;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
 import com.libgdx.fallingblocks.game.GameScore;
@@ -52,8 +50,10 @@ public class GameRunner {
         this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
         this.enemiesController= new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
 
+        this.gameOverHud= new GameOverHud(spriteBatch, this);
+        inputListenerManager.addInputProcessor(gameOverHud.getStage());
 
-        this.gameOverHud= new GameOverHud(spriteBatch);
+
         setScoreListeners();
         setEnemyDeathListeners();
         setPlayerState();
@@ -97,6 +97,13 @@ public class GameRunner {
         }
     }
 
+    public void reset(){
+//        playerController.reset();
+
+        enemiesController.getEnemyDeathManager().reset();
+        playerController.reset();
+        gameController.getGameStateManager().setGameState(GameState.RUNNING);
+    }
 
 
     public void render(float delta){
