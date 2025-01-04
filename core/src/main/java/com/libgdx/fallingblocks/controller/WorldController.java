@@ -17,18 +17,26 @@ public class WorldController {
 
     private World world;
     private final TiledObjectLoader tiledObjectLoader;
-    private Box2DDebugRenderer box2DDebugRenderer;
+    private final Box2DDebugRenderer box2DDebugRenderer;
 
     public WorldController(boolean renderDebug, WorldDto worldDto, TiledMap tiledMap){
         world= new World(worldDto.getGravity(), worldDto.isDoSleep());
         tiledObjectLoader= new TiledObjectLoader(world, tiledMap);
         world.setContactListener(new GameContactListener());
 
-        if(renderDebug){
-            box2DDebugRenderer= new Box2DDebugRenderer();
-            box2DDebugRenderer.SHAPE_STATIC.set(0,0, 0,0);
-            box2DDebugRenderer.setDrawBodies(true);
-        }
+        box2DDebugRenderer= new Box2DDebugRenderer();
+        box2DDebugRenderer.SHAPE_STATIC.set(0,0, 0,0);
+        box2DDebugRenderer.setDrawBodies(true);
+    }
+
+    public WorldController(WorldDto worldDto, TiledMap tiledMap){
+        world= new World(worldDto.getGravity(), worldDto.isDoSleep());
+        tiledObjectLoader= new TiledObjectLoader(world, tiledMap);
+        world.setContactListener(new GameContactListener());
+
+        box2DDebugRenderer= new Box2DDebugRenderer();
+        box2DDebugRenderer.SHAPE_STATIC.set(0,0, 0,0);
+        box2DDebugRenderer.setDrawBodies(true);
     }
 
     public void update(){

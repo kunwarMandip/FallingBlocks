@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libgdx.fallingblocks.controller.*;
 import com.libgdx.fallingblocks.entity.common.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
-import com.libgdx.fallingblocks.entity.player.PlayerState;
 import com.libgdx.fallingblocks.game.GameScore;
 import com.libgdx.fallingblocks.game.GameState;
 import com.libgdx.fallingblocks.input.InputListenerManager;
@@ -43,6 +42,7 @@ public class GameRunner {
 
         this.gameDto= new GameDtoParser().getGameDto(level);
         this.waveDto = gameDto.getNextWave();
+
         this.gameController = new GameController();
         this.gameRunningHud = new GameRunningHud(spriteBatch);
         this.sceneController = new SceneController(waveDto.getTiledMapDto());
@@ -52,7 +52,6 @@ public class GameRunner {
 
         this.gameOverHud= new GameOverHud(spriteBatch, this);
         inputListenerManager.addInputProcessor(gameOverHud.getStage());
-
 
         setScoreListeners();
         setEnemyDeathListeners();
@@ -71,8 +70,8 @@ public class GameRunner {
     }
 
     private void setPlayerState(){
-        Subject<PlayerState> playerStateSubject= playerController.getPlayerStateSubject();
-        playerStateSubject.addObserver(gameController.getGameStateManager());
+        Subject<Enemy> enemyDeathNotifier= enemiesController.getEnemyDeathManager().getEnemyDeathNotifier();
+        enemyDeathNotifier.addObserver(gameController.getGameScore());
     }
 
     private void gameRunning(float delta){
@@ -99,7 +98,6 @@ public class GameRunner {
 
     public void reset(){
 //        playerController.reset();
-
         enemiesController.getEnemyDeathManager().reset();
         playerController.reset();
         gameController.getGameStateManager().setGameState(GameState.RUNNING);

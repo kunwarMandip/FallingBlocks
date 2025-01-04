@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.libgdx.fallingblocks.Logger;
 
 
 public class InputListenerManager {
@@ -33,5 +32,9 @@ public class InputListenerManager {
 
     public InputMultiplexer getInputMultiplexer(){
         return inputMultiplexer;
+    }
+
+    public void dispose(){
+        inputMultiplexer.clear();
     }
 }

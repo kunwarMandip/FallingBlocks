@@ -12,7 +12,7 @@ import static com.libgdx.fallingblocks.GlobalVariables.*;
 
 public class SceneController {
 
-    private Viewport gameViewport;
+    private Viewport viewport;
     private OrthographicCamera orthographicGameCamera;
 
     private TiledMap tiledMap;
@@ -26,9 +26,9 @@ public class SceneController {
     private void loadNextWave(TiledMapDto tiledMapDto){
         this.tiledMapDto= tiledMapDto;
         orthographicGameCamera = new OrthographicCamera();
-        gameViewport = new FitViewport(VIRTUAL_WIDTH/PPM, VIRTUAL_HEIGHT/PPM, orthographicGameCamera);
-        gameViewport.apply();
-        orthographicGameCamera.position.set(gameViewport.getWorldWidth()/2f,gameViewport.getWorldHeight()/2f,0);
+        viewport = new FitViewport(VIRTUAL_WIDTH/PPM, VIRTUAL_HEIGHT/PPM, orthographicGameCamera);
+        viewport.apply();
+        orthographicGameCamera.position.set(viewport.getWorldWidth()/2f, viewport.getWorldHeight()/2f,0);
         orthographicGameCamera.update();
         tiledMap= new TmxMapLoader().load(this.tiledMapDto.getMapPath());
         orthogonalTiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,1/PPM);
@@ -45,8 +45,8 @@ public class SceneController {
     }
 
     public void resize(int width, int height){
-        gameViewport.update(width, height);
-        gameViewport.apply();
+        viewport.update(width, height);
+        viewport.apply();
     }
 
     public TiledMap getTiledMap() {
