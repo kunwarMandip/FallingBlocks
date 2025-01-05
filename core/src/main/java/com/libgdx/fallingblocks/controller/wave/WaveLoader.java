@@ -57,8 +57,8 @@ public class WaveLoader {
         Subject<Enemy> enemyDeathNotifier= enemiesController.getEnemyDeathManager().getEnemyDeathNotifier();
         enemyDeathNotifier.addObserver(gameController.getGameScore());
 
-
-        Subject<PlayerState> playerState= playerController.getPlayerStateSubject();
+        Subject<PlayerState> playerStateSubject= playerController.getPlayerStateSubject();
+        playerStateSubject.addObserver(gameController.getGameStateManager());
     }
 
 
