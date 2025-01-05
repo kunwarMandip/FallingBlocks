@@ -3,6 +3,7 @@ package com.libgdx.fallingblocks.controller.wave;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.controller.*;
+import com.libgdx.fallingblocks.controller.game.GameLoader;
 import com.libgdx.fallingblocks.entity.common.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.player.Player;
@@ -30,7 +31,7 @@ public class WaveLoader {
     private final PlayerController playerController;
     private final EnemiesController enemiesController;
 
-    public WaveLoader(WaveDto waveDto, SpriteBatch spriteBatch){
+    public WaveLoader(WaveDto waveDto, SpriteBatch spriteBatch, GameLoader gameLoader){
         this.waveDto= waveDto;
         this.spriteBatch= spriteBatch;
         this.inputListenerManager= new InputListenerManager();
@@ -43,7 +44,7 @@ public class WaveLoader {
         this.enemiesController= new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
 
 
-        this.gameOverHud= new GameOverHud(spriteBatch, this);
+        this.gameOverHud= new GameOverHud(spriteBatch, this, gameLoader);
         inputListenerManager.addInputProcessor(gameOverHud.getStage());
 
         setListeners();

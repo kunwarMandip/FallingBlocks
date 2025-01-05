@@ -11,16 +11,18 @@ public class GameLoader {
     private final GameDto gameDto;
     private final SpriteBatch spriteBatch;
 
+    private WaveDto waveDto;
     private WaveLoader waveLoader;
     public GameLoader(int levelToLoad, SpriteBatch spriteBatch){
         this.gameDto= new GameDtoParser().getGameDto(levelToLoad);
         this.spriteBatch= spriteBatch;
+        this.waveDto= gameDto.getNextWave();
         setNewWave();
     }
 
     public void setNewWave(){
-        WaveDto waveDto= gameDto.getNextWave();
-        waveLoader= new WaveLoader(waveDto, spriteBatch );
+//        WaveDto waveDto= gameDto.getNextWave();
+        waveLoader= new WaveLoader(waveDto, spriteBatch, this);
     }
 
 

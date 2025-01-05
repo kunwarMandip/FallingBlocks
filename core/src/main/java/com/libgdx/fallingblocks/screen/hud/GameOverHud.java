@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.libgdx.fallingblocks.GameRunner;
+import com.libgdx.fallingblocks.controller.game.GameLoader;
 import com.libgdx.fallingblocks.controller.wave.WaveLoader;
 
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_HEIGHT;
@@ -31,6 +32,7 @@ public class GameOverHud {
 
     private GameRunner gameRunner;
     private WaveLoader waveLoader;
+    private GameLoader gameLoader;
     public GameOverHud(SpriteBatch spriteBatch, GameRunner gameRunner){
         this.spriteBatch=spriteBatch;
         this.gameRunner=gameRunner;
@@ -41,9 +43,10 @@ public class GameOverHud {
         setHud();
     }
 
-    public GameOverHud(SpriteBatch spriteBatch, WaveLoader waveLoader){
+    public GameOverHud(SpriteBatch spriteBatch, WaveLoader waveLoader, GameLoader gameLoader){
         this.spriteBatch=spriteBatch;
         this.waveLoader=waveLoader;
+        this.gameLoader= gameLoader;
         this.orthographicCamera= new OrthographicCamera();
         this.viewport= new FitViewport(VIRTUAL_WIDTH/2f, VIRTUAL_HEIGHT/2f, orthographicCamera);
         this.stage= new Stage(viewport, spriteBatch);
@@ -76,7 +79,8 @@ public class GameOverHud {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Restart Clicked");
-                waveLoader.reset();
+                gameLoader.setNewWave();
+//                waveLoader.reset();
                 window.setVisible(false);
             }
         });
@@ -94,6 +98,7 @@ public class GameOverHud {
     public Stage getStage(){
         return stage;
     }
+
     public void render(float delta){
         window.setVisible(true);
         spriteBatch.setProjectionMatrix(orthographicCamera.combined);
