@@ -4,16 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.libgdx.fallingblocks.GameRunner;
+import com.libgdx.fallingblocks.controller.game.GameLoader;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 
 public class GameScreen implements Screen {
 
     private final int levelToLoad;
     private final SpriteBatch spriteBatch;
-    private InputListenerManager inputListenerManager;
+    private final InputListenerManager inputListenerManager;
 
-    private GameRunner gameRunner;
+    private GameLoader gameLoader;
 
     public GameScreen(int levelToLoad, SpriteBatch spriteBatch, InputListenerManager inputListenerManager){
         this.levelToLoad=levelToLoad;
@@ -23,7 +23,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        gameRunner = new GameRunner(levelToLoad, spriteBatch, inputListenerManager);
+//        gameRunner = new GameRunner(levelToLoad, spriteBatch, inputListenerManager);
+
+        this.gameLoader= new GameLoader(levelToLoad, spriteBatch);
     }
 
 
@@ -35,29 +37,30 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        gameRunner.update(delta);
+
+        gameLoader.getWaveLoader().update(delta);
+//        gameLoader.update(delta);
         clearScreen();
-        gameRunner.render(delta);
+//        gameLoader.render(delta);
+        gameLoader.getWaveLoader().draw(delta);
     }
 
     @Override
     public void resize(int width, int height) {
-        gameRunner.resize(width, height);
+//        gameLoader.resize(width, height);
+        gameLoader.getWaveLoader().resize(width, height);
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override

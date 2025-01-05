@@ -8,6 +8,7 @@ import com.libgdx.fallingblocks.parser.dto.wave.WorldDto;
 
 public class WaveDto {
 
+    private int waveNumber;
     private final WorldDto worldDto;
     private final TiledMapDto tiledMapDto;
 
@@ -21,6 +22,11 @@ public class WaveDto {
         this.playerDto = waveDtoBuilder.playerDto;
         this.waveSettingDto = waveDtoBuilder.waveSettingDto;
         this.enemiesSpawnInfoDto = waveDtoBuilder.enemiesSpawnInfoDto;
+    }
+
+    //todo implement this method to return other than 1
+    public int getWaveNumber() {
+        return 1;
     }
 
     public WorldDto getWorldDto() {

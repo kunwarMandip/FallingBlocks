@@ -12,6 +12,8 @@ public class GameDto {
 
     private final WaveManager waveManager;
 
+
+    private final int lastWaveNumber;
     private final Array<WorldDto> worldDtoArray;
     private final Array<TiledMapDto> tiledMapDtoArray;
     private final Array<WaveSettingDto> waveSettingDtoArray;
@@ -20,6 +22,7 @@ public class GameDto {
     private final Array<EnemiesSpawnInfoDto> enemyInfoDtoArray;
 
     public GameDto(GameDtoBuilder gameDtoBuilder) {
+        this.lastWaveNumber=1;
         this.waveManager= new WaveManager();
         this.worldDtoArray = gameDtoBuilder.worldDto;
         this.tiledMapDtoArray = gameDtoBuilder.tiledMapDto;
@@ -38,6 +41,12 @@ public class GameDto {
             .setEnemyInfoDto(waveManager.getEnemyInfoDto(enemyInfoDtoArray));
 
         return waveDtoBuilder.build();
+    }
+
+
+    //todo variables always returns 1
+    public int getLastWaveNumber() {
+        return lastWaveNumber;
     }
 
     public static class GameDtoBuilder {

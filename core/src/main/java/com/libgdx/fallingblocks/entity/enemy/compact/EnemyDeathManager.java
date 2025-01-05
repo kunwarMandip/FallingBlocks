@@ -35,6 +35,16 @@ public class EnemyDeathManager {
     }
 
 
+    public void reset(){
+        Iterator<Enemy> iterator= currentEnemies.iterator();
+        while (iterator.hasNext()){
+            Enemy enemy= iterator.next();
+            enemy.destroy(world);
+            iterator.remove();
+            Logger.log(DESTROY_ENEMY, "Destroying Enemy");
+        }
+    }
+
     public Subject<Enemy> getEnemyDeathNotifier(){
         return this.enemyDeathNotifier;
     }

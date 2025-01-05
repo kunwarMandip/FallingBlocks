@@ -49,6 +49,12 @@ public class PlayerController {
         setNewPlayer(PlayerTypes.NORMAL);
     }
 
+
+    public void reset(){
+        player.setToDestroy();
+        isDestroyEnemy();
+    }
+
     public void setPlayerState(PlayerState playerState){
         playerStateSubject.notify(playerState);
     }
