@@ -8,30 +8,27 @@ import com.libgdx.fallingblocks.parser.dto.WaveDto;
 
 public class GameLoader {
 
-    private WaveLoader waveLoader;
     private final GameDto gameDto;
+    private final SpriteBatch spriteBatch;
 
-    private final GameStats gameStats;
+    private WaveLoader waveLoader;
+    public GameLoader(int levelToLoad, SpriteBatch spriteBatch){
+        this.gameDto= new GameDtoParser().getGameDto(levelToLoad);
+        this.spriteBatch= spriteBatch;
+        setNewWave();
+    }
 
-    public GameLoader(int getLastWaveNumber, SpriteBatch spriteBatch){
-        this.gameDto= new GameDtoParser().getGameDto(getLastWaveNumber);
-
+    public void setNewWave(){
         WaveDto waveDto= gameDto.getNextWave();
-        this.gameStats= new GameStats(0, waveDto.getWaveNumber());
-
-        waveLoader = new WaveLoader(waveDto, spriteBatch);
+        waveLoader= new WaveLoader(waveDto, spriteBatch );
     }
 
-    public void update(float delta){
-        waveLoader.update(delta);
+
+    public WaveLoader getWaveLoader(){
+        return waveLoader;
     }
 
-    public void render(float delta){
-        waveLoader.draw(delta);
-    }
 
-    public void resize(int width, int height){
-        waveLoader.resize(width, height);
-    }
+
 
 }

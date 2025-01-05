@@ -1,15 +1,20 @@
 package com.libgdx.fallingblocks.controller.wave;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.controller.*;
 import com.libgdx.fallingblocks.entity.common.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
+import com.libgdx.fallingblocks.entity.player.Player;
+import com.libgdx.fallingblocks.entity.player.PlayerState;
 import com.libgdx.fallingblocks.game.GameScore;
 import com.libgdx.fallingblocks.game.GameState;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
 import com.libgdx.fallingblocks.screen.hud.GameOverHud;
 import com.libgdx.fallingblocks.screen.hud.GameRunningHud;
+
+import static com.libgdx.fallingblocks.Logger.Tags.GAME_OVER_STATE;
 
 public class WaveLoader {
 
@@ -51,15 +56,33 @@ public class WaveLoader {
 
         Subject<Enemy> enemyDeathNotifier= enemiesController.getEnemyDeathManager().getEnemyDeathNotifier();
         enemyDeathNotifier.addObserver(gameController.getGameScore());
+
+
+        Subject<PlayerState> playerState= playerController.getPlayerStateSubject();
     }
 
+
     public void update(float delta){
+        GameState gameState= gameController.getGameStateManager().getGameState();
+        switch(gameState){
+            case RUNNING:
+                gameRunning(delta);
+                break;
+            case GAME_OVER:
+                gameOver();
+        }
+    }
+
+    private void gameOver(){
+        Logger.log(GAME_OVER_STATE, "Game Over");
+    }
+
+    private void gameRunning(float delta){
         worldController.update();
         sceneController.render();
         playerController.update(delta);
         enemiesController.update(delta);
     }
-
 
     public void reset(){
         enemiesController.getEnemyDeathManager().reset();

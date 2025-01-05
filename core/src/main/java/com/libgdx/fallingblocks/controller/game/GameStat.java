@@ -5,15 +5,13 @@ import com.libgdx.fallingblocks.entity.enemy.types.EnemyType;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameStats {
+public class GameStat {
 
     private int score;
-    private int currentWaveNumber;
     private final Map<EnemyType, Integer> killCount= new HashMap<>();
 
-    public GameStats(int score, int currentWaveNumber){
+    public GameStat(int score){
         this.score=0;
-        this.currentWaveNumber=0;
     }
 
     public int getScore() {
@@ -22,14 +20,6 @@ public class GameStats {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public int getCurrentWaveNumber() {
-        return currentWaveNumber;
-    }
-
-    public void setCurrentWaveNumber(int currentWaveNumber) {
-        this.currentWaveNumber = currentWaveNumber;
     }
 
     public Map<EnemyType, Integer> getKillCount() {

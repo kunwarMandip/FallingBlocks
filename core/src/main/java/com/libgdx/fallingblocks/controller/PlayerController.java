@@ -54,6 +54,7 @@ public class PlayerController {
         player.setToDestroy();
         isDestroyEnemy();
     }
+
     public void setPlayerState(PlayerState playerState){
         playerStateSubject.notify(playerState);
     }

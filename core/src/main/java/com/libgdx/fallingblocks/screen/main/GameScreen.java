@@ -37,14 +37,18 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        gameLoader.update(delta);
+
+        gameLoader.getWaveLoader().update(delta);
+//        gameLoader.update(delta);
         clearScreen();
-        gameLoader.render(delta);
+//        gameLoader.render(delta);
+        gameLoader.getWaveLoader().draw(delta);
     }
 
     @Override
     public void resize(int width, int height) {
-        gameLoader.resize(width, height);
+//        gameLoader.resize(width, height);
+        gameLoader.getWaveLoader().resize(width, height);
     }
 
     @Override
