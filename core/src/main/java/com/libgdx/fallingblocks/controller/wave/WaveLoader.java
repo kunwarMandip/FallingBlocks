@@ -6,7 +6,6 @@ import com.libgdx.fallingblocks.controller.*;
 import com.libgdx.fallingblocks.controller.game.GameLoader;
 import com.libgdx.fallingblocks.entity.common.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
-import com.libgdx.fallingblocks.entity.player.Player;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
 import com.libgdx.fallingblocks.game.GameScore;
 import com.libgdx.fallingblocks.game.GameState;
@@ -21,7 +20,6 @@ public class WaveLoader {
 
     private final WaveDto waveDto;
     private final SpriteBatch spriteBatch;
-    private InputListenerManager inputListenerManager;
 
     private final GameOverHud gameOverHud;
     private final GameRunningHud gameRunningHud;
@@ -31,10 +29,11 @@ public class WaveLoader {
     private final PlayerController playerController;
     private final EnemiesController enemiesController;
 
+    private final InputListenerManager inputListenerManager= new InputListenerManager();
+
     public WaveLoader(WaveDto waveDto, SpriteBatch spriteBatch, GameLoader gameLoader){
         this.waveDto= waveDto;
         this.spriteBatch= spriteBatch;
-        this.inputListenerManager= new InputListenerManager();
 
         this.gameController = new GameController();
         this.gameRunningHud = new GameRunningHud(spriteBatch);
@@ -42,7 +41,6 @@ public class WaveLoader {
         this.worldController = new WorldController(waveDto.getWorldDto(), sceneController.getTiledMap());
         this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
         this.enemiesController= new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
-
 
         this.gameOverHud= new GameOverHud(spriteBatch, this, gameLoader);
         inputListenerManager.addInputProcessor(gameOverHud.getStage());
@@ -112,7 +110,6 @@ public class WaveLoader {
     public void dispose(){
         inputListenerManager.dispose();
     }
-
 
     public void resize(int width, int height){
         sceneController.resize(width, height);

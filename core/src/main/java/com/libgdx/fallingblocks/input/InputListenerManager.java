@@ -8,10 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class InputListenerManager {
 
-    private final InputMultiplexer inputMultiplexer;
+    private final InputMultiplexer inputMultiplexer= new InputMultiplexer();
 
     public InputListenerManager(){
-        this.inputMultiplexer = new InputMultiplexer();
         Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
@@ -19,8 +18,7 @@ public class InputListenerManager {
         inputMultiplexer.addProcessor(inputProcessor);
     }
 
-    public void addInputListener(Stage stage){
-        System.out.println("Adding Stage Listener");
+    public void addStageInputProcessor(Stage stage){
         inputMultiplexer.addProcessor(stage);
     }
 
@@ -28,10 +26,6 @@ public class InputListenerManager {
         if(inputMultiplexer.getProcessors().contains(inputProcessor, true)){
             inputMultiplexer.removeProcessor(inputProcessor);
         }
-    }
-
-    public InputMultiplexer getInputMultiplexer(){
-        return inputMultiplexer;
     }
 
     public void dispose(){
