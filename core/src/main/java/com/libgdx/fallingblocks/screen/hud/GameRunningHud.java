@@ -70,11 +70,6 @@ public class GameRunningHud implements Disposable, Observers<Integer> {
     }
 
 
-//    @Override
-//    public void onScoreChanged(int score) {
-//        scoreLabel.setText(score);
-//    }
-
     @Override
     public void dispose() {
         stage.dispose();

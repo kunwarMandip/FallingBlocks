@@ -1,18 +1,63 @@
 package com.libgdx.fallingblocks.screen.hud;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.libgdx.fallingblocks.entity.common.observers.Subject;
 
-public interface Hud {
+import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_HEIGHT;
+import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_WIDTH;
 
-    void setHud();
+public abstract class Hud  {
 
-    void render(float delta);
+    protected final Skin skin;
+    protected final Stage stage;
+    protected final Viewport viewport;
+    protected final Subject<Hud> listeners= new Subject<>();
 
-    void setVisibility(boolean visibility);
+    private final SpriteBatch spriteBatch;
+    private final OrthographicCamera orthographicCamera;
 
-    void resize(int width, int height);
+    //todo make this constructor prettier
+    public Hud(Skin skin, SpriteBatch spriteBatch) {
+        if(skin == null){
+            this.skin = new Skin();
+            this.skin.addRegions(new TextureAtlas(Gdx.files.internal("flat-earth/skin/flat-earth-ui.atlas")));
+            this.skin.load(Gdx.files.internal("flat-earth/skin/flat-earth-ui.json"));
+        }
+        else{
+            this.skin= skin;
+        }
 
-    void dispose();
+        this.spriteBatch=spriteBatch;
+        this.orthographicCamera= new OrthographicCamera();
+        this.viewport= new FitViewport(VIRTUAL_WIDTH/2f, VIRTUAL_HEIGHT/2f, orthographicCamera);
+        this.stage= new Stage(viewport, spriteBatch);
+    }
 
-    Stage getStage();
+    public abstract void show();
+
+    public void render(float delta){
+        spriteBatch.setProjectionMatrix(orthographicCamera.combined);
+        stage.act(delta);
+        stage.draw();
+    }
+
+    public void resize(int width, int height) {
+        viewport.update(width, height);
+    }
+
+    public void dispose() {
+        stage.clear();
+        stage.dispose();
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
 }

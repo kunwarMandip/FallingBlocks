@@ -8,14 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class GameOver extends WindowHud{
-
-    private Window window;
+public class GameOver extends Hud {
 
     public GameOver(Skin skin, SpriteBatch spriteBatch) {
         super(skin, spriteBatch);
     }
-
 
     @Override
     public void show() {
@@ -34,9 +31,12 @@ public class GameOver extends WindowHud{
         restartButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                listeners.notify(GameOver.this);
                 System.out.println("Restart Clicked");
             }
         });
 
+        stage.addActor(window);
     }
+
 }

@@ -9,6 +9,7 @@ import java.util.Set;
 public class Logger {
 
     public enum Tags {
+        HUD,
         GAME_OVER_STATE,
         BEGIN_CONTACT_MANAGER,
         SCORE_SETTER,

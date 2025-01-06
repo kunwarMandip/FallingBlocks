@@ -1,7 +1,7 @@
 package com.libgdx.fallingblocks.controller.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.libgdx.fallingblocks.controller.wave.WaveLoader;
+import com.libgdx.fallingblocks.controller.wave.WaveRunner;
 import com.libgdx.fallingblocks.parser.GameDtoParser;
 import com.libgdx.fallingblocks.parser.dto.GameDto;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
@@ -12,7 +12,7 @@ public class GameLoader {
     private final SpriteBatch spriteBatch;
 
     private WaveDto waveDto;
-    private WaveLoader waveLoader;
+    private WaveRunner waveRunner;
     public GameLoader(int levelToLoad, SpriteBatch spriteBatch){
         this.gameDto= new GameDtoParser().getGameDto(levelToLoad);
         this.spriteBatch= spriteBatch;
@@ -22,12 +22,12 @@ public class GameLoader {
 
     public void setNewWave(){
 //        WaveDto waveDto= gameDto.getNextWave();
-        waveLoader= new WaveLoader(waveDto, spriteBatch, this);
+        waveRunner = new WaveRunner(waveDto, spriteBatch, this);
     }
 
 
-    public WaveLoader getWaveLoader(){
-        return waveLoader;
+    public WaveRunner getWaveLoader(){
+        return waveRunner;
     }
 
 

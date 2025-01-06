@@ -11,15 +11,18 @@ import com.libgdx.fallingblocks.game.GameScore;
 import com.libgdx.fallingblocks.game.GameState;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
+import com.libgdx.fallingblocks.screen.hud.GameOver;
 import com.libgdx.fallingblocks.screen.hud.GameOverHud;
 import com.libgdx.fallingblocks.screen.hud.GameRunningHud;
 
 import static com.libgdx.fallingblocks.Logger.Tags.GAME_OVER_STATE;
 
-public class WaveLoader {
+public class WaveRunner {
 
     private final WaveDto waveDto;
     private final SpriteBatch spriteBatch;
+
+    private final HudController hudController;
 
     private final GameOverHud gameOverHud;
     private final GameRunningHud gameRunningHud;
@@ -31,9 +34,12 @@ public class WaveLoader {
 
     private final InputListenerManager inputListenerManager= new InputListenerManager();
 
-    public WaveLoader(WaveDto waveDto, SpriteBatch spriteBatch, GameLoader gameLoader){
+    public WaveRunner(WaveDto waveDto, SpriteBatch spriteBatch, GameLoader gameLoader){
         this.waveDto= waveDto;
         this.spriteBatch= spriteBatch;
+
+        this.hudController= new HudController(inputListenerManager);
+        hudController.addHud(new GameOver(null, spriteBatch));
 
         this.gameController = new GameController();
         this.gameRunningHud = new GameRunningHud(spriteBatch);
@@ -90,7 +96,6 @@ public class WaveLoader {
     }
 
     public void draw(float delta){
-
         sceneController.render();
         worldController.render(sceneController.getOrthographicGameCamera());
         spriteBatch.setProjectionMatrix(sceneController.getOrthographicGameCamera().combined);
@@ -102,19 +107,28 @@ public class WaveLoader {
 
         gameRunningHud.render(delta);
         GameState gameState= gameController.getGameStateManager().getGameState();
-        if(gameState==GameState.GAME_OVER){
-            gameOverHud.render(delta);
+
+        if(gameState== GameState.GAME_OVER){
+            hudController.render(delta);
         }
+//        if(gameState==GameState.GAME_OVER){
+//            gameOverHud.render(delta);
+//        }
+
     }
 
     public void dispose(){
+        hudController.disposeAll();
         inputListenerManager.dispose();
+
     }
 
     public void resize(int width, int height){
         sceneController.resize(width, height);
         gameRunningHud.resize(width, height);
         gameOverHud.resize(width, height);
+
+        hudController.resize(width, height);
     }
 
 }

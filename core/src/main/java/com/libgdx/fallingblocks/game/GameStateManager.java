@@ -19,10 +19,8 @@ public class GameStateManager implements Observers<PlayerState> {
         this.gameState = gameState;
     }
 
-
     @Override
     public void notify(PlayerState event) {
-
         switch (event) {
             case ALIVE:
                 setGameState(GameState.RUNNING);
