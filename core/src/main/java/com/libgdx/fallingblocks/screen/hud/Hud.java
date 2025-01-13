@@ -18,10 +18,10 @@ public abstract class Hud  {
     protected final Skin skin;
     protected final Stage stage;
     protected final Viewport viewport;
-    protected final Subject<Hud> listeners= new Subject<>();
+    protected final OrthographicCamera orthographicCamera;
 
     private final SpriteBatch spriteBatch;
-    private final OrthographicCamera orthographicCamera;
+    protected final Subject<Hud> listeners= new Subject<>();
 
     //todo make this constructor prettier
     public Hud(Skin skin, SpriteBatch spriteBatch) {
@@ -38,6 +38,7 @@ public abstract class Hud  {
         this.orthographicCamera= new OrthographicCamera();
         this.viewport= new FitViewport(VIRTUAL_WIDTH/2f, VIRTUAL_HEIGHT/2f, orthographicCamera);
         this.stage= new Stage(viewport, spriteBatch);
+
     }
 
     public abstract void show();

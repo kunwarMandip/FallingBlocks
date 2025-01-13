@@ -1,7 +1,7 @@
-package com.libgdx.fallingblocks.controller.game;
+package com.libgdx.fallingblocks.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.libgdx.fallingblocks.controller.wave.WaveRunner;
+import com.libgdx.fallingblocks.game.wave.WaveRunner;
 import com.libgdx.fallingblocks.parser.GameDtoParser;
 import com.libgdx.fallingblocks.parser.dto.GameDto;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;

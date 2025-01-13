@@ -4,34 +4,32 @@ import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.entity.common.observers.Observers;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.screen.hud.Hud;
+import com.libgdx.fallingblocks.screen.hud.HudEvent;
 
-public class HudController implements Observers<Hud> {
-
-    private final Array<Hud> hudArray = new Array<>();
-    private final InputListenerManager inputListenerManager;
-
+public class HudController implements Observers<Hud>, HudEvent {
 
     private final Array<Hud> activeHud = new Array<>();
     private final Array<Hud> inActiveHud= new Array<>();
+    private final InputListenerManager inputListenerManager;
 
     public HudController(InputListenerManager inputListenerManager){
         this.inputListenerManager= inputListenerManager;
     }
 
-    public void addHud(Hud hud){
+    public void addActiveHud(Hud hud){
         inputListenerManager.addInputProcessor(hud.getStage());
         this.activeHud.add(hud);
+        hud.show();
     }
-
 
     public void removeHud(Hud hud){
         inputListenerManager.removeInputProcessor(hud.getStage());
         hud.dispose();
-        this.hudArray.removeValue(hud, true);
+        this.activeHud.removeValue(hud, true);
     }
 
     public void disposeAll(){
-        for(Hud hud: hudArray){
+        for(Hud hud: activeHud){
             removeHud(hud);
         }
     }
@@ -43,7 +41,7 @@ public class HudController implements Observers<Hud> {
     }
 
     public void resize(int width, int height){
-        for(Hud hud: hudArray){
+        for(Hud hud: activeHud){
             hud.resize(width, height);
         }
     }
@@ -55,5 +53,18 @@ public class HudController implements Observers<Hud> {
     @Override
     public void notify(Hud event) {
         removeHud(event);
+    }
+
+    @Override
+    public void setActive(Hud hud) {
+        inActiveHud.removeValue(hud, true);
+        addActiveHud(hud);
+    }
+
+    @Override
+    public void setInActive(Hud hud) {
+        hud.dispose();
+        activeHud.removeValue(hud, true);
+        inActiveHud.add(hud);
     }
 }

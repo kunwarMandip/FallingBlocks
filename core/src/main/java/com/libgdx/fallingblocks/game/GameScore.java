@@ -37,7 +37,7 @@ public class GameScore implements Observers<Enemy> {
 
     @Override
     public void notify(Enemy event) {
-        Logger.log(SCORE_SETTER, "Setting Score");
+        Logger.log(SCORE_SETTER, "Setting ScoreLabel");
         setScore(enemyScoreCalculator.calculateScore(event));
     }
 

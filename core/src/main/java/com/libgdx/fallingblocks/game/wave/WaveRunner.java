@@ -1,9 +1,9 @@
-package com.libgdx.fallingblocks.controller.wave;
+package com.libgdx.fallingblocks.game.wave;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.controller.*;
-import com.libgdx.fallingblocks.controller.game.GameLoader;
+import com.libgdx.fallingblocks.game.GameLoader;
 import com.libgdx.fallingblocks.entity.common.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
@@ -14,6 +14,7 @@ import com.libgdx.fallingblocks.parser.dto.WaveDto;
 import com.libgdx.fallingblocks.screen.hud.GameOver;
 import com.libgdx.fallingblocks.screen.hud.GameOverHud;
 import com.libgdx.fallingblocks.screen.hud.GameRunningHud;
+
 
 import static com.libgdx.fallingblocks.Logger.Tags.GAME_OVER_STATE;
 
@@ -34,12 +35,13 @@ public class WaveRunner {
 
     private final InputListenerManager inputListenerManager= new InputListenerManager();
 
+    //todo:: instead of passing gameLoader, pass a listener to tell it to stop Listening
     public WaveRunner(WaveDto waveDto, SpriteBatch spriteBatch, GameLoader gameLoader){
         this.waveDto= waveDto;
         this.spriteBatch= spriteBatch;
 
         this.hudController= new HudController(inputListenerManager);
-        hudController.addHud(new GameOver(null, spriteBatch));
+        hudController.addActiveHud(new GameOver(null, spriteBatch));
 
         this.gameController = new GameController();
         this.gameRunningHud = new GameRunningHud(spriteBatch);
@@ -111,24 +113,19 @@ public class WaveRunner {
         if(gameState== GameState.GAME_OVER){
             hudController.render(delta);
         }
-//        if(gameState==GameState.GAME_OVER){
-//            gameOverHud.render(delta);
-//        }
-
     }
 
-    public void dispose(){
-        hudController.disposeAll();
-        inputListenerManager.dispose();
-
-    }
 
     public void resize(int width, int height){
         sceneController.resize(width, height);
         gameRunningHud.resize(width, height);
         gameOverHud.resize(width, height);
-
         hudController.resize(width, height);
+    }
+
+    public void dispose(){
+        hudController.disposeAll();
+        inputListenerManager.dispose();
     }
 
 }

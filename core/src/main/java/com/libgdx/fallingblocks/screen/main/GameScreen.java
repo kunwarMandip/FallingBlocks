@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.libgdx.fallingblocks.controller.game.GameLoader;
+import com.libgdx.fallingblocks.game.GameLoader;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 
 public class GameScreen implements Screen {

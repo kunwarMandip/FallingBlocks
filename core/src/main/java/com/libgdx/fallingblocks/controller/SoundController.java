@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.game;
+package com.libgdx.fallingblocks.controller;
 
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 

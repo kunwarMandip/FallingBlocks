@@ -14,8 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.libgdx.fallingblocks.GameRunner;
-import com.libgdx.fallingblocks.controller.game.GameLoader;
-import com.libgdx.fallingblocks.controller.wave.WaveRunner;
+import com.libgdx.fallingblocks.game.GameLoader;
+import com.libgdx.fallingblocks.game.wave.WaveRunner;
 
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_HEIGHT;
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_WIDTH;

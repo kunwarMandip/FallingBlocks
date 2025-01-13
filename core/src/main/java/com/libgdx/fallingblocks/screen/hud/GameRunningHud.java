@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.libgdx.fallingblocks.Assets;
 import com.libgdx.fallingblocks.entity.common.observers.Observers;
 
 import java.util.Locale;
@@ -42,8 +43,13 @@ public class GameRunningHud implements Disposable, Observers<Integer> {
 
     private void set(){
         this.skin = new Skin();
-        skin.addRegions(new TextureAtlas(Gdx.files.internal("flat-earth/skin/flat-earth-ui.atlas")));
-        skin.load(Gdx.files.internal("flat-earth/skin/flat-earth-ui.json"));
+//        skin.addRegions(new TextureAtlas(Gdx.files.internal("flat-earth/skin/flat-earth-ui.atlas")));
+//        skin.load(Gdx.files.internal("flat-earth/skin/flat-earth-ui.json"));
+
+        Assets.getInstance().loadMenuAssets();
+//        skin.addRegions(Assets.getInstance().manager.get("flat-earth/skin/flat-earth-ui.atlas"));
+//        skin.load(Assets.getInstance().manager.get("flat-earth/skin/flat-earth-ui.json"));
+        this.skin=Assets.getInstance().manager.get("flat-earth/skin/flat-earth-ui.json");
 
         topTable = new Table();
         topTable.top();
