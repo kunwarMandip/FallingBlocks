@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.libgdx.fallingblocks.GameRunner;
 import com.libgdx.fallingblocks.game.GameLoader;
 import com.libgdx.fallingblocks.game.wave.WaveRunner;
 
@@ -30,18 +29,9 @@ public class GameOverHud {
     private final SpriteBatch spriteBatch;
     private final OrthographicCamera orthographicCamera;
 
-    private GameRunner gameRunner;
     private WaveRunner waveRunner;
     private GameLoader gameLoader;
-    public GameOverHud(SpriteBatch spriteBatch, GameRunner gameRunner){
-        this.spriteBatch=spriteBatch;
-        this.gameRunner=gameRunner;
-        this.orthographicCamera= new OrthographicCamera();
-        this.viewport= new FitViewport(VIRTUAL_WIDTH/2f, VIRTUAL_HEIGHT/2f, orthographicCamera);
-        this.stage= new Stage(viewport, spriteBatch);
-        setSkin();
-        setHud();
-    }
+
 
     public GameOverHud(SpriteBatch spriteBatch, WaveRunner waveRunner, GameLoader gameLoader){
         this.spriteBatch=spriteBatch;

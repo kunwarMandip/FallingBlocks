@@ -1,14 +1,10 @@
-package com.libgdx.fallingblocks.entity.enemy.services;
+package com.libgdx.fallingblocks.game.score;
 
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 
-public class EnemyScoreCalculator {
+public class ScoreCalculator {
 
-    private int scoreMultiplier=1;
-
-    public EnemyScoreCalculator(){
-
-    }
+    private int scoreMultiplier= 1;
 
     public int calculateScore(Enemy enemy){
         return getBaseScore(enemy) * scoreMultiplier;
@@ -16,7 +12,13 @@ public class EnemyScoreCalculator {
 
     private int getBaseScore(Enemy enemy){
 
-        return 5;
+        Integer score= enemy.getScore();
+
+        if(score == null){
+            return 5;
+        }
+
+        return 10;
 //        EnemyType enemyType= enemy.getEnemyType();
 //        switch (enemyType){
 //            case NORMAL:
@@ -30,11 +32,4 @@ public class EnemyScoreCalculator {
 //        }
     }
 
-    public void setScoreMultiplier(int scoreMultiplier){
-        this.scoreMultiplier=scoreMultiplier;
-    }
-
-    public void resetScoreMultiplier(){
-        this.scoreMultiplier=1;
-    }
 }

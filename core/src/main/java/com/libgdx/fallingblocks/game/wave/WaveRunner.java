@@ -4,16 +4,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.controller.*;
 import com.libgdx.fallingblocks.game.GameLoader;
-import com.libgdx.fallingblocks.entity.common.observers.Subject;
+import com.libgdx.fallingblocks.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
-import com.libgdx.fallingblocks.game.GameScore;
-import com.libgdx.fallingblocks.game.GameState;
+import com.libgdx.fallingblocks.game.score.GameScore;
+import com.libgdx.fallingblocks.game.state.GameState;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
 import com.libgdx.fallingblocks.screen.hud.GameOver;
 import com.libgdx.fallingblocks.screen.hud.GameOverHud;
 import com.libgdx.fallingblocks.screen.hud.GameRunningHud;
+import com.libgdx.fallingblocks.screen.overlay.GameOverLayHud;
 
 
 import static com.libgdx.fallingblocks.Logger.Tags.GAME_OVER_STATE;
@@ -24,9 +25,11 @@ public class WaveRunner {
     private final SpriteBatch spriteBatch;
 
     private final HudController hudController;
-
     private final GameOverHud gameOverHud;
     private final GameRunningHud gameRunningHud;
+    private final GameOverLayHud gameOverLayHud;
+
+
     private final GameController gameController;
     private final WorldController worldController;
     private final SceneController sceneController;
@@ -42,6 +45,8 @@ public class WaveRunner {
 
         this.hudController= new HudController(inputListenerManager);
         hudController.addActiveHud(new GameOver(null, spriteBatch));
+
+        this.gameOverLayHud= new GameOverLayHud(spriteBatch);
 
         this.gameController = new GameController();
         this.gameRunningHud = new GameRunningHud(spriteBatch);

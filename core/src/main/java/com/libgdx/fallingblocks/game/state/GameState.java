@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.game;
+package com.libgdx.fallingblocks.game.state;
 
 public enum GameState {
     RUNNING,

@@ -1,7 +1,7 @@
 package com.libgdx.fallingblocks.controller;
 
-import com.libgdx.fallingblocks.game.GameScore;
-import com.libgdx.fallingblocks.game.GameStateManager;
+import com.libgdx.fallingblocks.game.score.GameScore;
+import com.libgdx.fallingblocks.game.state.GameStateManager;
 
 public class GameController {
 
@@ -10,6 +10,7 @@ public class GameController {
 
     public GameController(){
         this.gameScore = new GameScore();
+
         this.gameStateManager= new GameStateManager();
     }
 

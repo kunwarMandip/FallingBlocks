@@ -2,6 +2,7 @@ package com.libgdx.fallingblocks.entity.enemy.types;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Null;
 import com.libgdx.fallingblocks.entity.common.Entity;
 import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.AttackBehaviour;
 import com.libgdx.fallingblocks.entity.common.behaviour.interfaces.Moveable;
@@ -14,6 +15,7 @@ public abstract class Enemy extends Entity {
     private AttackBehaviour attackBehaviour;
     private Moveable moveAble;
 
+    private @Null int score;
     private EnemyType enemyType;
 
     public Enemy(int health, Vector2 spawnPosition, Vector2 bodyDimension, Vector2 speed, AttackBehaviour attackBehaviour, Moveable moveAble) {
@@ -32,6 +34,13 @@ public abstract class Enemy extends Entity {
         attackBehaviour.attack(delta);
     }
 
+    public void setScore(int score){
+        this.score=score;
+    }
+
+    public int getScore(){
+        return score;
+    }
     public void performMovement(float delta){
         moveAble.movement(delta);
     }

@@ -1,7 +1,7 @@
 package com.libgdx.fallingblocks.controller;
 
 import com.badlogic.gdx.physics.box2d.World;
-import com.libgdx.fallingblocks.entity.common.observers.Subject;
+import com.libgdx.fallingblocks.observers.Subject;
 import com.libgdx.fallingblocks.entity.player.Player;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
 import com.libgdx.fallingblocks.entity.player.services.PlayerFactory;

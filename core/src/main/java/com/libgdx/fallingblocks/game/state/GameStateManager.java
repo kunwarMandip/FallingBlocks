@@ -1,9 +1,9 @@
-package com.libgdx.fallingblocks.game;
+package com.libgdx.fallingblocks.game.state;
 
-import com.libgdx.fallingblocks.entity.common.observers.Observers;
+import com.libgdx.fallingblocks.observers.Observer;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
 
-public class GameStateManager implements Observers<PlayerState> {
+public class GameStateManager implements Observer<PlayerState>, GameStateSetter {
 
     private GameState gameState;
 
@@ -15,6 +15,7 @@ public class GameStateManager implements Observers<PlayerState> {
         return gameState;
     }
 
+    @Override
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }

@@ -14,7 +14,7 @@
 
 # Lets make game reset first upon entity touching enemies
 # Make enemy increase Score. Make hud Increase Score
-# 
+
 
 
 
@@ -29,3 +29,6 @@
 # and then a wave level class
 # so when I want to reset the game, I just make a new instance of the wave level class 
 # For game Stats, I can make a temp one for each wave and when the player passes the wave, I just add them 
+
+
+

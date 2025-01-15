@@ -12,14 +12,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import com.libgdx.fallingblocks.entity.common.observers.Observers;
+import com.libgdx.fallingblocks.observers.Observer;
 
 import java.util.Locale;
 
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_HEIGHT;
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_WIDTH;
 
-public class GameRunningHud implements Disposable, Observers<Integer> {
+public class GameRunningHud implements Disposable, Observer<Integer> {
 
     private final SpriteBatch spriteBatch;
 

@@ -1,9 +1,9 @@
 package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
 
-import com.libgdx.fallingblocks.entity.common.observers.Observers;
+import com.libgdx.fallingblocks.observers.Observer;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 
-public class DeathBasedSpawnCondition extends Spawn implements Observers<Enemy> {
+public class DeathBasedSpawnCondition extends Spawn implements Observer<Enemy> {
 
     private int currentDeaths;
     private final int deathThreshold;

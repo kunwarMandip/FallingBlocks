@@ -1,8 +1,8 @@
 package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
 
-import com.libgdx.fallingblocks.entity.common.observers.Observers;
+import com.libgdx.fallingblocks.observers.Observer;
 
-public class ScoreBasedSpawnCondition extends Spawn implements Observers<Integer> {
+public class ScoreBasedSpawnCondition extends Spawn implements Observer<Integer> {
 
     private int currentScore;
     private final int scoreThreshold;
