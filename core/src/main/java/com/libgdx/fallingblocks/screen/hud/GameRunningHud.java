@@ -12,14 +12,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import com.libgdx.fallingblocks.observers.Observer;
+import com.libgdx.fallingblocks.observers.Observable;
 
 import java.util.Locale;
 
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_HEIGHT;
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_WIDTH;
 
-public class GameRunningHud implements Disposable, Observer<Integer> {
+public class GameRunningHud implements Disposable, Observable<Integer> {
 
     private final SpriteBatch spriteBatch;
 
@@ -79,7 +79,7 @@ public class GameRunningHud implements Disposable, Observer<Integer> {
 
 
     @Override
-    public void notify(Integer event) {
+    public void onEvent(Integer event) {
         scoreLabel.setText(event);
     }
 }

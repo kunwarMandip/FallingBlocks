@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class EventBus {
 
-    private Map<Subject<?>, Array<Observer<?>>> eventBus= new HashMap<>();
+    private Map<Subject<?>, Array<Observable<?>>> eventBus= new HashMap<>();
 
     public void add(Subject<?> subject){
         eventBus.putIfAbsent(subject, new Array<>());

@@ -21,12 +21,11 @@ public class GlobalVariables {
         return (int) (Math.random() * maxValue) + 1;
     }
 
-    public static void isFileExist(FileHandle fileHandle){
-        if(!fileHandle.exists()){
+    public static void isFileExist(FileHandle fileHandle) {
+        if (!fileHandle.exists()) {
             throw new IllegalStateException(fileHandle.path() + " not Found");
         }
     }
-
 
     public static void isNodeExists(JsonValue node){
         if(node== null){

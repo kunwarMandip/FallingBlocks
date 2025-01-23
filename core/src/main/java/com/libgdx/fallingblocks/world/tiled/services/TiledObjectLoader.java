@@ -30,7 +30,7 @@ public class TiledObjectLoader {
     }
 
     public void loadSpawnAreas(){
-        MapLayer targetLayer = tiledMap.getLayers().get("EnemySpawn");
+        MapLayer targetLayer = tiledMap.getLayers().get("SpawnObserver");
         for (RectangleMapObject object : targetLayer.getObjects().getByType(RectangleMapObject.class)) {
             EnemySpawnArea enemySpawnArea= new EnemySpawnArea(world, tiledMap, object);
             Vector2 spawnArea= new Vector2(enemySpawnArea.getPosition());

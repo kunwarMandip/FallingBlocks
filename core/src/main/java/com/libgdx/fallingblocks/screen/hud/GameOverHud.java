@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.libgdx.fallingblocks.game.GameLoader;
+import com.libgdx.fallingblocks.GameLoader;
 import com.libgdx.fallingblocks.game.wave.WaveRunner;
 
 import static com.libgdx.fallingblocks.GlobalVariables.VIRTUAL_HEIGHT;

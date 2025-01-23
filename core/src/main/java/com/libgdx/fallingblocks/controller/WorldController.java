@@ -15,19 +15,9 @@ import java.util.Map;
 
 public class WorldController {
 
-    private World world;
+    private final World world;
     private final TiledObjectLoader tiledObjectLoader;
     private final Box2DDebugRenderer box2DDebugRenderer;
-
-    public WorldController(boolean renderDebug, WorldDto worldDto, TiledMap tiledMap){
-        world= new World(worldDto.getGravity(), worldDto.isDoSleep());
-        tiledObjectLoader= new TiledObjectLoader(world, tiledMap);
-        world.setContactListener(new GameContactListener());
-
-        box2DDebugRenderer= new Box2DDebugRenderer();
-        box2DDebugRenderer.SHAPE_STATIC.set(0,0, 0,0);
-        box2DDebugRenderer.setDrawBodies(true);
-    }
 
     public WorldController(WorldDto worldDto, TiledMap tiledMap){
         world= new World(worldDto.getGravity(), worldDto.isDoSleep());
@@ -55,7 +45,4 @@ public class WorldController {
         return world;
     }
 
-    public void setWorld(World world) {
-        this.world = world;
-    }
 }

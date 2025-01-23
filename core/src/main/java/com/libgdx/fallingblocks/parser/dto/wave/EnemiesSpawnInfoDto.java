@@ -3,6 +3,7 @@ package com.libgdx.fallingblocks.parser.dto.wave;
 import java.util.Map;
 
 public class EnemiesSpawnInfoDto {
+
     private final Map<String, Integer> spawnDirections;
     private final Map<String, Integer> enemyDistributions;
 

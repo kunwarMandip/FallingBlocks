@@ -38,6 +38,7 @@ public class WaveSettingsDtoParser {
         int totalEnemies= wave.getInt("totalEnemies", -1);
         float startDelay = wave.getFloat("startDelay", 0.0f);
         float duration = wave.getFloat("duration", 0.0f);
+        String spawnCondition = wave.getString("spawnCondition", "none");
 
         waveSettingDto.setTotalEnemies(totalEnemies);
         waveSettingDto.setWaveStartDelay(startDelay);

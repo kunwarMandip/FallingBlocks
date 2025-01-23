@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.game;
+package com.libgdx.fallingblocks;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libgdx.fallingblocks.game.wave.WaveRunner;

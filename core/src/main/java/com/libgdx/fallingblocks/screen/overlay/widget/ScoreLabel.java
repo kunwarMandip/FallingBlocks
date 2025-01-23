@@ -2,11 +2,11 @@ package com.libgdx.fallingblocks.screen.overlay.widget;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.libgdx.fallingblocks.observers.Observer;
+import com.libgdx.fallingblocks.observers.Observable;
 
 import java.util.Locale;
 
-public class ScoreLabel implements Observer<Integer> {
+public class ScoreLabel implements Observable<Integer> {
 
    public Label scoreLabel;
 
@@ -20,7 +20,7 @@ public class ScoreLabel implements Observer<Integer> {
    }
 
     @Override
-    public void notify(Integer event) {
+    public void onEvent(Integer event) {
         scoreLabel.setText(event);
     }
 

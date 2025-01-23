@@ -3,7 +3,7 @@ package com.libgdx.fallingblocks.game.wave;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.controller.*;
-import com.libgdx.fallingblocks.game.GameLoader;
+import com.libgdx.fallingblocks.GameLoader;
 import com.libgdx.fallingblocks.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
@@ -29,8 +29,7 @@ public class WaveRunner {
     private final GameRunningHud gameRunningHud;
     private final GameOverLayHud gameOverLayHud;
 
-
-    private final GameController gameController;
+    private final GameSettingsController gameSettingsController;
     private final WorldController worldController;
     private final SceneController sceneController;
     private final PlayerController playerController;
@@ -48,7 +47,7 @@ public class WaveRunner {
 
         this.gameOverLayHud= new GameOverLayHud(spriteBatch);
 
-        this.gameController = new GameController();
+        this.gameSettingsController = new GameSettingsController();
         this.gameRunningHud = new GameRunningHud(spriteBatch);
         this.sceneController = new SceneController(waveDto.getTiledMapDto());
         this.worldController = new WorldController(waveDto.getWorldDto(), sceneController.getTiledMap());
@@ -62,20 +61,20 @@ public class WaveRunner {
     }
 
     private void setListeners(){
-        GameScore gameScore= gameController.getGameScore();
+        GameScore gameScore= gameSettingsController.getGameScore();
         gameScore.getScoreObservers().addObserver(gameRunningHud);
-        gameScore.getScoreObservers().addObserver(enemiesController.getEnemySpawnManager().setSpawnConditions().setScoreBasedSpawnRate(5));
+        gameScore.getScoreObservers().addObserver(enemiesController.getEnemySpawnManager().setSpawnConditions().setScoreBasedSpawnRate(20));
 
         Subject<Enemy> enemyDeathNotifier= enemiesController.getEnemyDeathManager().getEnemyDeathNotifier();
-        enemyDeathNotifier.addObserver(gameController.getGameScore());
+        enemyDeathNotifier.addObserver(gameSettingsController.getGameScore());
 
         Subject<PlayerState> playerStateSubject= playerController.getPlayerStateSubject();
-        playerStateSubject.addObserver(gameController.getGameStateManager());
+        playerStateSubject.addObserver(gameSettingsController.getGameStateManager());
     }
 
 
     public void update(float delta){
-        GameState gameState= gameController.getGameStateManager().getGameState();
+        GameState gameState= gameSettingsController.getGameStateManager().getGameState();
         switch(gameState){
             case RUNNING:
                 gameRunning(delta);
@@ -99,7 +98,7 @@ public class WaveRunner {
     public void reset(){
         enemiesController.getEnemyDeathManager().reset();
         playerController.reset();
-        gameController.getGameStateManager().setGameState(GameState.RUNNING);
+        gameSettingsController.getGameStateManager().setGameState(GameState.RUNNING);
     }
 
     public void draw(float delta){
@@ -113,7 +112,7 @@ public class WaveRunner {
         spriteBatch.end();
 
         gameRunningHud.render(delta);
-        GameState gameState= gameController.getGameStateManager().getGameState();
+        GameState gameState= gameSettingsController.getGameStateManager().getGameState();
 
         if(gameState== GameState.GAME_OVER){
             hudController.render(delta);

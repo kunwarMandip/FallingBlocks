@@ -6,10 +6,9 @@ import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.world.tiled.objects.spawnArea.MovementDirection;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyDtoBuilder;
-import com.libgdx.fallingblocks.entity.enemy.services.SpawnRateController;
+import com.libgdx.fallingblocks.entity.enemy.service.SpawnRateController;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyFactory;
-import com.libgdx.fallingblocks.entity.enemy.services.IEnemyFactory;
 import com.libgdx.fallingblocks.parser.dto.levelDto.EnemyDto;
 import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 
@@ -19,9 +18,12 @@ import static com.libgdx.fallingblocks.Logger.Tags.SPAWN_ENEMY;
 
 public class EnemySpawnManager {
 
+    private int maxEnemySpawnAble=2;
+    private int enemySpawnCounter =0;
+
     private final Array<Enemy> currentEnemies;
     private final EnemyDtoBuilder dtoBuilder;
-    private final IEnemyFactory enemyFactory;
+    private final EnemyFactory enemyFactory;
     private final SpawnRateController spawnRateController;
 
     public EnemySpawnManager(World world, Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas, Array<Enemy> currentEnemies){
@@ -31,13 +33,21 @@ public class EnemySpawnManager {
         this.dtoBuilder= new EnemyDtoBuilder(playerPosition, enemiesSpawnInfoDto, spawnAreas);
     }
 
+
     public void spawnEnemies(){
+
+        if(enemySpawnCounter >= maxEnemySpawnAble){
+            Logger.log(SPAWN_ENEMY, "Max Enemy Spawned");
+            return;
+        }
+
         int numEnemyToSpawn= spawnRateController.getNumEnemyToSpawn();
 
         for(int i=0; i<numEnemyToSpawn; i++){
             Logger.log(SPAWN_ENEMY, "Spawning Enemy");
             EnemyDto enemyDto= dtoBuilder.getEnemyDto();
             currentEnemies.add(enemyFactory.createEnemy(enemyDto));
+            enemySpawnCounter++;
         }
         spawnRateController.resetNumEnemyToSpawn();
     }
@@ -45,5 +55,6 @@ public class EnemySpawnManager {
     public SpawnRateController setSpawnConditions(){
         return spawnRateController;
     }
+
 
 }

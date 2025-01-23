@@ -2,11 +2,11 @@ package com.libgdx.fallingblocks.entity.enemy.compact;
 
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
-import com.libgdx.fallingblocks.observers.Observer;
+import com.libgdx.fallingblocks.observers.Observable;
 
 import java.util.Iterator;
 
-public class EnemyRemover implements Observer<Enemy> {
+public class EnemyRemover implements Observable<Enemy> {
 
     private final Array<Enemy> currentEnemies;
     private final Array<Enemy> destroyAble= new Array<>();
@@ -27,7 +27,7 @@ public class EnemyRemover implements Observer<Enemy> {
     }
 
     @Override
-    public void notify(Enemy event) {
+    public void onEvent(Enemy event) {
         destroyAble.add(event);
     }
 }

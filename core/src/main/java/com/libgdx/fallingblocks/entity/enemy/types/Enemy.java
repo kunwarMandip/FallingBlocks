@@ -41,6 +41,7 @@ public abstract class Enemy extends Entity {
     public int getScore(){
         return score;
     }
+
     public void performMovement(float delta){
         moveAble.movement(delta);
     }

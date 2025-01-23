@@ -5,7 +5,7 @@
       "startDelay": 0,
       "duration": 30,
       "totalEnemies": 100,
-      "spawnRateIncrement": "onEnemyDeath"
+      "spawnCondition": "timed"
     }
   ]
 }
