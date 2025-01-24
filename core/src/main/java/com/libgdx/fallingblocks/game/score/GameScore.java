@@ -10,8 +10,8 @@ import static com.libgdx.fallingblocks.Logger.Tags.SCORE_SETTER;
 public class GameScore implements Observable<Enemy> {
 
     private int score;
+    private final ScoreCalculator scoreCalculator= new ScoreCalculator();
     private final Subject<Integer> scoreObservers= new Subject<>();
-    private final ScoreCalculator scoreCalculator = new ScoreCalculator();
 
     public GameScore(){
         this.score=0;

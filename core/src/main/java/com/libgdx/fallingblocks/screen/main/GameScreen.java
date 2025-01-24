@@ -11,14 +11,11 @@ public class GameScreen implements Screen {
 
     private final int levelToLoad;
     private final SpriteBatch spriteBatch;
-    private final InputListenerManager inputListenerManager;
-
     private GameLoader gameLoader;
 
-    public GameScreen(int levelToLoad, SpriteBatch spriteBatch, InputListenerManager inputListenerManager){
+    public GameScreen(int levelToLoad, SpriteBatch spriteBatch){
         this.levelToLoad=levelToLoad;
         this.spriteBatch=spriteBatch;
-        this.inputListenerManager= inputListenerManager;
     }
 
     @Override
