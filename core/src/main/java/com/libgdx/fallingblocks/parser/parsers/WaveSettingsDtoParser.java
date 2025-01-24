@@ -25,16 +25,15 @@ public class WaveSettingsDtoParser {
 
         Array<WaveSettingDto> waveSettingDtoArray= new Array<>();
         for (JsonValue wave : wavesNode) {
-            WaveSettingDto waveSettingDto = new WaveSettingDto();
-            parseWaveSetting(wave, waveSettingDto);
-            waveSettingDtoArray.add(waveSettingDto);
+            waveSettingDtoArray.add(parseWaveSetting(wave));
         }
         return waveSettingDtoArray;
     }
 
 
+    private WaveSettingDto parseWaveSetting(JsonValue wave){
+        WaveSettingDto waveSettingDto= new WaveSettingDto();
 
-    private void parseWaveSetting(JsonValue wave, WaveSettingDto waveSettingDto){
         int totalEnemies= wave.getInt("totalEnemies", -1);
         float startDelay = wave.getFloat("startDelay", 0.0f);
         float duration = wave.getFloat("duration", 0.0f);
@@ -43,10 +42,14 @@ public class WaveSettingsDtoParser {
         waveSettingDto.setTotalEnemies(totalEnemies);
         waveSettingDto.setWaveStartDelay(startDelay);
         waveSettingDto.setDuration(duration);
+        waveSettingDto.spawnCondition= spawnCondition;
 
         Logger.log(Logger.Tags.WAVE_PARSER, "Total Enemies: " + (waveSettingDto.getTotalEnemies()));
         Logger.log(Logger.Tags.WAVE_PARSER, "Start Delay: " + (waveSettingDto.getWaveStartDelay()));
         Logger.log(Logger.Tags.WAVE_PARSER, "Duration: " + (waveSettingDto.getDuration()));
+        Logger.log(Logger.Tags.WAVE_PARSER, "SpawnCondition: " + (waveSettingDto.spawnCondition));
+
+        return waveSettingDto;
     }
 }
 

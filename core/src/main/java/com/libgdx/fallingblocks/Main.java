@@ -17,6 +17,8 @@ public class Main extends Game {
 
 //        Logger.disableTag(Logger.Tags.GAME_OVER_STATE);
 //        Logger.disableTag(Logger.Tags.GAME_OVER_STATE);
+
+        Logger.enableSingle(Logger.Tags.WAVE_PARSER);
         SpriteBatch spriteBatch = new SpriteBatch();
         setScreen(new GameScreen(1, spriteBatch, inputListenerManager));
     }

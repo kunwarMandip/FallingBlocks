@@ -2,9 +2,9 @@ package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
 
 public abstract class Spawn {
 
-    protected final SpawnSetter spawnSetter;
+    protected SpawnAble spawnAble;
 
-    public Spawn(SpawnSetter spawnSetter){
-        this.spawnSetter = spawnSetter;
+    public void addListener(SpawnAble spawnAble){
+        this.spawnAble= spawnAble;
     }
 }

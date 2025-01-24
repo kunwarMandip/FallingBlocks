@@ -9,8 +9,7 @@ public class DeathBasedSpawnCondition extends Spawn implements DeathObserver<Ene
     private int deathCounter = 0;
     private final int deathThreshold;
 
-    public DeathBasedSpawnCondition(int deathThreshold, SpawnSetter spawnSetter){
-        super(spawnSetter);
+    public DeathBasedSpawnCondition(int deathThreshold){
         this.deathThreshold=deathThreshold;
     }
 
@@ -22,7 +21,7 @@ public class DeathBasedSpawnCondition extends Spawn implements DeathObserver<Ene
         int numEnemyToSpawn= deathCounter/deathThreshold;
 
         if(numEnemyToSpawn >= 0){
-            spawnSetter.setNumEnemiesToSpawn(numEnemyToSpawn);
+            spawnAble.setAmountToSpawn(numEnemyToSpawn);
             deathCounter%= deathThreshold;
         }
     }

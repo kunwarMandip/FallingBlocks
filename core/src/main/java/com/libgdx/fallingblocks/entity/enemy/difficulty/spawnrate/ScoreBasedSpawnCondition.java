@@ -7,8 +7,7 @@ public class ScoreBasedSpawnCondition extends Spawn implements Observable<Intege
     private int currentScore;
     private final int scoreThreshold;
 
-    public ScoreBasedSpawnCondition(int scoreThreshold, SpawnSetter spawnSetter){
-        super(spawnSetter);
+    public ScoreBasedSpawnCondition(int scoreThreshold){
         this.scoreThreshold=scoreThreshold;
     }
 
@@ -17,7 +16,7 @@ public class ScoreBasedSpawnCondition extends Spawn implements Observable<Intege
         int scoreChange= event - currentScore;
 
         if(scoreChange % scoreThreshold== 0){
-            spawnSetter.setNumEnemiesToSpawn(1);
+            spawnAble.setAmountToSpawn(1);
         }
 
         currentScore+=scoreChange;

@@ -1,20 +1,11 @@
-package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
+package com.libgdx.fallingblocks.game.spawn;
 
 import com.badlogic.gdx.utils.Array;
+import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.TimeAble;
 
 public class EnemySpawnSettings {
 
     private Array<TimeAble> timeAbleSpawnConditions;
-    private Array<Spawn> spawnConditions;
-
-    public void addListener(Spawn spawn){
-
-        if(spawnConditions == null){
-            spawnConditions= new Array<>();
-        }
-
-        spawnConditions.add(spawn);
-    }
 
     public void addListener(TimeAble timeAble){
         if(timeAbleSpawnConditions == null){
@@ -29,4 +20,5 @@ public class EnemySpawnSettings {
             timeAble.update(delta);
         }
     }
+
 }

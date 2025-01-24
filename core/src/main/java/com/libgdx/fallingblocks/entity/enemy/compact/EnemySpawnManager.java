@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.world.tiled.objects.spawnArea.MovementDirection;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyDtoBuilder;
-import com.libgdx.fallingblocks.entity.enemy.service.SpawnRateController;
+import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnAbleConditions;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyFactory;
 import com.libgdx.fallingblocks.parser.dto.levelDto.EnemyDto;
@@ -24,12 +24,12 @@ public class EnemySpawnManager {
     private final Array<Enemy> currentEnemies;
     private final EnemyDtoBuilder dtoBuilder;
     private final EnemyFactory enemyFactory;
-    private final SpawnRateController spawnRateController;
+    private final SpawnAbleConditions spawnAbleConditions;
 
     public EnemySpawnManager(World world, Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas, Array<Enemy> currentEnemies){
         this.currentEnemies=currentEnemies;
         this.enemyFactory= new EnemyFactory(world);
-        this.spawnRateController= new SpawnRateController();
+        this.spawnAbleConditions = new SpawnAbleConditions();
         this.dtoBuilder= new EnemyDtoBuilder(playerPosition, enemiesSpawnInfoDto, spawnAreas);
     }
 
@@ -41,7 +41,7 @@ public class EnemySpawnManager {
             return;
         }
 
-        int numEnemyToSpawn= spawnRateController.getNumEnemyToSpawn();
+        int numEnemyToSpawn= spawnAbleConditions.getAmountToSpawn();
 
         for(int i=0; i<numEnemyToSpawn; i++){
             Logger.log(SPAWN_ENEMY, "Spawning Enemy");
@@ -49,11 +49,10 @@ public class EnemySpawnManager {
             currentEnemies.add(enemyFactory.createEnemy(enemyDto));
             enemySpawnCounter++;
         }
-        spawnRateController.resetNumEnemyToSpawn();
     }
 
-    public SpawnRateController setSpawnConditions(){
-        return spawnRateController;
+    public SpawnAbleConditions setSpawnConditions(){
+        return spawnAbleConditions;
     }
 
 
