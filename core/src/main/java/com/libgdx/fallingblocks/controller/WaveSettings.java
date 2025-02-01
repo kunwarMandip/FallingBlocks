@@ -10,10 +10,10 @@ public class WaveSettings {
     private final SpawnRateConditions spawnRateConditions;
 
     public WaveSettings(WaveSettingDto waveSettingDto){
-        this.gameScore = new GameScore();
-        this.spawnRateConditions = new SpawnRateConditions();
+        this.gameScore              = new GameScore();
+//        this.spawnRateConditions    = new SpawnRateConditions(waveSettingDto.spawnCondition);
+        this.spawnRateConditions    = new SpawnRateConditions();
     }
-
 
     public GameScore getGameScore(){
         return gameScore;
@@ -22,4 +22,5 @@ public class WaveSettings {
     public SpawnRateConditions getSpawnRateConditions(){
         return spawnRateConditions;
     }
+
 }

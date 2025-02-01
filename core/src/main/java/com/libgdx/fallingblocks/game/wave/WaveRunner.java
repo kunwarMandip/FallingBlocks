@@ -42,25 +42,25 @@ public class WaveRunner {
     private final InputListenerManager inputListenerManager= new InputListenerManager();
 
     //todo:: instead of passing gameLoader, pass a listener to tell it to stop Listening
-    public WaveRunner(WaveDto waveDto, SpriteBatch spriteBatch, GameLoader gameLoader){
-        this.waveDto= waveDto;
-        this.spriteBatch= spriteBatch;
+    public WaveRunner(WaveDto waveDto, GameLoader gameLoader, SpriteBatch spriteBatch){
+        this.waveDto            = waveDto;
+        this.spriteBatch        = spriteBatch;
 
-        this.gameStateManager= new GameStateManager();
-        this.waveSettings = new WaveSettings(waveDto.getWaveSettingDto());
+        this.gameStateManager   = new GameStateManager();
+        this.waveSettings       = new WaveSettings(waveDto.getWaveSettingDto());
 
-        this.hudController= new HudController(inputListenerManager);
-        hudController.addActiveHud(new GameOver(null, spriteBatch));
+        this.hudController      = new HudController(inputListenerManager);
+        this.hudController.addActiveHud(new GameOver(null, spriteBatch));
 
-        this.gameOverLayHud= new GameOverLayHud(spriteBatch);
+        this.gameOverLayHud     = new GameOverLayHud(spriteBatch);
 
-        this.gameRunningHud = new GameRunningHud(spriteBatch);
-        this.sceneController = new SceneController(waveDto.getTiledMapDto());
-        this.worldController = new WorldController(waveDto.getWorldDto(), sceneController.getTiledMap());
-        this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
-        this.enemiesController= new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
+        this.gameRunningHud     = new GameRunningHud(spriteBatch);
+        this.sceneController    = new SceneController(waveDto.getTiledMapDto());
+        this.worldController    = new WorldController(waveDto.getWorldDto(), sceneController.getTiledMap());
+        this.playerController   = new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
+        this.enemiesController  = new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
 
-        this.gameOverHud= new GameOverHud(spriteBatch, this, gameLoader);
+        this.gameOverHud        = new GameOverHud(spriteBatch, this, gameLoader);
         inputListenerManager.addInputProcessor(gameOverHud.getStage());
 
         setListeners();
@@ -77,7 +77,6 @@ public class WaveRunner {
         Subject<PlayerState> playerStateSubject= playerController.getPlayerStateSubject();
         playerStateSubject.addObserver(gameStateManager);
     }
-
 
     public void update(float delta){
         GameState gameState= gameStateManager.getGameState();
@@ -101,12 +100,12 @@ public class WaveRunner {
         enemiesController.update(delta);
     }
 
-    public void reset(){
-        enemiesController.getEnemyDeathManager().reset();
-        playerController.reset();
-
-//        waveSettings.getGameStateManager().setGameState(GameState.RUNNING);
-    }
+//    public void reset(){
+//        enemiesController.getEnemyDeathManager().reset();
+//        playerController.reset();
+//
+////        waveSettings.getGameStateManager().setGameState(GameState.RUNNING);
+//    }
 
     public void draw(float delta){
         sceneController.render();
@@ -125,7 +124,6 @@ public class WaveRunner {
             hudController.render(delta);
         }
     }
-
 
     public void resize(int width, int height){
         sceneController.resize(width, height);

@@ -5,7 +5,7 @@ public class TimeBasedSpawnCondition extends Spawn implements TimeAble{
     private float spawnTimer;
     private float spawnRateCounter;
 
-    public TimeBasedSpawnCondition(float spawnTimer, SpawnAble spawnAble) {
+    public TimeBasedSpawnCondition(float spawnTimer) {
         this.spawnTimer = spawnTimer;
         this.spawnRateCounter= 0f;
     }

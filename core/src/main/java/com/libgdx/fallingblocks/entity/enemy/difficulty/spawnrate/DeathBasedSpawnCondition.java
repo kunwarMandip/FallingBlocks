@@ -13,7 +13,6 @@ public class DeathBasedSpawnCondition extends Spawn implements DeathObserver<Ene
         this.deathThreshold=deathThreshold;
     }
 
-
     @Override
     public void onEntityDeath(Array<Enemy> killedEntities) {
         deathCounter+= killedEntities.size;
