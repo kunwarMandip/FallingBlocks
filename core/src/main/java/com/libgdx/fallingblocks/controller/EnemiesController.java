@@ -60,7 +60,7 @@ public class EnemiesController {
             enemy.update(delta);
         }
 
-        enemySpawnManager.spawn();
+        enemySpawnManager.spawn(delta);
     }
 
     public void draw(SpriteBatch spriteBatch){
