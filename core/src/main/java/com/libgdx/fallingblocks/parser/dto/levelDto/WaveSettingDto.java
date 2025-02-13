@@ -5,6 +5,8 @@ public class WaveSettingDto {
     private int totalEnemies;
     private float duration, waveStartDelay, spawnRateStart, spawnRateIncrement,spawnRateIncreaseInterval;
 
+    public String spawnCondition;
+
     public int getTotalEnemies() {
         return totalEnemies;
     }

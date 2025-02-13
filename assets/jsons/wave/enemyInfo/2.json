@@ -1,10 +1,32 @@
 {
+  "1":{
+
+    "settings":{
+      "spawn_direction": "weighted",
+      "is_max_enemy_count": false,
+      "max_enemy_count": 10,
+      "enemy_distribution": "weighted"
+    },
+
+    "directions": {
+      "top": 20,
+      "left": 20,
+      "right": 30,
+      "bottom": 30
+    },
+
+    "enemyDistribution": {
+      "normal": 100
+    }
+
+  },
+
   "waves":[
     {
       "waveNumber": 1,
+
       "settings":{
         "spawn_direction": "random"
-
       },
       "directions": {
         "top": 20,

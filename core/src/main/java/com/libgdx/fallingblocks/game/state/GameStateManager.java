@@ -1,9 +1,9 @@
 package com.libgdx.fallingblocks.game.state;
 
-import com.libgdx.fallingblocks.observers.Observer;
+import com.libgdx.fallingblocks.observers.Observable;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
 
-public class GameStateManager implements Observer<PlayerState>, GameStateSetter {
+public class GameStateManager implements Observable<PlayerState>, GameStateSetter {
 
     private GameState gameState;
 
@@ -21,7 +21,7 @@ public class GameStateManager implements Observer<PlayerState>, GameStateSetter 
     }
 
     @Override
-    public void notify(PlayerState event) {
+    public void onEvent(PlayerState event) {
         switch (event) {
             case ALIVE:
                 setGameState(GameState.RUNNING);

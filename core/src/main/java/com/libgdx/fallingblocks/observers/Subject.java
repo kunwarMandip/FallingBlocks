@@ -5,19 +5,19 @@ import java.util.List;
 
 public final class Subject<T>{
 
-    private final List<Observer<T>> observerList = new ArrayList<>();
+    private final List<Observable<T>> observableList = new ArrayList<>();
 
-    public void addObserver(Observer<T> observer){
-        observerList.add(observer);
+    public void addObserver(Observable<T> observable){
+        observableList.add(observable);
     }
 
-    public void removeObserver(Observer<T> observer){
-        observerList.remove(observer);
+    public void removeObserver(Observable<T> observable){
+        observableList.remove(observable);
     }
 
     public void notify(T event){
-        for(Observer<T> observer: observerList){
-            observer.notify(event);
+        for(Observable<T> observable : observableList){
+            observable.onEvent(event);
         }
     }
 }

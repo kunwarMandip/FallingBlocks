@@ -50,7 +50,8 @@ public class BasicPlayerInput implements GestureDetector.GestureListener {
         } else {
             if (velocityY > 0) {
                 body.setLinearVelocity(new Vector2(0f, -horizontalSpeed));
-            } else {
+            }
+            else {
                 body.setLinearVelocity(new Vector2(0f, horizontalSpeed));
             }
         }

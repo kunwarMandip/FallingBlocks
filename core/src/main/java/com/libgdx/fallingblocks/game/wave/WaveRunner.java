@@ -3,11 +3,13 @@ package com.libgdx.fallingblocks.game.wave;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.controller.*;
-import com.libgdx.fallingblocks.game.GameLoader;
+import com.libgdx.fallingblocks.GameLoader;
+import com.libgdx.fallingblocks.controller.WaveSettings;
+import com.libgdx.fallingblocks.game.state.GameStateManager;
 import com.libgdx.fallingblocks.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
-import com.libgdx.fallingblocks.game.score.GameScore;
+import com.libgdx.fallingblocks.game.wave.settings.score.GameScore;
 import com.libgdx.fallingblocks.game.state.GameState;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
@@ -29,53 +31,55 @@ public class WaveRunner {
     private final GameRunningHud gameRunningHud;
     private final GameOverLayHud gameOverLayHud;
 
-
-    private final GameController gameController;
+    private final WaveSettings waveSettings;
     private final WorldController worldController;
     private final SceneController sceneController;
     private final PlayerController playerController;
     private final EnemiesController enemiesController;
 
+    private final GameStateManager gameStateManager;
+
     private final InputListenerManager inputListenerManager= new InputListenerManager();
 
     //todo:: instead of passing gameLoader, pass a listener to tell it to stop Listening
-    public WaveRunner(WaveDto waveDto, SpriteBatch spriteBatch, GameLoader gameLoader){
-        this.waveDto= waveDto;
-        this.spriteBatch= spriteBatch;
+    public WaveRunner(WaveDto waveDto, GameLoader gameLoader, SpriteBatch spriteBatch){
+        this.waveDto            = waveDto;
+        this.spriteBatch        = spriteBatch;
 
-        this.hudController= new HudController(inputListenerManager);
-        hudController.addActiveHud(new GameOver(null, spriteBatch));
+        this.gameStateManager   = new GameStateManager();
+        this.waveSettings       = new WaveSettings(waveDto.getWaveSettingDto());
 
-        this.gameOverLayHud= new GameOverLayHud(spriteBatch);
+        this.hudController      = new HudController(inputListenerManager);
+        this.hudController.addActiveHud(new GameOver(null, spriteBatch));
 
-        this.gameController = new GameController();
-        this.gameRunningHud = new GameRunningHud(spriteBatch);
-        this.sceneController = new SceneController(waveDto.getTiledMapDto());
-        this.worldController = new WorldController(waveDto.getWorldDto(), sceneController.getTiledMap());
-        this.playerController= new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
-        this.enemiesController= new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
+        this.gameOverLayHud     = new GameOverLayHud(spriteBatch);
 
-        this.gameOverHud= new GameOverHud(spriteBatch, this, gameLoader);
+        this.gameRunningHud     = new GameRunningHud(spriteBatch);
+        this.sceneController    = new SceneController(waveDto.getTiledMapDto());
+        this.worldController    = new WorldController(waveDto.getWorldDto(), sceneController.getTiledMap());
+        this.playerController   = new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
+        this.enemiesController  = new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveSettings.getSpawnConditions() ,waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
+
+        this.gameOverHud        = new GameOverHud(spriteBatch, this, gameLoader);
         inputListenerManager.addInputProcessor(gameOverHud.getStage());
 
         setListeners();
     }
 
     private void setListeners(){
-        GameScore gameScore= gameController.getGameScore();
+        GameScore gameScore= waveSettings.getGameScore();
         gameScore.getScoreObservers().addObserver(gameRunningHud);
-        gameScore.getScoreObservers().addObserver(enemiesController.getEnemySpawnManager().setSpawnConditions().setScoreBasedSpawnRate(5));
+//        gameScore.getScoreObservers().addObserver(enemiesController.getEnemySpawnManager().setSpawnConditions().setScoreBasedSpawnRate(20));
 
         Subject<Enemy> enemyDeathNotifier= enemiesController.getEnemyDeathManager().getEnemyDeathNotifier();
-        enemyDeathNotifier.addObserver(gameController.getGameScore());
+        enemyDeathNotifier.addObserver(waveSettings.getGameScore());
 
         Subject<PlayerState> playerStateSubject= playerController.getPlayerStateSubject();
-        playerStateSubject.addObserver(gameController.getGameStateManager());
+        playerStateSubject.addObserver(gameStateManager);
     }
 
-
     public void update(float delta){
-        GameState gameState= gameController.getGameStateManager().getGameState();
+        GameState gameState= gameStateManager.getGameState();
         switch(gameState){
             case RUNNING:
                 gameRunning(delta);
@@ -92,15 +96,17 @@ public class WaveRunner {
     private void gameRunning(float delta){
         worldController.update();
         sceneController.render();
+        waveSettings.update(delta);
         playerController.update(delta);
         enemiesController.update(delta);
     }
 
-    public void reset(){
-        enemiesController.getEnemyDeathManager().reset();
-        playerController.reset();
-        gameController.getGameStateManager().setGameState(GameState.RUNNING);
-    }
+//    public void reset(){
+//        enemiesController.getEnemyDeathManager().reset();
+//        playerController.reset();
+//
+////        waveSettings.getGameStateManager().setGameState(GameState.RUNNING);
+//    }
 
     public void draw(float delta){
         sceneController.render();
@@ -113,13 +119,12 @@ public class WaveRunner {
         spriteBatch.end();
 
         gameRunningHud.render(delta);
-        GameState gameState= gameController.getGameStateManager().getGameState();
+        GameState gameState= gameStateManager.getGameState();
 
         if(gameState== GameState.GAME_OVER){
             hudController.render(delta);
         }
     }
-
 
     public void resize(int width, int height){
         sceneController.resize(width, height);

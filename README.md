@@ -1,7 +1,19 @@
 # FallingBlocks
 
 
-# ENTITY class has useless variable 
+# Current Working on:
+    # Set number of enemy to spawn
+    # Set Enemy Type To Spawn
+    # Keep Count
+
+    //Lets call this a controller type stuff -> Control how many enemies to spawn. Difference in
+
+    #Lets think about how I can do this
+    #I can add a variable in spawnRateController. so, if the amount of enemySpawned >=
+
+
+# ENTITY class has useless variable
+
 
 # No difficulty Settings created yet
 # Game needs to be move to the next wave
@@ -9,13 +21,12 @@
 # Only one class for Enemy is Defined #Normal
 # Only one Movement and Attack Behaviour for Enemy is defined
 
+
 # CODE IS SHITTY UNREADABLE. NEEDS TO BE REFACTORED
 
 
 # Lets make game reset first upon entity touching enemies
 # Make enemy increase Score. Make hud Increase Score
-
-
 
 
 # Enemies Controller
@@ -29,6 +40,5 @@
 # and then a wave level class
 # so when I want to reset the game, I just make a new instance of the wave level class 
 # For game Stats, I can make a temp one for each wave and when the player passes the wave, I just add them 
-
 
 

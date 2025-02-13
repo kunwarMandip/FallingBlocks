@@ -1,12 +1,12 @@
 package com.libgdx.fallingblocks.controller;
 
 import com.badlogic.gdx.utils.Array;
-import com.libgdx.fallingblocks.observers.Observer;
+import com.libgdx.fallingblocks.observers.Observable;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.screen.hud.Hud;
 import com.libgdx.fallingblocks.screen.hud.HudEvent;
 
-public class HudController implements Observer<Hud>, HudEvent {
+public class HudController implements Observable<Hud>, HudEvent {
 
     private final Array<Hud> activeHud = new Array<>();
     private final Array<Hud> inActiveHud= new Array<>();
@@ -51,7 +51,7 @@ public class HudController implements Observer<Hud>, HudEvent {
      * @param event
      */
     @Override
-    public void notify(Hud event) {
+    public void onEvent(Hud event) {
         removeHud(event);
     }
 

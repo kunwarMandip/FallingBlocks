@@ -15,7 +15,6 @@ public class WaveController {
     }
 
     public void update(float delta){
-
     }
 
     public void setWaveSettingDto(WaveSettingDto waveSettingDto){

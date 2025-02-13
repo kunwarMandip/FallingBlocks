@@ -12,16 +12,16 @@ import static com.libgdx.fallingblocks.GlobalVariables.CATEGORY_ENEMY;
 import static com.libgdx.fallingblocks.GlobalVariables.CATEGORY_WALL;
 
 
-public class EnemyFactory implements IEnemyFactory {
+public class EnemyFactory {
 
-    private World world;
+    private final World world;
     public EnemyFactory(World world){
         this.world=world;
     }
 
+
     private Enemy createNormalEnemy(EnemyDto enemyDto){
         Enemy enemy= new NormalEnemy(enemyDto.spawnPosition, new Vector2(2, 2),enemyDto.speed);
-
         enemy.spawnBody(world);
         enemy.setMaskBit(CATEGORY_ENEMY, (short) ~(CATEGORY_WALL | CATEGORY_ENEMY));
         return enemy;
@@ -36,7 +36,6 @@ public class EnemyFactory implements IEnemyFactory {
     }
 
 
-    @Override
     public Enemy createEnemy(EnemyDto enemyDto) {
 
         switch (enemyDto.getEnemyType()){

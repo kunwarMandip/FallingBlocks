@@ -1,0 +1,15 @@
+[random / weighted] difference=> weighted means the value are exact.
+                                whereas measures means using pe
+limited =>
+unlimited =>
+
+
+wave_settings_options:
+    spawn_directions: [random / weighted]
+
+    spawn_rate_settings:{
+
+        max_enemy_count: [true / false],
+
+        enemy_distribution_setting: [random, weighted]
+    }
