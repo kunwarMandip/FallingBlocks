@@ -1,31 +1,37 @@
 package com.libgdx.fallingblocks.controller;
 
-import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnConditionController;
-import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.TimeBasedSpawnCondition;
-import com.libgdx.fallingblocks.game.score.GameScore;
+import com.libgdx.fallingblocks.game.wave.settings.death.EnemyDeath;
+import com.libgdx.fallingblocks.game.wave.settings.score.GameScore;
+import com.libgdx.fallingblocks.game.wave.settings.spawn.SpawnConditionController;
+import com.libgdx.fallingblocks.game.wave.settings.spawn.SpawnConditionListener;
 import com.libgdx.fallingblocks.parser.dto.levelDto.WaveSettingDto;
 
 public class WaveSettings {
 
-    private final GameScore gameScore= new GameScore();
-    private final SpawnConditionController spawnConditionController= new SpawnConditionController();
+    private final GameScore gameScore;
+    private final EnemyDeath enemyDeath;
+    private final SpawnConditionController spawnConditionController;
 
     public WaveSettings(WaveSettingDto waveSettingDto){
-        setSpawnCondition();
+        this.gameScore= new GameScore(0);
+        this.enemyDeath= new EnemyDeath();
+        this.spawnConditionController= new SpawnConditionController(this);
     }
 
-    private void setSpawnCondition(){
-        spawnConditionController.addSpawnCondition(new TimeBasedSpawnCondition(10));
+    public void update(float delta){
+        spawnConditionController.update(delta);
     }
-
-    public SpawnConditionController getSpawnConditionController(){
-        return spawnConditionController;
-    }
-
 
     public GameScore getGameScore(){
         return gameScore;
     }
 
+    public EnemyDeath getEnemyDeath(){
+        return enemyDeath;
+    }
+
+    public SpawnConditionListener getSpawnConditions(){
+        return spawnConditionController.getSpawnConditionListener();
+    }
 
 }

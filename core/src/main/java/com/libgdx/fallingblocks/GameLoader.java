@@ -25,12 +25,8 @@ public class GameLoader{
         waveRunner = new WaveRunner(waveDto, this, spriteBatch);
     }
 
-
     public WaveRunner getWaveLoader(){
         return waveRunner;
     }
-
-
-
 
 }

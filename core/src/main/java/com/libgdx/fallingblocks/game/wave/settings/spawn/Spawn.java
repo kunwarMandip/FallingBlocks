@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
+package com.libgdx.fallingblocks.game.wave.settings.spawn;
 
 public abstract class Spawn {
 
@@ -6,5 +6,9 @@ public abstract class Spawn {
 
     public void addListener(SpawnAble spawnAble){
         this.spawnAble= spawnAble;
+    }
+
+    public void removeListener(){
+        this.spawnAble=null;
     }
 }

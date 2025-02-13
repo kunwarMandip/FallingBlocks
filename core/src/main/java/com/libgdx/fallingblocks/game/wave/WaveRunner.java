@@ -9,7 +9,7 @@ import com.libgdx.fallingblocks.game.state.GameStateManager;
 import com.libgdx.fallingblocks.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
-import com.libgdx.fallingblocks.game.score.GameScore;
+import com.libgdx.fallingblocks.game.wave.settings.score.GameScore;
 import com.libgdx.fallingblocks.game.state.GameState;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
@@ -58,7 +58,7 @@ public class WaveRunner {
         this.sceneController    = new SceneController(waveDto.getTiledMapDto());
         this.worldController    = new WorldController(waveDto.getWorldDto(), sceneController.getTiledMap());
         this.playerController   = new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
-        this.enemiesController  = new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
+        this.enemiesController  = new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveSettings.getSpawnConditions() ,waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
 
         this.gameOverHud        = new GameOverHud(spriteBatch, this, gameLoader);
         inputListenerManager.addInputProcessor(gameOverHud.getStage());
@@ -96,6 +96,7 @@ public class WaveRunner {
     private void gameRunning(float delta){
         worldController.update();
         sceneController.render();
+        waveSettings.update(delta);
         playerController.update(delta);
         enemiesController.update(delta);
     }

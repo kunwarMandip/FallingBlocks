@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.libgdx.fallingblocks.game.wave.settings.spawn.SpawnConditionListener;
 import com.libgdx.fallingblocks.world.tiled.objects.spawnArea.MovementDirection;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.compact.EnemyDeathManager;
@@ -26,31 +27,15 @@ public class EnemiesController {
     private EnemyDeathManager enemyDeathManager;
     private EnemySpawnManager enemySpawnManager;
 
-    public EnemiesController(World world, Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas){
+//    public EnemiesController(World world, Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas){
+//        this.enemyDeathManager= new EnemyDeathManager(world, currentEnemies);
+//        this.enemySpawnManager= new EnemySpawnManager(world, playerPosition, enemiesSpawnInfoDto, spawnAreas, currentEnemies);
+//    }
+
+
+    public EnemiesController(World world, Vector2 playerPosition, SpawnConditionListener spawnConditions, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas) {
         this.enemyDeathManager= new EnemyDeathManager(world, currentEnemies);
-        this.enemySpawnManager= new EnemySpawnManager(world, playerPosition, enemiesSpawnInfoDto, spawnAreas, currentEnemies);
-    }
-
-
-    /**
-     * Things to do:
-     *      Remove Enemies
-     *      Spawn Enemies
-     *          - Spawn Enemies in the correct areas
-     *          - Spawn Enemies based on the wave
-     *                 - Spawn Enemies based on the wave's spawn rate
-     *                 - Spawn Enemies based on the wave's spawn amount
-     *
-     *      Update Enemies
-     *
-     *
-     *
-     * @param builder
-     */
-    public EnemiesController(Builder builder){
-//        this.enemyDeathManager= new EnemyDeathManager(builder.world, currentEnemies);
-//        this.enemySpawnManager= new EnemySpawnManager(builder.world, builder.playerPosition,
-//            builder.enemiesSpawnInfoDto, builder.spawnAreas, currentEnemies);
+        this.enemySpawnManager= new EnemySpawnManager(world, playerPosition, spawnConditions, enemiesSpawnInfoDto, spawnAreas, currentEnemies);
     }
 
     public void update(float delta) {
@@ -77,36 +62,5 @@ public class EnemiesController {
         return enemyDeathManager;
     }
 
-
-    public static class Builder{
-        private World world;
-        private Vector2 playerPosition;
-        private EnemiesSpawnInfoDto enemiesSpawnInfoDto;
-        private Map<MovementDirection, Vector2> spawnAreas;
-
-        public Builder setWorld(World world){
-            this.world= world;
-            return this;
-        }
-
-        public Builder setPlayerPosition(Vector2 playerPosition){
-            this.playerPosition= playerPosition;
-            return this;
-        }
-
-        public Builder setEnemiesSpawnInfoDto(EnemiesSpawnInfoDto enemiesSpawnInfoDto){
-            this.enemiesSpawnInfoDto= enemiesSpawnInfoDto;
-            return this;
-        }
-
-        public Builder setSpawnAreas(Map<MovementDirection, Vector2> spawnAreas){
-            this.spawnAreas= spawnAreas;
-            return this;
-        }
-
-        public EnemiesController build(){
-            return new EnemiesController(world, playerPosition, enemiesSpawnInfoDto, spawnAreas);
-        }
-    }
 
 }

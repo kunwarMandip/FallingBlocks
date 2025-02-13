@@ -3,10 +3,7 @@ package com.libgdx.fallingblocks.entity.enemy.compact;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnConditionController;
-import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.SpawnRateConditions;
-import com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.TimeBasedSpawnCondition;
-import com.libgdx.fallingblocks.game.spawn.SpawnController;
+import com.libgdx.fallingblocks.game.wave.settings.spawn.SpawnConditionListener;
 import com.libgdx.fallingblocks.world.tiled.objects.spawnArea.MovementDirection;
 import com.libgdx.fallingblocks.entity.enemy.services.EnemyDtoBuilder;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
@@ -20,15 +17,15 @@ public class EnemySpawnManager {
     private final Array<Enemy> currentEnemies;
     private final EnemyDtoBuilder dtoBuilder;
     private final EnemyFactory enemyFactory;
+    private final SpawnConditionListener spawnConditionListener;
 
 
-    private final SpawnConditionController spawnConditionController= new SpawnConditionController();
-
-    public EnemySpawnManager(World world, Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas, Array<Enemy> currentEnemies){
+    public EnemySpawnManager(World world, Vector2 playerPosition, SpawnConditionListener spawnConditionListener,  EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas, Array<Enemy> currentEnemies){
         this.currentEnemies=currentEnemies;
         this.enemyFactory= new EnemyFactory(world);
+        this.spawnConditionListener= spawnConditionListener;
         this.dtoBuilder= new EnemyDtoBuilder(playerPosition, enemiesSpawnInfoDto, spawnAreas);
-        this.spawnConditionController.addSpawnCondition(new TimeBasedSpawnCondition(10));
+
     }
 
 
@@ -36,9 +33,16 @@ public class EnemySpawnManager {
 
     public void spawn(float delta){
 
-        spawnConditionController.update(delta);
+//        spawnCondition.update(delta);
+//
+//        int numToSpawn= spawnCondition.getNumEnemiesToSpawn();
+//
+//        if(numToSpawn==0){
+//            return;
+//        }
 
-        int numToSpawn= spawnConditionController.getNumEnemiesToSpawn();
+
+        int numToSpawn= spawnConditionListener.getNumEnemiesToSpawn();
 
         if(numToSpawn==0){
             return;
@@ -46,7 +50,10 @@ public class EnemySpawnManager {
 
         for(int i=0; i<numToSpawn; i++){
             currentEnemies.add(enemyFactory.createEnemy(dtoBuilder.getEnemyDto()));
-            spawnConditionController.setAmountToSpawn(-1);
+            spawnConditionListener.setAmountToSpawn(-1);
+
+//            enemies.add(enemyFactory.createEnemy(dtoBuilder.getEnemyDto()));
+//            spawnCondition.setAmountToSpawn(-1);
         }
 
     }

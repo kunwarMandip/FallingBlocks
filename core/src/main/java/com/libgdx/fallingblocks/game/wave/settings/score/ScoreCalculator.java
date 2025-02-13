@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.game.score;
+package com.libgdx.fallingblocks.game.wave.settings.score;
 
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 

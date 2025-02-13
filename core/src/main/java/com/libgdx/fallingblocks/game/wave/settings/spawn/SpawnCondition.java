@@ -1,11 +1,11 @@
-package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
+package com.libgdx.fallingblocks.game.wave.settings.spawn;
 
 import com.badlogic.gdx.utils.Array;
+import com.libgdx.fallingblocks.observers.TimeAble;
 
-public class SpawnConditionController implements SpawnAble{
+public class SpawnCondition implements SpawnAble {
 
     private int numEnemiesToSpawn;
-
     private final Array<Spawn> spawnConditions= new Array<>();
     private final Array<TimeAble> timedSpawnConditions= new Array<>();
 

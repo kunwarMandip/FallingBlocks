@@ -16,6 +16,7 @@ public class Logger {
         SPAWN_ENEMY,
         DESTROY_ENEMY,
         WAVE_PARSER,
+        SPAWN_CONDITION,
         DISABLE_ALL
     }
 

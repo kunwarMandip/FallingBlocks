@@ -1,6 +1,10 @@
-package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
+package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.conditions;
 
-public class TimeBasedSpawnCondition extends Spawn implements TimeAble{
+import com.libgdx.fallingblocks.Logger;
+import com.libgdx.fallingblocks.game.wave.settings.spawn.Spawn;
+import com.libgdx.fallingblocks.observers.TimeAble;
+
+public class TimeBasedSpawnCondition extends Spawn implements TimeAble {
 
     private float spawnTimer;
     private float spawnRateCounter;
@@ -17,6 +21,7 @@ public class TimeBasedSpawnCondition extends Spawn implements TimeAble{
             return;
         }
 
+        Logger.log(Logger.Tags.SPAWN_CONDITION, "TimeBasedSpawnCondition: update: Spawning enemy");
         spawnAble.setAmountToSpawn(1);
         spawnRateCounter = 0f;
     }

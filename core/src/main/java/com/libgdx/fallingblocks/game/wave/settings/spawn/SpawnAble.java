@@ -1,4 +1,4 @@
-package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
+package com.libgdx.fallingblocks.game.wave.settings.spawn;
 
 public interface SpawnAble {
     void setAmountToSpawn(int amountToSpawn);

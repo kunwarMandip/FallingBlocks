@@ -1,6 +1,7 @@
-package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate;
+package com.libgdx.fallingblocks.entity.enemy.difficulty.spawnrate.conditions;
 
 import com.badlogic.gdx.utils.Array;
+import com.libgdx.fallingblocks.game.wave.settings.spawn.Spawn;
 import com.libgdx.fallingblocks.observers.DeathObserver;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 
