@@ -6,10 +6,10 @@ import com.libgdx.fallingblocks.controller.*;
 import com.libgdx.fallingblocks.GameLoader;
 import com.libgdx.fallingblocks.controller.WaveSettings;
 import com.libgdx.fallingblocks.game.state.GameStateManager;
+import com.libgdx.fallingblocks.game.wave.settings.score.GameScoreManager;
 import com.libgdx.fallingblocks.observers.Subject;
 import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.player.PlayerState;
-import com.libgdx.fallingblocks.game.wave.settings.score.GameScore;
 import com.libgdx.fallingblocks.game.state.GameState;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
@@ -67,9 +67,9 @@ public class WaveRunner {
     }
 
     private void setListeners(){
-        GameScore gameScore= waveSettings.getGameScore();
-        gameScore.getScoreObservers().addObserver(gameRunningHud);
-//        gameScore.getScoreObservers().addObserver(enemiesController.getEnemySpawnManager().setSpawnConditions().setScoreBasedSpawnRate(20));
+        GameScoreManager gameScoreManager = waveSettings.getGameScore();
+        gameScoreManager.getScoreObservers().addObserver(gameRunningHud);
+//        gameScoreManager.getScoreObservers().addObserver(enemiesController.getEnemySpawnManager().setSpawnConditions().setScoreBasedSpawnRate(20));
 
         Subject<Enemy> enemyDeathNotifier= enemiesController.getEnemyDeathManager().getEnemyDeathNotifier();
         enemyDeathNotifier.addObserver(waveSettings.getGameScore());

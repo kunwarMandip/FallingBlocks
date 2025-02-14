@@ -28,8 +28,6 @@ public class EnemySpawnManager {
 
     }
 
-
-
     public void spawn(float delta){
         int numToSpawn= spawnConditionListener.getNumEnemiesToSpawn();
 
@@ -44,26 +42,6 @@ public class EnemySpawnManager {
 
     }
 
-    public void spawnEnemies(){
-
-    }
-
-//    public void spawnEnemies(){
-//
-//        if(enemySpawnCounter >= maxEnemySpawnAble){
-//            Logger.log(SPAWN_ENEMY, "Max Enemy Spawned");
-//            return;
-//        }
-
-    //        int numEnemyToSpawn= spawnRateConditions.getAmountToSpawn();
-    //
-    //        for(int i=0; i<numEnemyToSpawn; i++){
-    //            Logger.log(SPAWN_ENEMY, "Spawning Enemy");
-    //            EnemyDto enemyDto= dtoBuilder.getEnemyDto();
-    //            currentEnemies.add(enemyFactory.createEnemy(enemyDto));
-    //            enemySpawnCounter++;
-    //        }
-//    }
 
 
 
