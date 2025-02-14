@@ -30,30 +30,16 @@ public class EnemySpawnManager {
 
 
 
-
     public void spawn(float delta){
-
-//        spawnCondition.update(delta);
-//
-//        int numToSpawn= spawnCondition.getNumEnemiesToSpawn();
-//
-//        if(numToSpawn==0){
-//            return;
-//        }
-
-
         int numToSpawn= spawnConditionListener.getNumEnemiesToSpawn();
 
-        if(numToSpawn==0){
+        if(numToSpawn<=0){
+            System.out.println("No Enemies to Spawn");
             return;
         }
 
         for(int i=0; i<numToSpawn; i++){
             currentEnemies.add(enemyFactory.createEnemy(dtoBuilder.getEnemyDto()));
-            spawnConditionListener.setAmountToSpawn(-1);
-
-//            enemies.add(enemyFactory.createEnemy(dtoBuilder.getEnemyDto()));
-//            spawnCondition.setAmountToSpawn(-1);
         }
 
     }
