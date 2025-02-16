@@ -12,7 +12,7 @@ import static com.libgdx.fallingblocks.GlobalVariables.isFileExist;
 import static com.libgdx.fallingblocks.GlobalVariables.isNodeExists;
 
 
-public class WaveSettingsDtoParser {
+public class WaveSettingsParser {
 
     public Array<WaveSettingDto> getWaveSettingDtoArray(String filePath){
         FileHandle fileHandle = Gdx.files.internal(filePath);

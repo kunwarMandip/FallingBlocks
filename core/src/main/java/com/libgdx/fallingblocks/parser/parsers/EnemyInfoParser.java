@@ -5,7 +5,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
-import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 
 import java.util.HashMap;
@@ -14,7 +13,7 @@ import java.util.Map;
 import static com.libgdx.fallingblocks.GlobalVariables.isFileExist;
 import static com.libgdx.fallingblocks.GlobalVariables.isNodeExists;
 
-public class EnemyInfoDtoParser {
+public class EnemyInfoParser {
 
     public Array<EnemiesSpawnInfoDto> getEnemyInfoDto(String filePath){
         FileHandle fileHandle = Gdx.files.internal(filePath);

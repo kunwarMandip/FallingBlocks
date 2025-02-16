@@ -7,6 +7,7 @@ public class EnemiesSpawnInfoDto {
     private final Map<String, Integer> spawnDirections;
     private final Map<String, Integer> enemyDistributions;
 
+
     public EnemiesSpawnInfoDto(Map<String, Integer> spawnDirections, Map<String, Integer> enemyDistributions) {
         this.spawnDirections = spawnDirections;
         this.enemyDistributions = enemyDistributions;
@@ -19,4 +20,7 @@ public class EnemiesSpawnInfoDto {
     public Map<String, Integer> getSpawnDirections() {
         return spawnDirections;
     }
+
+
+
 }

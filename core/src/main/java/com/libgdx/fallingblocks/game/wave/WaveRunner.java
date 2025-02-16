@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.controller.*;
 import com.libgdx.fallingblocks.GameLoader;
-import com.libgdx.fallingblocks.controller.WaveSettings;
 import com.libgdx.fallingblocks.game.state.GameStateManager;
 import com.libgdx.fallingblocks.game.wave.settings.score.GameScoreManager;
 import com.libgdx.fallingblocks.observers.Subject;
@@ -58,8 +57,7 @@ public class WaveRunner {
         this.sceneController    = new SceneController(waveDto.getTiledMapDto());
         this.worldController    = new WorldController(waveDto.getWorldDto(), sceneController.getTiledMap());
         this.playerController   = new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
-        this.enemiesController  = new EnemiesController(worldController.getWorld(), playerController.getPlayer().getBodyPosition(), waveSettings.getSpawnConditions() ,waveDto.getEnemyInfoDto(), worldController.getSpawnAreas());
-
+        this.enemiesController  = new EnemiesController(worldController.getWorld(), playerController.getPlayerPosition(), waveSettings.getSpawnConditionListener(), waveDto.getEnemiesSpawnInfoDto(), worldController.getSpawnAreas());
         this.gameOverHud        = new GameOverHud(spriteBatch, this, gameLoader);
         inputListenerManager.addInputProcessor(gameOverHud.getStage());
 

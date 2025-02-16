@@ -19,7 +19,6 @@ public class EnemyFactory {
         this.world=world;
     }
 
-
     private Enemy createNormalEnemy(EnemyDto enemyDto){
         Enemy enemy= new NormalEnemy(enemyDto.spawnPosition, new Vector2(2, 2),enemyDto.speed);
         enemy.spawnBody(world);
@@ -37,7 +36,6 @@ public class EnemyFactory {
 
 
     public Enemy createEnemy(EnemyDto enemyDto) {
-
         switch (enemyDto.getEnemyType()){
             case NORMAL:
                 return createNormalEnemy(enemyDto);

@@ -1,5 +1,6 @@
 package com.libgdx.fallingblocks.controller;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.libgdx.fallingblocks.observers.Subject;
 import com.libgdx.fallingblocks.entity.player.Player;
@@ -55,12 +56,17 @@ public class PlayerController {
         isDestroyEnemy();
     }
 
+
     public void setPlayerState(PlayerState playerState){
         playerStateSubject.notify(playerState);
     }
 
     public Subject<PlayerState> getPlayerStateSubject(){
         return playerStateSubject;
+    }
+
+    public Vector2 getPlayerPosition(){
+        return player.getBodyPosition();
     }
 
     public Player getPlayer(){

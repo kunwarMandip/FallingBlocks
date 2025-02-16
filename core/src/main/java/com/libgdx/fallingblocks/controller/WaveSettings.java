@@ -30,7 +30,7 @@ public class WaveSettings {
         return enemyDeathManager;
     }
 
-    public SpawnConditionListener getSpawnConditions(){
+    public SpawnConditionListener getSpawnConditionListener(){
         return spawnConditionController.getSpawnConditionListener();
     }
 

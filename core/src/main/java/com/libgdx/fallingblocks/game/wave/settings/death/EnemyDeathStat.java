@@ -1,6 +1,5 @@
 package com.libgdx.fallingblocks.game.wave.settings.death;
 
-import com.libgdx.fallingblocks.entity.enemy.types.Enemy;
 import com.libgdx.fallingblocks.entity.enemy.types.EnemyType;
 
 import java.util.HashMap;
@@ -18,29 +17,32 @@ public class EnemyDeathStat {
         this.enemyDeathMap= enemyDeathMap;
     }
 
-    public int totalEnemyDeath(){
-        return enemyDeathMap.values().stream().max(Integer::compareTo).orElse(0);
+    /**
+     * @return a map of the total number of deaths of each enemy type
+     */
+    public Map<EnemyType, Integer> totalEnemyDeath(){
+        return enemyDeathMap;
     }
 
-    public void addEnemyDeath(Enemy enemy){
-        EnemyType enemyType= enemy.getEnemyType();
+
+    /**
+     * Records the death the give enemyType to the map
+     * @param enemyType @EnemyType the enemy type that died
+     */
+    public void addEnemyDeath(EnemyType enemyType){
         enemyDeathMap.putIfAbsent(enemyType, 0);
         enemyDeathMap.put(enemyType, enemyDeathMap.get(enemyType)+1);
     }
 
+
+    /**
+     * @param enemyType @EnemyType Enemy type to get the death count of
+     * @return Total number of times the given enemy type has died
+     */
     public EnemyTypeDeathStat getEnemyTypeDeathStat(EnemyType enemyType){
         int deathCount= enemyDeathMap.getOrDefault(enemyType, 0);
         return new EnemyTypeDeathStat(enemyType, enemyDeathMap.get(enemyType));
     }
 
-    public static class EnemyTypeDeathStat{
-        public int deathCount;
-        public EnemyType enemyType;
-
-        public EnemyTypeDeathStat(EnemyType enemyType, int deathCount){
-            this.enemyType= enemyType;
-            this.deathCount= deathCount;
-        }
-    }
 
 }

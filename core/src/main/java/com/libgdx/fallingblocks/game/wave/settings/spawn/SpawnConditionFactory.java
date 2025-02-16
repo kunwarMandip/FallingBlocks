@@ -20,10 +20,12 @@ public class SpawnConditionFactory {
         return scoreBasedSpawnCondition;
     }
 
+    //TODO: Fix this method
     public DeathBasedCondition deathBasedSpawnCondition(Array<?> args){
-        DeathBasedCondition deathBasedSpawnCondition= new DeathBasedCondition((int) args.get(0));
-        waveSettings.getEnemyDeath().getScoreObservers().addObserver(deathBasedSpawnCondition);
-        return deathBasedSpawnCondition;
+//        DeathBasedCondition deathBasedSpawnCondition= new DeathBasedCondition((int) args.get(0));
+//        waveSettings.getGameScore().getScoreObservers().addObserver(deathBasedSpawnCondition);
+//        return deathBasedSpawnCondition;
+        return null;
     }
 
 
