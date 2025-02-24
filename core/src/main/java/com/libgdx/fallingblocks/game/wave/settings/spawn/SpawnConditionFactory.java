@@ -15,7 +15,8 @@ public class SpawnConditionFactory {
     }
 
     public ScoreBasedSpawnCondition scoreBasedSpawnCondition(Array<?> args){
-        ScoreBasedSpawnCondition scoreBasedSpawnCondition= new ScoreBasedSpawnCondition((int) args.get(0));
+        int score = ((Float) args.get(0)).intValue();
+        ScoreBasedSpawnCondition scoreBasedSpawnCondition= new ScoreBasedSpawnCondition(score);
         waveSettings.getGameScore().getScoreObservers().addObserver(scoreBasedSpawnCondition);
         return scoreBasedSpawnCondition;
     }
@@ -30,7 +31,7 @@ public class SpawnConditionFactory {
 
 
     public TimeBasedSpawnCondition timeBasedSpawnCondition(Array<?> args){
-        return new TimeBasedSpawnCondition((int) args.get(0));
+        return new TimeBasedSpawnCondition((float) args.get(0));
     }
 
     public Spawn spawnCondition(SpawnConditionType spawnConditionType, Array<?> args){

@@ -5,7 +5,9 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
+import com.libgdx.fallingblocks.parser.dto.wave.EnemySpawnConditionDto;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +27,44 @@ public class EnemyInfoParser {
 
         Array<EnemiesSpawnInfoDto> enemyInfoDtoArray= new Array<>();
         for (JsonValue wave : wavesNode) {
+
             Map<String, Integer> spawnDirection= parseNodeToMap(wave.get("directions"));
             Map<String, Integer> enemiesDistribution= parseNodeToMap(wave.get("enemyDistribution"));
-            enemyInfoDtoArray.add(new EnemiesSpawnInfoDto(spawnDirection, enemiesDistribution));
+            EnemySpawnConditionDto enemySpawnConditionDto= getCondition(wave);
+
+            EnemiesSpawnInfoDto enemiesSpawnInfoDto= new EnemiesSpawnInfoDto.EnemiesSpawnInfoDtoBuilder()
+                .setEnemySpawnConditionDto(enemySpawnConditionDto)
+                .setSpawnDirections(spawnDirection)
+                .setEnemyDistributions(enemiesDistribution)
+                .build();
+
+            enemyInfoDtoArray.add(enemiesSpawnInfoDto);
         }
         return enemyInfoDtoArray;
+    }
+
+
+
+
+    private EnemySpawnConditionDto getCondition(JsonValue node){
+
+        JsonValue conditionNode= node.get("spawnCondition");
+
+        String condition= conditionNode.getString("condition");
+        JsonValue spawnArgumentsNode= conditionNode.get("spawnArguments");
+
+        Array<Float> spawnArguments= new Array<>();
+        for(JsonValue arg: spawnArgumentsNode){
+            spawnArguments.add(arg.asFloat());
+        }
+
+        EnemySpawnConditionDto enemySpawnConditionDto= new EnemySpawnConditionDto();
+        enemySpawnConditionDto.spawnCondition= condition;
+        enemySpawnConditionDto.spawnArguments= spawnArguments;
+
+        Logger.log(Logger.Tags.WAVE_PARSER, "EnemySpawnConditionDto: " + enemySpawnConditionDto.toString());
+        return enemySpawnConditionDto;
+
     }
 
     private Map<String, Integer> parseNodeToMap(JsonValue targetNode) {

@@ -20,8 +20,6 @@ public class EnemiesController {
     private final Array<Enemy> currentEnemies= new Array<>();
 
 
-    private final EnemySettingsManager enemySettingsManager;
-
     public EnemiesController(World world, Vector2 playerPosition, SpawnConditionListener spawnConditionListener, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas) {
         this.enemyDeathManager= new EnemyDeathManager(world, currentEnemies);
         this.enemySpawnManager= new EnemySpawnManager(world, playerPosition, spawnConditionListener, enemiesSpawnInfoDto, spawnAreas);

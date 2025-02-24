@@ -1,7 +1,6 @@
 package com.libgdx.fallingblocks;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonValue;
 
 public class GlobalVariables {
@@ -16,6 +15,8 @@ public class GlobalVariables {
     public static final short CATEGORY_ENEMY_SPAWN_AREA = 0x0008;
     public static final short CATEGORY_OUTER_BOUND      = 0x00016;
 
+
+    public static final String gameJsonPath = "jsons/game";
 
     public static int getRandomValue(int maxValue){
         return (int) (Math.random() * maxValue) + 1;

@@ -27,6 +27,7 @@ public class Logger {
         disableTag(Tags.DISABLE_ALL);
     }
 
+
     public static void enableTag(Tags tag) {
         enabledTags.add(tag);
     }

@@ -12,6 +12,8 @@ import com.libgdx.fallingblocks.entity.player.PlayerState;
 import com.libgdx.fallingblocks.game.state.GameState;
 import com.libgdx.fallingblocks.input.InputListenerManager;
 import com.libgdx.fallingblocks.parser.dto.WaveDto;
+import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
+import com.libgdx.fallingblocks.parser.dto.wave.EnemySpawnConditionDto;
 import com.libgdx.fallingblocks.screen.hud.GameOver;
 import com.libgdx.fallingblocks.screen.hud.GameOverHud;
 import com.libgdx.fallingblocks.screen.hud.GameRunningHud;
@@ -45,8 +47,16 @@ public class WaveRunner {
         this.waveDto            = waveDto;
         this.spriteBatch        = spriteBatch;
 
+        EnemiesSpawnInfoDto enemiesSpawnInfoDto = waveDto.getEnemiesSpawnInfoDto();
+        EnemySpawnConditionDto enemySpawnConditionDto = enemiesSpawnInfoDto.getEnemySpawnConditionDto();
+
+
+//        EnemiesSpawnInfoDto
+
         this.gameStateManager   = new GameStateManager();
-        this.waveSettings       = new WaveSettings(waveDto.getWaveSettingDto());
+        this.waveSettings       = new WaveSettings(waveDto.getWaveSettingDto(), enemySpawnConditionDto);
+
+
 
         this.hudController      = new HudController(inputListenerManager);
         this.hudController.addActiveHud(new GameOver(null, spriteBatch));
@@ -57,7 +67,7 @@ public class WaveRunner {
         this.sceneController    = new SceneController(waveDto.getTiledMapDto());
         this.worldController    = new WorldController(waveDto.getWorldDto(), sceneController.getTiledMap());
         this.playerController   = new PlayerController(worldController.getWorld(), waveDto.getPlayerDto(), inputListenerManager);
-        this.enemiesController  = new EnemiesController(worldController.getWorld(), playerController.getPlayerPosition(), waveSettings.getSpawnConditionListener(), waveDto.getEnemiesSpawnInfoDto(), worldController.getSpawnAreas());
+        this.enemiesController  = new EnemiesController(worldController.getWorld(), playerController.getPlayerPosition(), waveSettings.getSpawnConditionListener(), enemiesSpawnInfoDto, worldController.getSpawnAreas());
         this.gameOverHud        = new GameOverHud(spriteBatch, this, gameLoader);
         inputListenerManager.addInputProcessor(gameOverHud.getStage());
 
