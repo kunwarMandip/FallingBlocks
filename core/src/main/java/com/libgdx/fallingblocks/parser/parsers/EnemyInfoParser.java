@@ -30,10 +30,10 @@ public class EnemyInfoParser {
 
             Map<String, Integer> spawnDirection= parseNodeToMap(wave.get("directions"));
             Map<String, Integer> enemiesDistribution= parseNodeToMap(wave.get("enemyDistribution"));
-            EnemySpawnConditionDto enemySpawnConditionDto= getCondition(wave);
+            Array<EnemySpawnConditionDto> enemySpawnConditionDto= getCondition(wave);
 
             EnemiesSpawnInfoDto enemiesSpawnInfoDto= new EnemiesSpawnInfoDto.EnemiesSpawnInfoDtoBuilder()
-                .setEnemySpawnConditionDto(enemySpawnConditionDto)
+                .setEnemySpawnConditionDtoArray(enemySpawnConditionDto)
                 .setSpawnDirections(spawnDirection)
                 .setEnemyDistributions(enemiesDistribution)
                 .build();
@@ -44,27 +44,50 @@ public class EnemyInfoParser {
     }
 
 
+//    private Array<EnemySpawnConditionDto> getCondition(JsonValue node){
+//
+//        JsonValue conditionNode= node.get("spawnCondition");
+//        Array<EnemySpawnConditionDto> enemySpawnConditionDtoArray= new Array<>();
+//
+//        String condition= conditionNode.getString("condition");
+//        JsonValue spawnArgumentsNode= conditionNode.get("spawnArguments");
+//
+//
+//        Array<Float> spawnArguments= new Array<>();
+//        for(JsonValue arg: spawnArgumentsNode){
+//            spawnArguments.add(arg.asFloat());
+//        }
+//
+//        EnemySpawnConditionDto enemySpawnConditionDto= new EnemySpawnConditionDto();
+//        enemySpawnConditionDto.spawnCondition= condition;
+//        enemySpawnConditionDto.spawnArguments= spawnArguments;
+//
+//        Logger.log(Logger.Tags.WAVE_PARSER, "EnemySpawnConditionDto: " + enemySpawnConditionDto.toString());
+//        return enemySpawnConditionDto;
+//    }
 
+    private Array<EnemySpawnConditionDto> getCondition(JsonValue node){
 
-    private EnemySpawnConditionDto getCondition(JsonValue node){
+        Array<EnemySpawnConditionDto> enemySpawnConditionDtoArray= new Array<>();
 
-        JsonValue conditionNode= node.get("spawnCondition");
+        JsonValue conditionNode= node.get("spawnConditions");
 
-        String condition= conditionNode.getString("condition");
-        JsonValue spawnArgumentsNode= conditionNode.get("spawnArguments");
+        for(JsonValue condition: conditionNode){
+            String type= condition.getString("condition");
+            JsonValue spawnArgumentsNode= condition.get("spawnArguments");
 
-        Array<Float> spawnArguments= new Array<>();
-        for(JsonValue arg: spawnArgumentsNode){
-            spawnArguments.add(arg.asFloat());
+            Array<Float> spawnArguments= new Array<>();
+            for(JsonValue arg: spawnArgumentsNode){
+                spawnArguments.add(arg.asFloat());
+            }
+
+            EnemySpawnConditionDto enemySpawnConditionDto= new EnemySpawnConditionDto();
+            enemySpawnConditionDto.spawnCondition= type;
+            enemySpawnConditionDto.spawnArguments= spawnArguments;
+
+            enemySpawnConditionDtoArray.add(enemySpawnConditionDto);
         }
-
-        EnemySpawnConditionDto enemySpawnConditionDto= new EnemySpawnConditionDto();
-        enemySpawnConditionDto.spawnCondition= condition;
-        enemySpawnConditionDto.spawnArguments= spawnArguments;
-
-        Logger.log(Logger.Tags.WAVE_PARSER, "EnemySpawnConditionDto: " + enemySpawnConditionDto.toString());
-        return enemySpawnConditionDto;
-
+        return enemySpawnConditionDtoArray;
     }
 
     private Map<String, Integer> parseNodeToMap(JsonValue targetNode) {

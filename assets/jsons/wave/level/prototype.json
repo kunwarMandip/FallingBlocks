@@ -1,0 +1,44 @@
+{
+  "gameSettings":
+  {
+    "totalWaves": 2
+  },
+
+
+  "waves":
+  [
+    {
+      "waveNumber": 1,
+
+      "waveSettings": {
+
+      },
+
+      "enemyInfo": {
+
+      },
+
+      "tiledMap": {
+
+      }
+
+    },
+
+    {
+      "waveNumber": 2,
+      "enemyInfo": {
+
+      },
+
+      "tiledMap": {
+
+      }
+
+
+    }
+
+  ]
+
+
+
+}

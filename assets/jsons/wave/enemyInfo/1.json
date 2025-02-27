@@ -17,10 +17,17 @@
         "normal": 100
       },
 
-      "spawnCondition": {
-        "condition": "TIME_BASED",
-        "spawnArguments": [2]
-      },
+      "spawnConditions": [
+        {
+          "condition": "TIME_BASED",
+          "spawnArguments": [2]
+        },
+        {
+          "condition": "SCORE_BASED",
+          "spawnArguments": [10]
+        }
+      ],
+
 
       "spawnSettings": {
         "spawnRate": {

@@ -1,17 +1,19 @@
 package com.libgdx.fallingblocks.parser.dto.wave;
 
+import com.badlogic.gdx.utils.Array;
+
 import java.util.Map;
 
 public class EnemiesSpawnInfoDto {
 
     private final Map<String, Integer> spawnDirections;
     private final Map<String, Integer> enemyDistributions;
-    private final EnemySpawnConditionDto enemySpawnConditionDto;
+    private final Array<EnemySpawnConditionDto> enemySpawnConditionDtoArray;
 
     private EnemiesSpawnInfoDto(EnemiesSpawnInfoDtoBuilder builder) {
         enemyDistributions = builder.enemyDistributions;
         spawnDirections = builder.spawnDirections;
-        enemySpawnConditionDto = builder.enemySpawnConditionDto;
+        enemySpawnConditionDtoArray = builder.enemySpawnConditionDtoArray;
     }
 
     public Map<String, Integer> getEnemyDistributions() {
@@ -22,15 +24,14 @@ public class EnemiesSpawnInfoDto {
         return spawnDirections;
     }
 
-    public EnemySpawnConditionDto getEnemySpawnConditionDto() {
-        return enemySpawnConditionDto;
+    public Array<EnemySpawnConditionDto> getEnemySpawnConditionDtoArray() {
+        return enemySpawnConditionDtoArray;
     }
-
 
     public static final class EnemiesSpawnInfoDtoBuilder {
         private Map<String, Integer> enemyDistributions;
         private Map<String, Integer> spawnDirections;
-        private EnemySpawnConditionDto enemySpawnConditionDto;
+        private Array<EnemySpawnConditionDto> enemySpawnConditionDtoArray;
 
         public EnemiesSpawnInfoDtoBuilder() {
         }
@@ -45,8 +46,8 @@ public class EnemiesSpawnInfoDto {
             return this;
         }
 
-        public EnemiesSpawnInfoDtoBuilder setEnemySpawnConditionDto(EnemySpawnConditionDto enemySpawnConditionDto) {
-            this.enemySpawnConditionDto = enemySpawnConditionDto;
+        public EnemiesSpawnInfoDtoBuilder setEnemySpawnConditionDtoArray(Array<EnemySpawnConditionDto> enemySpawnConditionDtoArray) {
+            this.enemySpawnConditionDtoArray = enemySpawnConditionDtoArray;
             return this;
         }
 
@@ -55,5 +56,3 @@ public class EnemiesSpawnInfoDto {
         }
     }
 }
-
-

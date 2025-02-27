@@ -1,6 +1,7 @@
 package com.libgdx.fallingblocks.game.wave;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.controller.*;
 import com.libgdx.fallingblocks.GameLoader;
@@ -48,7 +49,7 @@ public class WaveRunner {
         this.spriteBatch        = spriteBatch;
 
         EnemiesSpawnInfoDto enemiesSpawnInfoDto = waveDto.getEnemiesSpawnInfoDto();
-        EnemySpawnConditionDto enemySpawnConditionDto = enemiesSpawnInfoDto.getEnemySpawnConditionDto();
+        Array<EnemySpawnConditionDto> enemySpawnConditionDto = enemiesSpawnInfoDto.getEnemySpawnConditionDtoArray();
 
 
 //        EnemiesSpawnInfoDto
