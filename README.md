@@ -1,15 +1,13 @@
 # FallingBlocks
 
 
-# Current Working on:
-    # Set number of enemy to spawn
-    # Set Enemy Type To Spawn
-    # Keep Count
+# CURRENT:
+    # ADD LOSE CONDITION    
+    # ADD WIN CONDITION
 
-    //Lets call this a controller type stuff -> Control how many enemies to spawn. Difference in
+# Finished: 
+    # SET SPAWN CONDITION AT THE START OF THE GAME
 
-    #Lets think about how I can do this
-    #I can add a variable in spawnRateController. so, if the amount of enemySpawned >=
 
 
 # ENTITY class has useless variable
