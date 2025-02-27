@@ -10,7 +10,7 @@ import com.libgdx.fallingblocks.parser.dto.wave.WorldDto;
 
 import static com.libgdx.fallingblocks.GlobalVariables.isFileExist;
 
-public class WorldDtoParser {
+public class Box2DWorldParser {
 
     public Array<WorldDto> getWorldDto(String filePath){
         FileHandle fileHandle = Gdx.files.internal(filePath);

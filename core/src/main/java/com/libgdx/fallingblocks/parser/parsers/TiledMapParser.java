@@ -5,7 +5,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
-import com.libgdx.fallingblocks.Logger;
 import com.libgdx.fallingblocks.parser.dto.wave.TiledMapDto;
 
 import static com.libgdx.fallingblocks.GlobalVariables.isFileExist;
@@ -29,5 +28,7 @@ public class TiledMapParser {
 
         return tiledMapDtoArray;
     }
+
+
 
 }

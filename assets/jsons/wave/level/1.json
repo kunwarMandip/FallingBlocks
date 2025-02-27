@@ -1,0 +1,49 @@
+{
+  "gameSettings":
+  {
+    "totalWaves": 1
+  },
+
+
+  "waves":
+  [
+    {
+      "waveNumber": 1,
+
+      "waveSettings": {
+        "normal": 100
+      },
+
+      "worldInfo": {
+        "sleep": "false",
+        "gravity": [0, 0]
+      },
+
+
+      "enemyInfo": {
+
+        "enemyDistribution": {
+          "normal": 100,
+          "quick": 100
+        },
+
+        "directions": {
+          "top": 20,
+          "left": 20,
+          "right": 30,
+          "bottom": 30
+        },
+
+        "spawnCondition": {
+          "condition": "TIME_BASED",
+          "spawnArguments": [2]
+        }
+      }
+
+    }
+
+  ]
+
+
+
+}
