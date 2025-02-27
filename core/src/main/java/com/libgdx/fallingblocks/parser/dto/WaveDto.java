@@ -45,7 +45,7 @@ public class WaveDto {
         return waveSettingDto;
     }
 
-    public EnemiesSpawnInfoDto getEnemyInfoDto() {
+    public EnemiesSpawnInfoDto getEnemiesSpawnInfoDto() {
         return enemiesSpawnInfoDto;
     }
 

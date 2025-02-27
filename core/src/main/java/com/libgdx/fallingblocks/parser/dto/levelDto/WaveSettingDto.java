@@ -7,6 +7,7 @@ public class WaveSettingDto {
 
     public String spawnCondition;
 
+
     public int getTotalEnemies() {
         return totalEnemies;
     }

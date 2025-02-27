@@ -13,29 +13,16 @@ import com.libgdx.fallingblocks.parser.dto.wave.EnemiesSpawnInfoDto;
 
 import java.util.Map;
 
-/**
- * I want this to control everything about the enemies:
- *  Spawn Enemies, Remove Enemies, Update Enemies
- *
- *
- *
- *
- */
 public class EnemiesController {
 
+    private final EnemyDeathManager enemyDeathManager;
+    private final EnemySpawnManager enemySpawnManager;
     private final Array<Enemy> currentEnemies= new Array<>();
-    private EnemyDeathManager enemyDeathManager;
-    private EnemySpawnManager enemySpawnManager;
-
-//    public EnemiesController(World world, Vector2 playerPosition, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas){
-//        this.enemyDeathManager= new EnemyDeathManager(world, currentEnemies);
-//        this.enemySpawnManager= new EnemySpawnManager(world, playerPosition, enemiesSpawnInfoDto, spawnAreas, currentEnemies);
-//    }
 
 
-    public EnemiesController(World world, Vector2 playerPosition, SpawnConditionListener spawnConditions, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas) {
+    public EnemiesController(World world, Vector2 playerPosition, SpawnConditionListener spawnConditionListener, EnemiesSpawnInfoDto enemiesSpawnInfoDto, Map<MovementDirection, Vector2> spawnAreas) {
         this.enemyDeathManager= new EnemyDeathManager(world, currentEnemies);
-        this.enemySpawnManager= new EnemySpawnManager(world, playerPosition, spawnConditions, enemiesSpawnInfoDto, spawnAreas, currentEnemies);
+        this.enemySpawnManager= new EnemySpawnManager(world, playerPosition, spawnConditionListener, enemiesSpawnInfoDto, spawnAreas);
     }
 
     public void update(float delta) {
@@ -45,7 +32,8 @@ public class EnemiesController {
             enemy.update(delta);
         }
 
-        enemySpawnManager.spawn(delta);
+        enemySpawnManager.spawnEnemies(currentEnemies);
+
     }
 
     public void draw(SpriteBatch spriteBatch){
@@ -54,9 +42,6 @@ public class EnemiesController {
         }
     }
 
-    public EnemySpawnManager getEnemySpawnManager(){
-        return enemySpawnManager;
-    }
 
     public EnemyDeathManager getEnemyDeathManager(){
         return enemyDeathManager;

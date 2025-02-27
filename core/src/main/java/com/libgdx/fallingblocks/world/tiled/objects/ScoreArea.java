@@ -11,7 +11,7 @@ public class ScoreArea{
     private Rectangle rectangleArea;
 
     public ScoreArea(World world, TiledMap tiledMap) {
-        MapLayer targetLayer= tiledMap.getLayers().get("GameScore");
+        MapLayer targetLayer= tiledMap.getLayers().get("GameScoreManager");
         for (RectangleMapObject object : targetLayer.getObjects().getByType(RectangleMapObject.class)) {
             this.rectangleArea = object.getRectangle();
         }

@@ -5,7 +5,12 @@
       "startDelay": 0,
       "duration": 30,
       "totalEnemies": 100,
-      "spawnCondition": "timed"
+
+      "spawnCondition": {
+        "condition": "timed",
+        "spawnArguments": [0.5, 0.5]
+      }
+
     }
   ]
 }

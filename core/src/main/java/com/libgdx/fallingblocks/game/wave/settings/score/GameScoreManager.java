@@ -11,12 +11,12 @@ import static com.libgdx.fallingblocks.Logger.Tags.SCORE_SETTER;
  * Handles the score of the game.
  * Observable class that notifies its observers when the score changes.
  */
-public class GameScore implements Observable<Enemy> {
+public class GameScoreManager implements Observable<Enemy> {
     private int score;
     private final Subject<Integer> scoreObservers= new Subject<>();
     private final ScoreCalculator scoreCalculator= new ScoreCalculator();
 
-    public GameScore(int score){
+    public GameScoreManager(int score){
         this.score=score;
     }
 

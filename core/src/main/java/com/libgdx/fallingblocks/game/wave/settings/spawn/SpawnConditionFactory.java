@@ -15,20 +15,23 @@ public class SpawnConditionFactory {
     }
 
     public ScoreBasedSpawnCondition scoreBasedSpawnCondition(Array<?> args){
-        ScoreBasedSpawnCondition scoreBasedSpawnCondition= new ScoreBasedSpawnCondition((int) args.get(0));
+        int score = ((Float) args.get(0)).intValue();
+        ScoreBasedSpawnCondition scoreBasedSpawnCondition= new ScoreBasedSpawnCondition(score);
         waveSettings.getGameScore().getScoreObservers().addObserver(scoreBasedSpawnCondition);
         return scoreBasedSpawnCondition;
     }
 
+    //TODO: Fix this method
     public DeathBasedCondition deathBasedSpawnCondition(Array<?> args){
-        DeathBasedCondition deathBasedSpawnCondition= new DeathBasedCondition((int) args.get(0));
-        waveSettings.getEnemyDeath().getScoreObservers().addObserver(deathBasedSpawnCondition);
-        return deathBasedSpawnCondition;
+//        DeathBasedCondition deathBasedSpawnCondition= new DeathBasedCondition((int) args.get(0));
+//        waveSettings.getGameScore().getScoreObservers().addObserver(deathBasedSpawnCondition);
+//        return deathBasedSpawnCondition;
+        return null;
     }
 
 
     public TimeBasedSpawnCondition timeBasedSpawnCondition(Array<?> args){
-        return new TimeBasedSpawnCondition((int) args.get(0));
+        return new TimeBasedSpawnCondition((float) args.get(0));
     }
 
     public Spawn spawnCondition(SpawnConditionType spawnConditionType, Array<?> args){

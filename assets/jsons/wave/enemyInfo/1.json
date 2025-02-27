@@ -4,17 +4,31 @@
       "waveNumber": 1,
       "settings":{
         "spawn_direction": "random"
-
       },
+
       "directions": {
         "top": 20,
         "left": 20,
         "right": 30,
         "bottom": 30
       },
+
       "enemyDistribution": {
         "normal": 100
       },
+
+      "spawnConditions": [
+        {
+          "condition": "TIME_BASED",
+          "spawnArguments": [2]
+        },
+        {
+          "condition": "SCORE_BASED",
+          "spawnArguments": [10]
+        }
+      ],
+
+
       "spawnSettings": {
         "spawnRate": {
           "start": 1,
