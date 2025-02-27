@@ -2,7 +2,6 @@
 
 
 # CURRENT:
-    # ADD LOSE CONDITION    
     # ADD WIN CONDITION
 
 # Finished: 
